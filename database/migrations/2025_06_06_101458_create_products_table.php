@@ -13,8 +13,18 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->string('title');
+            $table->text('description');
+            $table->decimal('mrp', 10, 2);
+            $table->decimal('discount', 10, 2)->default(0);
+            $table->decimal('selling_price', 10, 2);
+            $table->integer('available_qty')->default(0);
+            $table->integer('total_sales')->default(0);
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
+
     }
 
     /**
