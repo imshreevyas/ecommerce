@@ -19,8 +19,8 @@ return new class extends Migration
             $table->decimal('minimum_order_value', 10, 2)->default(0);
             $table->integer('usage_limit')->nullable();
             $table->integer('used_count')->default(0);
-            $table->timestamp('valid_from');
-            $table->timestamp('valid_until');
+            $table->timestamp('valid_from')->nullable();
+            $table->timestamp('valid_until')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
