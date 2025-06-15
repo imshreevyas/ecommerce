@@ -25,7 +25,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('/',[AdminController::class, 'index'])->name('login');
     Route::get('/login',[AdminController::class, 'index'])->name('login');
     Route::get('/forgot-password',[AdminController::class, 'index'])->name('forgot-password');
-    Route::post('/login',[AdminController::class, 'adminLoginPost'])->name('adminLoginPost');
+    Route::post('/login',[AdminController::class, 'sendOtp'])->name('adminLoginPost');
+    Route::post('/verifyOTP',[AdminController::class, 'verifyOTP'])->name('verifyOTP');
 
     // Google Login Routes
     Route::get('/auth/google/redirect',[AdminController::class, 'google_redirect'])->name('auth.google.redirect');
