@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\OtpMail;
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -37,9 +38,9 @@ class AdminController extends Controller
 
         // Send OTP via email
         if(Mail::to($email)->send(new OtpMail($otpCode))){
-            return json_encode(['message'=>"mail sent successfully"]);
+           return response()->json(['message'=>"mail sent successfully"]);
         }else{
-            return json_encode(['message'=>"operation failed"]);
+            return response()->json(['message'=>"operation failed"],401);
         }
     }
     public function verifyOTP(Request $request){
@@ -47,22 +48,19 @@ class AdminController extends Controller
             'email' => ['required', 'email', 'exists:admins,email'],
             'otp' => ['required', 'digits:6'],
         ]);
-
         $email = $request->email;
         $otp = $request->otp;
-
         $admin = Admin::where(['email' => $email, 'otp' => $otp])->first();
-
-    if ($admin) {
+        if ($admin) {
             // Clear the OTP after successful verification
             $admin->update(['otp' => 0]);
-
             // Log in the admin user
-            // auth()->login($admin);
-
-            return json_encode(['message'=>"verification successful"]);
+            Auth::guard('admin')->login($admin);
+           return response()->json([
+                'message' => 'Registration successful',
+            ],200);
         } else {
-            return json_encode(['message'=>"verification failed"]);
+            return response()->json(['message'=>"verification failed"],401);
         }
     }
     /**

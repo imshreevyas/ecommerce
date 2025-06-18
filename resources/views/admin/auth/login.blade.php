@@ -112,6 +112,7 @@
                                                         id="otp" placeholder="Enter OTP">
                                                 </div>
                                                 <div class="mt-4">
+                                                    <button type="submit" id="resendOTP" style="display: none">resend otp</button>
                                                     <button class="btn color-primary-3 btn-success w-100"
                                                         type="submit" id="submitButton">Send OTP</button>
                                                 </div>
@@ -228,9 +229,10 @@
                 console.log(response);
                 $('#otp-input-group').show();
                 $('#submitButton').text('Verify OTP & Login');
+                $('#resendOTP').show();
                 $('#otpLoginForm').attr('action', "{{ route('admin.verifyOTP') }}");
                 $('#email').prop('readonly', true);
-                alert(response.message || 'OTP sent successfully!');
+                // alert(response.message || 'OTP sent successfully!');
             },
             error: function(xhr) {
                 var errorMessage = 'An error occurred. Please try again.';
@@ -264,9 +266,13 @@
                 'X-CSRF-TOKEN': csrfToken
             },
             success: function(response) {
-                // Handle successful OTP verification
-                console.log(response);
-                
+                console.log(response.status)
+                if (response.status==200) {
+                    // Redirect to the dashboard or show success message
+                    window.location.href = "{{ route('admin.dashboard') }}";
+                } else {
+                    alert(response.message || 'OTP verification failed. Please try again.');
+                }               
             },
             error: function(xhr) {
                 var errorMessage = 'OTP verification failed. Please try again.';
