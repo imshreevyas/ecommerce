@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::create('product_images', function (Blueprint $table) {
+        Schema::create('system_logs', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id');
-            $table->string('image_url');
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->timestamp('timestamp');
+            $table->enum('type', ['INFO', 'WARN', 'ERROR']);
+            $table->string('module');
+            $table->string('url')->nullable();
+            $table->text('message');
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_images');
+        Schema::dropIfExists('system_log');
     }
 };

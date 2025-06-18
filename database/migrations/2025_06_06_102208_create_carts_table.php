@@ -11,9 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('carts', function (Blueprint $table) {
+       Schema::create('cart', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->integer('product_id');
+            $table->integer('quantity')->default(1);
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
+            
+            $table->unique(['user_id', 'product_id']); // Prevent duplicate items
         });
     }
 
