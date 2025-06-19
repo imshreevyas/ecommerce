@@ -112,6 +112,7 @@
                                                         id="otp" placeholder="Enter OTP">
                                                 </div>
                                                 <div class="mt-4">
+                                                    <p id="error_msg"></p>
                                                     <button type="submit" id="resendOTP" style="display: none">resend otp</button>
                                                     <button class="btn color-primary-3 btn-success w-100"
                                                         type="submit" id="submitButton">Send OTP</button>
@@ -234,14 +235,11 @@
                 $('#email').prop('readonly', true);
                 // alert(response.message || 'OTP sent successfully!');
             },
-            error: function(xhr) {
-                var errorMessage = 'An error occurred. Please try again.';
-                if (xhr.responseJSON && xhr.responseJSON.errors) {
-                    errorMessage = Object.values(xhr.responseJSON.errors).join('\n');
-                } else if (xhr.responseJSON && xhr.responseJSON.message) {
-                    errorMessage = xhr.responseJSON.message;
-                }
-                alert(errorMessage);
+            error: function(xhr, status, error) {   
+                // Handle error response
+                console.error(xhr.responseText);
+                var response = JSON.parse(xhr.responseText);
+                $('#error_msg').html(response.message);
             }
         });
     } else {
@@ -266,17 +264,18 @@
                 'X-CSRF-TOKEN': csrfToken
             },
             success: function(response) {
-                console.log(response.status)
-                if (response.status==200) {
+                if (response.type=='success') {
                     // Redirect to the dashboard or show success message
                     window.location.href = "{{ route('admin.dashboard') }}";
                 } else {
                     alert(response.message || 'OTP verification failed. Please try again.');
                 }               
             },
-            error: function(xhr) {
-                var errorMessage = 'OTP verification failed. Please try again.';
-                console.log(errorMessage);
+             error: function(xhr, status, error) {   
+                // Handle error response
+                console.error(xhr.responseText);
+                var response = JSON.parse(xhr.responseText);
+                $('#error_msg').html(response.message);
             }
         });
     }
