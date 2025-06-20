@@ -113,7 +113,7 @@
                                                 </div>
                                                 <div class="mt-4">
                                                     <p id="error_msg"></p>
-                                                    <button type="submit" id="resendOTP" style="display: none">resend otp</button>
+                                                    <button type="button" id="resendOTP" style="display: none">resend otp</button>
                                                     <button class="btn color-primary-3 btn-success w-100"
                                                         type="submit" id="submitButton">Send OTP</button>
                                                 </div>
@@ -202,6 +202,110 @@
     <!-- password-addon init -->
     <script src="{{ asset('public/assets/js/pages/password-addon.init.js') }}"></script>
     <script>
+    // Resend OTP button click handler
+    let resendCountdownInterval;
+    function startResendCountdown() {
+        let timeLeft = 30;
+        const resendButton = $('#resendOTP');
+        resendButton.prop('disabled', true);
+        
+        // Clear any existing countdown
+        if (resendCountdownInterval) {
+            clearInterval(resendCountdownInterval);
+        }
+        
+        // Update immediately
+        resendButton.text(`Resend OTP (${timeLeft}s)`);
+        
+        resendCountdownInterval = setInterval(function() {
+            timeLeft--;
+            
+            if (timeLeft <= 0) {
+                clearInterval(resendCountdownInterval);
+                resendButton.text('Resend OTP');
+                resendButton.prop('disabled', false);
+            } else {
+                resendButton.text(`Resend OTP (${timeLeft}s)`);
+            }
+        }, 1000);
+    }
+     function sendOTP(email, csrfToken) {
+        $.ajax({
+            url: "{{ route('admin.adminLoginPost') }}",
+            method: "POST",
+            data: {
+                email: email,
+                _token: csrfToken
+            },
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            success: function(response) {
+                $('#otp-input-group').show();
+                $('#submitButton').text('Verify OTP & Login');
+                $('#resendOTP').show();
+                $('#otpLoginForm').attr('action', "{{ route('admin.verifyOTP') }}");
+                $('#email').prop('readonly', true);
+                $('#error_msg').html('New OTP sent successfully!');
+                
+                startResendCountdown();
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+                var response = JSON.parse(xhr.responseText);
+                $('#error_msg').html(response.message);
+                $('#resendOTP').prop('disabled', false);
+            }
+        });
+    }
+    function verifyOTP(email, otp, csrfToken) {
+        $.ajax({
+            url: "{{ route('admin.verifyOTP') }}",
+            method: "POST",
+            data: {
+                email: email,
+                otp: otp,
+                _token: csrfToken
+            },
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            success: function(response) {
+                if (response.type == 'success') {
+                    window.location.href = "{{ route('admin.dashboard') }}";
+                } else {
+                    $('#error_msg').html(response.message || 'OTP verification failed. Please try again.');
+                }               
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+                var response = JSON.parse(xhr.responseText);
+                $('#error_msg').html(response.message);
+            }
+        });
+    }
+
+    $('#resendOTP').on('click', function() {
+        const csrfToken = $('meta[name="csrf-token"]').attr('content');
+        var email = $('#email').val().trim();
+        
+        if (email === '') {
+            alert('Email is required to resend OTP.');
+            return;
+        }
+        
+        // Disable the resend button temporarily to prevent spamming
+        $(this).prop('disabled', true);
+        $('#error_msg').html('Sending OTP...');
+        
+        sendOTP(email, csrfToken, function() {
+            // Re-enable the button after 30 seconds
+            setTimeout(function() {
+                $('#resendOTP').prop('disabled', false);
+            }, 30000);
+        });
+    });
+
     $('#otpLoginForm').on('submit', function(e) {
     e.preventDefault();
     var currentAction = $(this).attr('action');
@@ -215,33 +319,7 @@
             alert('Please enter your email.');
             return;
         }
-        
-        $.ajax({
-            url: "{{ route('admin.adminLoginPost') }}",
-            method: "POST",
-            data: {
-                email: email,
-                _token: csrfToken
-            },
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            },
-            success: function(response) {
-                console.log(response);
-                $('#otp-input-group').show();
-                $('#submitButton').text('Verify OTP & Login');
-                $('#resendOTP').show();
-                $('#otpLoginForm').attr('action', "{{ route('admin.verifyOTP') }}");
-                $('#email').prop('readonly', true);
-                // alert(response.message || 'OTP sent successfully!');
-            },
-            error: function(xhr, status, error) {   
-                // Handle error response
-                console.error(xhr.responseText);
-                var response = JSON.parse(xhr.responseText);
-                $('#error_msg').html(response.message);
-            }
-        });
+        sendOTP(email, csrfToken);
     } else {
         // OTP verification case
         var otp = $('#otp').val().trim();
@@ -251,33 +329,7 @@
             alert('Please enter the OTP.');
             return;
         }
-        // Here you would typically make another AJAX call to verify OTP
-        $.ajax({
-            url: "{{ route('admin.verifyOTP') }}",
-            method: "POST",
-            data: {
-                email: email,
-                otp: otp,
-                _token: csrfToken
-            },
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            },
-            success: function(response) {
-                if (response.type=='success') {
-                    // Redirect to the dashboard or show success message
-                    window.location.href = "{{ route('admin.dashboard') }}";
-                } else {
-                    alert(response.message || 'OTP verification failed. Please try again.');
-                }               
-            },
-             error: function(xhr, status, error) {   
-                // Handle error response
-                console.error(xhr.responseText);
-                var response = JSON.parse(xhr.responseText);
-                $('#error_msg').html(response.message);
-            }
-        });
+        verifyOTP(email, otp, csrfToken);
     }
 });
     </script>
