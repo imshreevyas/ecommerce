@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
+            $table->string('otp');
+            $table->string('name');
+            $table->string('email');
+            $table->string('mobile');
+            $table->string('last_login_ip')->nullable();
+            $table->timestamp('last_login_at')->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }
