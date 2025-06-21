@@ -12,15 +12,16 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.product.manage');
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('admin.product.add');
     }
 
     /**
@@ -28,7 +29,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return view('admin.product.add');
     }
 
     /**
@@ -44,7 +45,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('admin.product.edit');
     }
 
     /**
@@ -52,7 +53,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        return view('admin.product.edit');
     }
 
     /**
