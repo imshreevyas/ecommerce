@@ -128,4 +128,13 @@ class AdminController extends Controller
     {
         //
     }
+
+    public function profile(){
+        return view('admin.account.profile');
+    }
+
+    public function edit_profile(){
+        $data['admin_details'] = Admin::where('id', Auth::guard('admin')->user()->id)->first();
+        return view('admin.account.editProfile', $data);
+    }
 }

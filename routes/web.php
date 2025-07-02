@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,13 +34,15 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('/auth/google/redirect',[AdminController::class, 'google_redirect'])->name('auth.google.redirect');
     Route::get('/auth/google/callback',[AdminController::class, 'google_callback'])->name('auth.google.callback');
 
-    // Route::middleware('admin.auth')->group(function () {
+    Route::middleware('admin.auth')->group(function () {
 
         // ================ GET REQUESTS ==============================
 
             Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
             Route::get('/settings/all',[GeneralSettingController::class,'index'])->name('settings');
-            Route::get('/account',[AdminController::class,'adminAccountPage'])->name('admin_accounts');
+            Route::get('/account',[AdminController::class,'profile'])->name('profile');
+            Route::get('/account/update',[AdminController::class,'edit_profile'])->name('edit-profile');
+            
 
             // Products Routes
             Route::get('/product/add', [ProductController::class, 'index'])->name('add_product');
@@ -48,12 +51,18 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::get('/product/export', [PlansController::class, 'export_data'])->name('plans_export');
 
             // Category Routes
-            Route::get('/category/add', [CategoryController::class, 'index'])->name('add_category');
+            Route::get('/category/add', [CategoryController::class, 'create'])->name('add_category');
             Route::get('/category/edit', [CategoryController::class, 'edit'])->name('edit_category');
-            Route::get('/category/manage', [CategoryController::class, 'edit'])->name('manage_category');
+            Route::get('/category/manage', [CategoryController::class, 'index'])->name('manage_category');
+            Route::get('/category/get_all_category', [CategoryController::class, 'get_all_categories'])->name('get_all_category');
 
 
         // ================ POST REQUESTS ==============================
+
+            // Profile POST routes
+            Route::post('/account/update_address',[AdminController::class,'update_address'])->name('update-address-details');
+            Route::post('/account/update_logo',[AdminController::class,'update_logo'])->name('update-update-logo');
+            Route::post('/account/update_basic_details',[AdminController::class,'update_basic_details'])->name('update-basic-details');
 
             // Product Routes
             Route::post('/product/create', [ProductController::class, 'store'])->name('create_product');
@@ -62,8 +71,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::post('/product_images/delete', [ProductImageController::class, 'delete_image'])->name('delete_product_images');
 
             // Category Routes
-            Route::post('/category/create', [CategoryController::class, 'store'])->name('create_category');
-            Route::post('/category/update', [CategoryController::class, 'update'])->name('update_category');
+            Route::post('/category/store', [CategoryController::class, 'store'])->name('categories.store');
+            Route::post('/category/update', [CategoryController::class, 'update'])->name('categories.update');
+            Route::post('/category/update-category-status', [CategoryController::class, 'update_category_status'])->name('update_category_status');
             
             // General Settings
             Route::post('/settings/all/',[AdminController::class,'settingEdit'])->name('settingEdit');
@@ -74,7 +84,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
             // Admin Account
             Route::post('/account/{id}',[AdminController::class,'adminAccountUpdate'])->name('adminAccountUpdate');
             Route::get('/logout',[AdminController::class,'logout'])->name('logout');
-    // });
+    });
 });
 
 
