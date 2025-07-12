@@ -20,7 +20,7 @@ class AdminLoginHistoryController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

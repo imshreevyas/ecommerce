@@ -4,8 +4,19 @@ $('#profile-img-file-input').on('change', function(){
         const reader = new FileReader();
         reader.onload = function(e) {
             $('.user-profile-image').attr('src', e.target.result);
-            $('.upload-logo-photo-btn').addClass('d-none');
+            $('.update-logo-photo-btn').addClass('d-none');
             $('.update-logo-photo-btn').removeClass('d-none');
+        }
+        reader.readAsDataURL(file);
+    }
+});
+
+$('#favicon-img-file-input').on('change', function(){
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            $('#favicon-img-preview').attr('src', e.target.result);
         }
         reader.readAsDataURL(file);
     }
@@ -14,7 +25,7 @@ $('#profile-img-file-input').on('change', function(){
 $('#cancel-logo-upload').on('click',function(){
     var default_logo = $(this).attr('data-default-logo');
     $('.user-profile-image').attr('src', default_logo);
-    $('.upload-logo-photo-btn').removeClass('d-none');
+    $('.update-logo-photo-btn').removeClass('d-none');
     $('.update-logo-photo-btn').addClass('d-none');
 });
 
@@ -22,15 +33,15 @@ $('#upload-logo').on('click',function(e){
     e.preventDefault();
     const uploadBannerForm = $('#upload-logo-form')[0]; // Get the native DOM form element
     const formData = new FormData(uploadBannerForm);
-    axios.post(`${APP_URL}salon/update-salon-logo`,formData, {headers: {
+    axios.post(`${APP_URL}admin/account/update_logo`,formData, {headers: {
         'Content-Type': 'multipart/form-data', 
     }}).then(function(response) {
         // handle success
         show_toast(response.data.type, response.data.message)
         if (response.data.type == 'success') {
             $('.profile-wid-img').attr('src', response.data.new_banner_url);
-            $('.upload-cover-photo-btn').removeClass('d-none');
-            $('.update-cover-photo-btn').addClass('d-none');
+            $('.update-logo-photo-btn').removeClass('d-none');
+            $('.update-logo-photo-btn').addClass('d-none');
             return true;
         } else {
             return false;
@@ -91,7 +102,7 @@ $('#save_social_media_links').on('click',function(e){
     e.preventDefault();
     const social_media_links_form = $('#social_media_links_form')[0]; // Get the native DOM form element
     const formData = new FormData(social_media_links_form);
-    axios.post(`${APP_URL}salon/update-salon-social-media`, formData).then(function(response) {
+    axios.post(`${APP_URL}admin/account/update-brand-social-media`, formData).then(function(response) {
         // handle success
         show_toast(response.data.type, response.data.message)
 

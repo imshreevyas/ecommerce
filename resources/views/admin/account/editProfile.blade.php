@@ -20,7 +20,7 @@
             </div>
             <div class="position-relative mx-n4 mt-n4">
                 <div class="profile-wid-bg profile-setting-img">
-                    <img src="{{ isset($admin_details->profile->salon_banner) ? asset($admin_details->profile->salon_banner) : asset('msg/default-profile-bg.png') }}"
+                    <img src="{{ asset('assets/images/default-banner.jpg') }}"
                         class="profile-wid-img" alt="">
                 </div>
             </div>
@@ -31,13 +31,13 @@
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <div class="profile-user position-relative d-inline-block mx-auto mb-0">
-                                    <img src="{{ isset($admin_details->profile->salon_logo) ? asset($admin_details->settings->main_logo) : asset('assets/images/default-logo.png') }}"
+                                    <img src="{{ isset($company_profile->logo) ? asset($company_profile->logo) : asset('assets/images/default-logo.png') }}"
                                         class="rounded-circle avatar-xl img-thumbnail user-profile-image"
                                         alt="user-profile-image">
                                     <div class="avatar-xs p-0 rounded-circle profile-photo-edit">
                                         <form id="upload-logo-form">
                                             @csrf
-                                            <input id="profile-img-file-input" type="file" name="salon_logo" class="profile-img-file-input">
+                                            <input id="profile-img-file-input" type="file" name="logo" class="profile-img-file-input">
                                             <label for="profile-img-file-input" class="profile-photo-edit upload-logo-photo-btn avatar-xs">
                                                 <span class="avatar-title rounded-circle bg-light text-body">
                                                     <i class="ri-camera-fill"></i>
@@ -52,11 +52,11 @@
                                         class="btn btn-success btn-icon waves-effect waves-light"><i
                                             class="ri-check-fill"></i></button>
                                     <button type="button" id="cancel-logo-upload"
-                                        data-default-logo="{{ asset('assets/images/default-logo.png') }}"
+                                        data-default-logo="{{ isset($company_profile->logo) ? asset($company_profile->logo) : asset('assets/images/default-logo.png') }}"
                                         class="btn btn-danger btn-icon waves-effect waves-light"><i
                                             class="ri-close-fill"></i></button>
                                 </div>
-                                <h5 class="fs-16 mt-2 mb-1">{{ $admin_details['owner_name'] ?: '#Admin Name' }}</h5>
+                                <h5 class="fs-16 mt-2 mb-1">{{ $admin_details->name ?: '#Admin Name' }}</h5>
                                 <p class="text-muted mb-0">(Admin)</p>
                             </div>
                         </div>
@@ -72,9 +72,9 @@
                             @php 
                                 $links_count = -1;
                             @endphp
-                            @if (!empty($admin_details->profile->social_media_links))
+                            @if (!empty($company_profile->social_media_links))
                             @php
-                                $all_links = json_decode($admin_details->profile->social_media_links, true);
+                                $all_links = $company_profile->social_media_links;
                             @endphp
                                 <div class="row" id="social-media-div">
                                     @foreach ($all_links as $index => $single_sc)
@@ -145,33 +145,19 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-body {{ $show_active_tab == 'address' ? 'active' : '' }}" data-bs-toggle="tab" href="#address"
+                                    <a class="nav-link text-body {{ $show_active_tab == 'brandSupportDetails' ? 'active' : '' }}" data-bs-toggle="tab" href="#brandSupportDetails"
                                         role="tab">
                                         <i class="far fa-envelope"></i>
-                                        Address & Contact Details
+                                        Brand & Support Details
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-body {{ $show_active_tab == 'general_settings' ? 'active' : '' }}" data-bs-toggle="tab" href="#general_settings"
+                                    <a class="nav-link text-body {{ $show_active_tab == 'generalSettings' ? 'active' : '' }}" data-bs-toggle="tab" href="#generalSettings"
                                         role="tab">
                                         <i class="far fa-setting"></i>
                                         General Settings
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-body {{ $show_active_tab == 'login_history' ? 'active' : '' }}" data-bs-toggle="tab" href="#login_history"
-                                        role="tab">
-                                        <i class="far fa-users"></i>
-                                        Login History
-                                    </a>
-                                </li>
-                                {{-- <li class="nav-item">
-                                    <a class="nav-link text-body {{ $show_active_tab == 'changePassword' ? 'active' : '' }}" data-bs-toggle="tab" href="#changePassword"
-                                        role="tab">
-                                        <i class="far fa-user"></i>
-                                        Change Password
-                                    </a>
-                                </li> --}}
                             </ul>
                         </div>
                         <div class="card-body p-4">
@@ -180,25 +166,14 @@
                                     @include('admin.account.components.profile-basic-details-form')
                                 </div>
                                 <!--end tab-pane-->
-                                <div class="tab-pane  {{ $show_active_tab == 'address' ? 'active' : '' }}" id="address" role="tabpanel">
-                                    @include('admin.account.components.profile-address-form')
+                                <div class="tab-pane  {{ $show_active_tab == 'brandSupportDetails' ? 'active' : '' }}" id="brandSupportDetails" role="tabpanel">
+                                    @include('admin.account.components.profile-brand-form')
                                 </div>
 
                                 <!--end tab-pane-->
-                                <div class="tab-pane  {{ $show_active_tab == 'general_settings' ? 'active' : '' }}" id="general_settings" role="tabpanel">
-                                    {{-- @include('admin.account.components.profile-address-form') --}}
+                                <div class="tab-pane  {{ $show_active_tab == 'generalSettings' ? 'active' : '' }}" id="generalSettings" role="tabpanel">
+                                    @include('admin.account.components.profile-general-settings-form')
                                 </div>
-
-                                <!--end tab-pane-->
-                                <div class="tab-pane  {{ $show_active_tab == 'login_history' ? 'active' : '' }}" id="login_history" role="tabpanel">
-                                    @include('admin.account.components.profile-login-history-list')
-                                </div>
-                                
-                                <!--end tab-pane-->
-                                {{-- <div class="tab-pane  {{ $show_active_tab == 'changePassword' ? 'active' : '' }}" id="changePassword" role="tabpanel">
-                                    @include('admin.account.components.profile-change-password-form')
-
-                                </div> --}}
                             </div>
                         </div>
                     </div>

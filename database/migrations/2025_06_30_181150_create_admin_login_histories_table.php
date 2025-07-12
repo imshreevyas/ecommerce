@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('admin_login_histories', function (Blueprint $table) {
             $table->id();
+            $table->integer('admin_id');
             $table->string('ip_address', 45)->nullable(); // IPv6-safe
             $table->text('user_agent')->nullable();
             $table->dateTime('login_at')->useCurrent();

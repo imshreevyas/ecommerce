@@ -95,3 +95,45 @@ function show_toast(type, message) {
         },
     }).showToast();
 }
+
+
+$(document).on('change', '.maintenance-mode-update-checkbox', function () {
+    const newStatus = $(this).is(':checked') ? 1 : 0;
+    if(newStatus)
+        $(this).addClass('');
+
+    if(newStatus == 1){
+        const confirmResult = confirm('Your Website will shut down & go in Maintainence Mode!');
+        if (!confirmResult) {
+            // Revert checkbox state
+            $(this).prop('checked', ($(this).is(':checked') ? 0 : 1));
+            return;
+        }
+        $('.maintenance_mode_alert').removeClass('d-none');
+        $('#maintenance_mode_input_div').addClass('form-switch-success');
+    }else{
+        $('#maintenance_mode_input_div').removeClass('form-switch-success');
+        $('.maintenance_mode_alert').addClass('d-none');
+    }
+    
+    var formData = new FormData();
+    formData.append('maintenance_mode', newStatus);
+    axios.post(`${APP_URL}admin/general_settings/update-maintenance-status`, formData).then(function(response) {
+        show_toast(response.data.type, response.data.message)
+    }).catch(function(err) {
+        show_toast('error', err)
+    });
+});
+
+
+function generateSlug(e, slug_textfeild_id) {
+    const title = $(e).val();
+    var slug = title
+        .toString()
+        .toLowerCase()
+        .trim()
+        .replace(/[\s\W-]+/g, '-')  // Replace spaces and non-word chars with -
+        .replace(/^-+|-+$/g, '');   // Trim starting/trailing dashes
+
+    $(`#${slug_textfeild_id}`).val(slug);
+}

@@ -4,16 +4,16 @@
         <div class="col-lg-6">
             <div class="mb-3">
                 <label for="firstnameInput" class="form-label">Admin Name</label>
-                <input type="text" class="form-control" name="salon_name" placeholder="Enter your Salon Name"
-                    value="{{ old('salon_name', check_isset_or_null($admin_details->profile, 'salon_name', '')) }}">
+                <input type="text" class="form-control" name="name" placeholder="Enter your Salon Name"
+                    value="{{ old('name', check_isset_or_null($admin_details, 'name', '')) }}">
             </div>
         </div>
 
         <div class="col-lg-6">
             <div class="mb-3">
                 <label for="phonenumberInput" class="form-label">Admin Email id</label>
-                <input type="email" class="form-control" name="business_email" placeholder="Enter your Business Email"
-                    value="{{ old('business_email', check_isset_or_null($admin_details->profile, 'business_email', '')) }}">
+                <input type="email" class="form-control" name="email" placeholder="Enter your Email"
+                    value="{{ old('email', check_isset_or_null($admin_details, 'email', '')) }}">
             </div>
         </div>
         
