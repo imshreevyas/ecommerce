@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\AddressController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,6 +21,8 @@ use App\Http\Controllers\Api\AuthController;
     // Protected routes
     Route::middleware('auth:api')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout']);
+        Route::post('/updateAddress', [AddressController::class, 'updateAddress']);
+        Route::post('/addAddress', [AddressController::class, 'AddAddress']);
         Route::get('/user', function (Request $request) {
             return $request->user();
         });

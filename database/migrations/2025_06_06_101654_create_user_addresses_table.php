@@ -11,8 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_addresses', function (Blueprint $table) {
-            $table->id();
+        Schema::create('addresses', function (Blueprint $table) {
+            $table->id(); 
+            $table->foreignId('user_id');            
+            $table->enum('address_type', ['billing', 'shipping']);
+            $table->string('recipient_name', 100);
+            $table->string('address_line1', 255);
+            $table->string('address_line2', 255)->nullable();
+            $table->string('city', 100);
+            $table->string('state', 100);
+            $table->string('postal_code', 20);
+            $table->string('phone_number', 20)->nullable();
+            $table->boolean('is_default')->default(false);            
             $table->timestamps();
         });
     }
