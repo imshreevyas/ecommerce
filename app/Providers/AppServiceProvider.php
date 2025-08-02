@@ -19,6 +19,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        umask(0002); // ensures new folders/files are group-writable (0775)
     }
 }

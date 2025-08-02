@@ -5,7 +5,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Sign In | Velzon - Admin & Dashboard Template</title>
+    <title>Sign In | Ecommerce - Admin & Dashboard Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -13,15 +13,15 @@
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
     <!-- Layout config Js -->
-    <script src="{{ asset('public/assets/js/layout.js') }}"></script>
+    <script src="{{ asset('assets/js/layout.js') }}"></script>
     <!-- Bootstrap Css -->
-    <link href="{{ asset('public/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="{{ asset('public/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="{{ asset('public/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
-    <link href="{{ asset('public/assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
     <script>
         APP_URL = `{{ env('APP_URL') }}`;
     </script>
@@ -47,7 +47,7 @@
                                         <div class="position-relative h-100 d-flex flex-column">
                                             <div class="mb-4">
                                                 <a href="{{ route('home') }}" class="d-block">
-                                                    <img src="{{ asset('public/assets/images/logo-light.png') }}"
+                                                    <img src="{{ asset('assets/images/logo-light.png') }}"
                                                         alt="" height="18">
                                                 </a>
                                             </div>
@@ -160,16 +160,16 @@
 
     <!-- JAVASCRIPT -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('public/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('public/assets/libs/simplebar/simplebar.min.js') }}"></script>
-    <script src="{{ asset('public/assets/libs/node-waves/waves.min.js') }}"></script>
-    <script src="{{ asset('public/assets/libs/feather-icons/feather.min.js') }}"></script>
-    <script src="{{ asset('public/assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
-    <script src="{{ asset('public/assets/libs/choices/choices.js') }}"></script>
-    <script src="{{ asset('public/assets/libs/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
+    <script src="{{ asset('assets/libs/choices/choices.js') }}"></script>
+    <script src="{{ asset('assets/libs/flatpickr/flatpickr.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <!-- password-addon init -->
-    <script src="{{ asset('public/assets/js/pages/password-addon.init.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/password-addon.init.js') }}"></script>
     <script>
     // Resend OTP button click handler
     let resendCountdownInterval;

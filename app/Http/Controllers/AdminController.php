@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Mail\OtpMail;
 use App\Models\Admin;
+use App\Models\CompanyProfile;
+use App\Models\GeneralSetting;
+use App\Models\AdminLoginHistory;
 use Illuminate\Http\Request;
+use App\Http\Middleware\AdminAuth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -18,7 +24,8 @@ class AdminController extends Controller
     {
         return view('admin.auth.login');
     }
-     public function sendOtp(Request $request)
+
+    public function sendOtp(Request $request)
     {
         $request->validate([
             'email' => ['required', 'email', 'exists:admins,email'],
@@ -50,6 +57,7 @@ class AdminController extends Controller
             ], 500);
         }
     }
+
     public function verifyOTP(Request $request){
         $request->validate([
             'email' => ['required', 'email', 'exists:admins,email'],
@@ -64,17 +72,24 @@ class AdminController extends Controller
                     $admin->update(['otp' => 0]);
                     // Log in the admin user
                     Auth::guard('admin')->login($admin);
-                return response()->json([
+                    // Update Login History
+                    AdminLoginHistory::log(Auth::guard('admin')->user()->id, $request->ip(), $request->userAgent(), 'success');
+
+                    return response()->json([
                         'message' => 'Registration successful',
                         'type' => 'success',
                     ],200);
                 } else {
+                    // Update Login History
+                    AdminLoginHistory::log(Auth::guard('admin')->user()->id, $request->ip(), $request->userAgent(), 'failed');
                     return response()->json([
                             'message'=>"verification failed",
                             'type'=>'fail'
                     ],401);
                 }
         }catch(Exception $e){
+            // Update Login History
+            AdminLoginHistory::log(Auth::guard('admin')->user()->id, $request->ip(), $request->userAgent(), 'failed');
             return response()->json([
                 'message' => $e->getMessage(),
                 'type' => 'fail'
@@ -127,5 +142,51 @@ class AdminController extends Controller
     public function destroy(Admin $admin)
     {
         //
+    }
+
+    public function dashboard(){
+        $data = $this->get_all_details();
+        return view('admin.home.dashboard', $data);
+    }
+
+    public function profile(){
+        $admin_id = Auth::guard('admin')->user()->id;
+        $data = $this->get_all_details();
+        $data['login_history'] = AdminLoginHistory::where('admin_id', $admin_id)->first();
+        return view('admin.account.profile', $data);
+    }
+
+    public function edit_profile(){
+        $data = $this->get_all_details();
+        $data['tab'] = session('active_tab', 'basicDetails');
+        return view('admin.account.editProfile', $data);
+    }
+
+    public function update_basic_details(Request $request){
+
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email:rfc,dns|unique:admins,email,' . $request->email.',email'
+        ]);
+
+        $admin = Admin::where('id', Auth::guard('admin')->user()->id)->first(); 
+        if(!$admin){
+            return response()->json(['status' => 'error', 'message' => 'Invalid Access']);
+        }
+
+        $admin->name = $validatedData['name'];
+        $admin->email = $validatedData['email'];
+
+        if($admin->save()){
+            return redirect()->route('admin.edit-profile')->with('success', 'Basic Details Updated Successfully!')->with('active_tab', 'basicDetails');
+        }
+    }
+
+    public function get_all_details(){
+        $admin_id = Auth::guard('admin')->user()->id;
+        $data['admin_details'] = Admin::where('id', $admin_id)->first();
+        $data['company_profile'] = CompanyProfile::where('admin_id', $admin_id)->first();
+        $data['general_settings'] = GeneralSetting::where('admin_id', $admin_id)->first();
+        return $data;
     }
 }

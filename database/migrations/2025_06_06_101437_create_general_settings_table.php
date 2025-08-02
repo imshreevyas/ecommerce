@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('general_settings', function (Blueprint $table) {
             $table->id();
+            $table->integer('admin_id');
+            $table->string('currency')->default('INR');
+            $table->string('currency_symbol')->default('₹');
+            $table->boolean('maintenance_mode')->default(false);
+            $table->text('default_meta_title')->nullable();
+            $table->text('default_meta_description')->nullable();
+            $table->text('default_schema')->nullable();
+            $table->longText('custom_header')->nullable();
+            $table->longText('custom_footer')->nullable();
             $table->timestamps();
         });
     }
