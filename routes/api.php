@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AddressController;
 /*
@@ -27,3 +28,6 @@ use App\Http\Controllers\Api\AddressController;
             return $request->user();
         });
     });
+
+    // product list and category
+    Route::get('/categoryList',[CategoryController::class,'show'])->name('categoryList');
