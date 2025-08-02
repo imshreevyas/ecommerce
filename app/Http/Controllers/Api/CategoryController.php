@@ -41,13 +41,13 @@ class CategoryController extends Controller
         try {
         $categories = Category::where('status','active')->get();
             return response()->json([
-                'success' => true,
+                'status' => "success",
                 'message' => 'Categories retrieved successfully.',
                 'data' => $categories,
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
-                'success' => false,
+                'status' => "error",
                 'message' => 'Failed to retrieve categories.',
                 'error' => $e->getMessage(),
             ], 500);
