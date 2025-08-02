@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+    
+    protected $appends = ['parent_name'];
     protected $fillable = ['category_uid', 'parent_uid', 'name', 'slug', 'description', 'image_url', 'status'];
 
     public function products()
@@ -23,5 +25,10 @@ class Category extends Model
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_uid', 'category_uid');
+    }
+
+    public function getParentNameAttribute()
+    {
+        return $this->parent?->name ?? '-';
     }
 }
