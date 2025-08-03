@@ -30,6 +30,7 @@ use App\Http\Controllers\Api\ProductController;
         Route::post('/addAddress', [AddressController::class, 'AddAddress']);
         Route::post('/addCart', [CartController::class, 'addCart']);
         Route::post('/orders', [OrderController::class, 'addOrder']);
+        Route::post('/orderHistory', [OrderController::class, 'history']);
         Route::get('/user', function (Request $request) {
             return $request->user();
         });

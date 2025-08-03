@@ -168,4 +168,70 @@ class OrderController extends Controller
         // In a real implementation, integrate with payment gateway
         return "https://payment-gateway.com/checkout/order_{$order->id}";
     }
+    public function history(Request $request){
+        try {
+            $user = auth()->user();
+            
+            // Base query
+            $query = Order::with(['items.product.images'])
+                ->where('user_id', $user->id)
+                ->where('status', 'active'); // Using 'active' from your schema
+            
+            // Apply status filter
+            if ($request->has('status')) {
+                $query->where('order_status', $request->status);
+            }
+            
+            // Apply sorting
+            $sort = $request->input('sort', 'newest');
+            $query->orderBy('created_at', $sort === 'newest' ? 'desc' : 'asc');
+            
+            // Pagination
+            $perPage = $request->input('limit', 10);
+            $orders = $query->paginate($perPage);
+            
+            // Transform the order items collection
+            $transformedOrders = collect($orders->items())->map(function ($order) {
+                return [
+                    'id' => $order->id,
+                    'order_date' => $order->created_at->toIso8601String(),
+                    'status' => $order->order_status,
+                    'payment_status' => $order->payment_status,
+                    'total_amount' => $order->paid_amount,
+                    'items' => $order->items->map(function ($item) {
+                        return [
+                            'product_id' => $item->product_id,
+                            'title' => $item->product->title ?? 'Product not available',
+                            'quantity' => $item->quantity,
+                            'price' => $item->purchase_price,
+                            'image' => optional($item->product->images->first())->image_url
+                        ];
+                    })
+                ];
+            });
+            
+            // Return paginated response
+            return response()->json([
+                'success' => true,
+                'message' => 'Order history retrieved successfully',
+                'data' => [
+                    'orders' => $transformedOrders,
+                    'pagination' => [
+                        'total_orders' => $orders->total(),
+                        'current_page' => $orders->currentPage(),
+                        'per_page' => $orders->perPage(),
+                        'total_pages' => $orders->lastPage()
+                    ]
+                ]
+            ]);
+            
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve order history',
+                'error' => $e->getMessage(),
+                'error_code' => 'SERVER_ERROR'
+            ], 500);
+        }
+    }
 }
