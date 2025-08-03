@@ -13,11 +13,18 @@ class ReviewController extends Controller
 {
     public function create(Request $request, $product_id){
         // Validate request
-        $validated = $request->validate([
-            'rating' => 'required|integer|min:1|max:5',
-            'comment' => 'required|string|max:500',
-            'order_id' => 'required|integer|exists:orders,id'
-        ]);
+        try{
+            $validated = $request->validate([
+                'rating' => 'required|integer|min:1|max:5',
+                'comment' => 'required|string|max:500',
+                'order_id' => 'required|integer|exists:orders,id'
+            ]);
+        }catch(\Exception $e){
+            return response()->json([
+                    'status'=>'error',
+                    'message'=>$e->getMessage()
+                ]);
+        }
 
         try {
             $user = auth()->user();
@@ -33,7 +40,7 @@ class ReviewController extends Controller
 
             if (!$orderItem) {
                 return response()->json([
-                    'success' => false,
+                    'status' => "error",
                     'message' => 'You can only review products you\'ve purchased',
                     'error_code' => 'REVIEW_NOT_ALLOWED'
                 ], 403);
@@ -46,7 +53,7 @@ class ReviewController extends Controller
 
             if ($existingReview) {
                 return response()->json([
-                    'success' => false,
+                    'status' => "error",
                     'message' => 'You have already reviewed this product',
                     'error_code' => 'DUPLICATE_REVIEW'
                 ], 409);
@@ -68,7 +75,7 @@ class ReviewController extends Controller
                 ->avg('rating');
 
             return response()->json([
-                'success' => true,
+                'status' => "success",
                 'message' => 'Review added successfully',
                 'data' => [
                     'review' => $review,
@@ -78,13 +85,13 @@ class ReviewController extends Controller
 
         } catch (ModelNotFoundException $e) {
             return response()->json([
-                'success' => false,
+                'status' => "error",
                 'message' => 'Product not found',
                 'error_code' => 'PRODUCT_NOT_FOUND'
             ], 404);
         } catch (\Exception $e) {
             return response()->json([
-                'success' => false,
+                'status' => "error",
                 'message' => 'Failed to add review',
                 'error_code' => 'SERVER_ERROR'
             ], 500);
