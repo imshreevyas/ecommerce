@@ -31,6 +31,7 @@ use App\Http\Controllers\Api\ProductController;
         Route::post('/addCart', [CartController::class, 'addCart']);
         Route::post('/orders', [OrderController::class, 'addOrder']);
         Route::post('/orderHistory', [OrderController::class, 'history']);
+        Route::post('/products/{product_id}/review', [OrderController::class, 'review']);
         Route::get('/user', function (Request $request) {
             return $request->user();
         });
