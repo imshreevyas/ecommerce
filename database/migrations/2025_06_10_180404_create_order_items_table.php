@@ -19,6 +19,7 @@ return new class extends Migration
             $table->decimal('mrp_amount', 10, 2);
             $table->decimal('discount_amount', 10, 2)->default(0);
             $table->decimal('purchase_price', 10, 2);
+            $table->integer('return_quantity')->default(0);
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });

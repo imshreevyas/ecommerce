@@ -163,6 +163,126 @@ class OrderController extends Controller
         }
     }
 
+    public function returnOrder(Request $request, $order_id)
+    {
+        $validated = $request->validate([
+            'reason' => 'required|string|max:255',
+            'items' => 'required|array|min:1',
+            'items.*.order_item_id' => 'required|exists:order_items,id',
+            'items.*.quantity' => 'required|integer|min:1'
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $user = auth()->user();
+            $order = Order::with(['items.product'])->findOrFail($order_id);
+
+            // Verify ownership
+            if ($order->user_id !== $user->id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Order not found',
+                    'error_code' => 'ORDER_NOT_FOUND'
+                ], 404);
+            }
+
+            // Check eligibility
+            if ($order->order_status !== 'delivered' || 
+                $order->updated_at < now()->subDays(14)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Order not eligible for return',
+                    'error_code' => 'RETURN_NOT_ALLOWED'
+                ], 400);
+            }
+
+            // Check for existing return
+            if ($order->order_status === 'return_requested' || 
+                $order->order_status === 'return_processing') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Return already requested',
+                    'error_code' => 'DUPLICATE_RETURN'
+                ], 409);
+            }
+
+            // Validate items belong to order
+            $orderItemIds = $order->items->pluck('id')->toArray();
+            foreach ($validated['items'] as $item) {
+                if (!in_array($item['order_item_id'], $orderItemIds)) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Invalid items in return request',
+                        'error_code' => 'INVALID_ITEMS'
+                    ], 400);
+                }
+            }
+
+            // Calculate total refund
+            $totalRefund = 0;
+            $returnItems = [];
+            
+            foreach ($validated['items'] as $item) {
+                $orderItem = OrderItem::find($item['order_item_id']);
+                $refundAmount = $orderItem->purchase_price * $item['quantity'];
+                $totalRefund += $refundAmount;
+                
+                $returnItems[] = [
+                    'product_id' => $orderItem->product_id,
+                    'product_name' => $orderItem->product->title,
+                    'quantity' => $item['quantity'],
+                    'refund_amount' => $refundAmount
+                ];
+                
+                // Mark item as returned
+                $orderItem->update([
+                    'status' => 'return_requested',
+                    'return_quantity' => $item['quantity'],
+                    'return_reason' => $validated['reason']
+                ]);
+            }
+
+            // Update order status
+            $order->update([
+                'order_status' => 'return_requested',
+                'return_reason' => $validated['reason'],
+                'return_requested_at' => now(),
+                'refund_amount' => $totalRefund
+            ]);
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Return request submitted successfully',
+                'data' => [
+                    'order_id' => $order->id,
+                    'status' => 'return_requested',
+                    'reason' => $validated['reason'],
+                    'items' => $returnItems,
+                    'total_refund' => $totalRefund,
+                    'requested_at' => now()->toIso8601String()
+                ]
+            ]);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Order not found',
+                'error_code' => 'ORDER_NOT_FOUND'
+            ], 404);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to process return',
+                'error' => $e->getMessage(),
+                'error_code' => 'SERVER_ERROR'
+            ], 500);
+        }   
+    }
+
     private function generatePaymentUrl($order)
     {
         // In a real implementation, integrate with payment gateway

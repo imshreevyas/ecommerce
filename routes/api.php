@@ -30,9 +30,10 @@ use App\Http\Controllers\Api\ReviewController;
         Route::post('/updateAddress', [AddressController::class, 'updateAddress']);
         Route::post('/addAddress', [AddressController::class, 'AddAddress']);
         Route::post('/addCart', [CartController::class, 'addCart']);
-        Route::post('/orders', [OrderController::class, 'addOrder']);
+        Route::post('/orders', [OrderController::class, 'addOrder']); // with coupon functionality
         Route::post('/orderHistory', [OrderController::class, 'history']);
         Route::post('/products/{product_id}/review', [ReviewController::class, 'create']);
+        Route::post('/orders/{order_id}/return', [OrderController::class, 'returnOrder']);
         Route::get('/user', function (Request $request) {
             return $request->user();
         });
