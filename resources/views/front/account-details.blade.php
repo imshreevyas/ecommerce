@@ -82,8 +82,8 @@
                                     class="text-sm link fw-medium my-account-nav-item active">Account Details</a>
                             </li>
                             <li>
-                                <a href="index.html" class="text-sm link fw-medium my-account-nav-item">Log
-                                    Out</a>
+                                <button id="logout-button">Log
+                                    Out</button>
                             </li>
                         </ul>
                     </div>
@@ -1764,6 +1764,7 @@
     <script src="{{asset('js/count-down.js')}}"></script>
     <script src="{{asset('js/wow.min.js')}}"></script>
     <script src="{{asset('js/multiple-modal.js')}}"></script>
+    <script src="{{asset('js/api/logout.js')}}"></script>
 </body>
 
 </html>

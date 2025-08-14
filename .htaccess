@@ -4,7 +4,10 @@
     </IfModule>
 
     RewriteEngine On
-
+    
+    #Handle 401 Unauthorized errors
+    ErrorDocument 401 /logout
+    
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
