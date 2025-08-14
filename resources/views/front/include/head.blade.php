@@ -18,3 +18,4 @@
 <!-- Favicon and Touch Icons  -->
 <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}">
 <link rel="apple-touch-icon-precomposed" href="{{ asset('images/logo/favicon.png') }}">
+<script src="{{ asset('js/api/init.js') }}"></script>

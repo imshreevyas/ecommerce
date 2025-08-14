@@ -82,8 +82,8 @@
                                     class="text-sm link fw-medium my-account-nav-item active">Account Details</a>
                             </li>
                             <li>
-                                <button id="logout-button">Log
-                                    Out</button>
+                                <a href="#" id="logout-button" class="text-sm link fw-medium my-account-nav-item">Log
+                                    Out</a>
                             </li>
                         </ul>
                     </div>

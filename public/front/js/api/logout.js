@@ -3,11 +3,7 @@ $("#logout-button").click(function (event) {
     console.log("Logout button clicked");
 
     const logoutBtn = document.getElementById('logout-button');
-    const originalContent = logoutBtn.innerHTML;
     logoutBtn.innerHTML = 'Logging out...';
-    // Clear local storage
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('user_data');
 
     $.ajax({
         url: 'http://localhost/ecom/api/logout',
@@ -23,12 +19,12 @@ $("#logout-button").click(function (event) {
             localStorage.removeItem('user_data');
             
             // Redirect to home page
-            window.location.href = '/';
+            window.location.href = './';
         },
         error: function(xhr, status, error) {
             console.error('Logout error:', error);
-            localStorage.removeItem('auth_token');
-            localStorage.removeItem('user_data');
+            // localStorage.removeItem('auth_token');
+            // localStorage.removeItem('user_data');
             if (xhr.status === 401) {
                 // Handle unauthorized access
                 window.location.href = './';
@@ -39,7 +35,7 @@ $("#logout-button").click(function (event) {
         },
         complete: function() {
             // Reset button state (though redirect will likely happen first)
-            $logoutBtn.html(originalContent).prop('disabled', false);
+            logoutBtn.innerHTML = 'Log Out';
         }
     });
 });
