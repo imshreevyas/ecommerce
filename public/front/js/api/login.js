@@ -17,7 +17,7 @@ $("#request-otp-button").click(function (event) {
 
   // API request to send OTP
   $.ajax({
-    url: "http://localhost/ecom/api/requestOtp",
+    url: 'http://localhost/ecom/api/requestOtp',
     type: "POST",
     contentType: "application/json",
     data: JSON.stringify({ phone: phone }),
@@ -66,7 +66,7 @@ $("#verify-otp-button").click(function (event) {
 
   // API request to verify OTP
   $.ajax({
-    url: "http://localhost/ecom/api/loginOtp",
+    url: 'http://localhost/ecom/api/loginOtp',
     type: "POST",
     contentType: "application/json",
     data: JSON.stringify({
@@ -82,7 +82,7 @@ $("#verify-otp-button").click(function (event) {
         localStorage.setItem("user_data", JSON.stringify(response.data.user));
 
         // Redirect to account details
-        window.location.href = "account-details.html";
+        window.location.href = "./account-details";
       } else {
         showError(response.message || "OTP verification failed");
         $("#verify-otp-button").prop("disabled", false).html("Verify OTP");
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (isLoggedIn) {
     // User is logged in - redirect to account details
-    accountIcon.href = "account-details.html";
+    accountIcon.href = "./account-details";
     accountIcon.removeAttribute("data-bs-toggle");
   } else {
     // User is not logged in - show login popup

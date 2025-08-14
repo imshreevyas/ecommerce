@@ -6,27 +6,7 @@
 <!--<![endif]-->
 
 <head>
-    <meta charset="utf-8">
-    <title>Fyll - Shift toward mindful living.</title>
-
-    <meta name="author" content="themesflat.com">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description"
-        content="Fyll description">
-
-    <!-- font -->
-    <link rel="stylesheet" href="fonts/fonts.css">
-    <link rel="stylesheet" href="fonts/font-icons.css">
-    <!-- css -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/swiper-bundle.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-
-    <!-- Favicon and Touch Icons  -->
-    <link rel="shortcut icon" href="images/logo/favicon.png">
-    <link rel="apple-touch-icon-precomposed" href="images/logo/favicon.png">
-
+    @include('front.include.head')
 </head>
 
 <body>
@@ -46,144 +26,11 @@
     <div id="wrapper">
 
         <!-- Top Bar-->
-        <div class="tf-topbar bg-dark-5 topbar-bg">
-            <div class="container">
-                <div class="topbar-wraper">
-                    <div class="d-none d-xl-block flex-shrink-0">
-                        <ul class="tf-social-icon topbar-left">
-                            <li><a href="https://www.facebook.com/" class="social-item social-facebook"><i
-                                        class="icon icon-fb"></i></a></li>
-                            <li><a href="https://www.instagram.com/" class="social-item social-instagram"><i
-                                        class="icon icon-instagram"></i></a>
-                            </li>
-                            <li><a href="https://x.com/" class="social-item social-x"><i class="icon icon-x"></i></a>
-                            </li>
-                            <li><a href="https://www.snapchat.com/" class="social-item social-snapchat"><i
-                                        class="icon icon-snapchat"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="overflow-hidden">
-                        <div class="topbar-center marquee-wrapper">
-                            <div class="initial-child-container">
-                                <div class="marquee-child-item">
-                                    <p>Return extended to 60 days</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Life-time Guarantes</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Limited-Time Offer</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <!-- 2 -->
-                                <div class="marquee-child-item">
-                                    <p>Return extended to 60 days</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Life-time Guarantes</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Limited-Time Offer</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <!-- 3 -->
-                                <div class="marquee-child-item">
-                                    <p>Return extended to 60 days</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Life-time Guarantes</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Limited-Time Offer</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <!-- 4 -->
-                                <div class="marquee-child-item">
-                                    <p>Return extended to 60 days</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Life-time Guarantes</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Limited-Time Offer</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <!-- 5 -->
-                                <div class="marquee-child-item">
-                                    <p>Return extended to 60 days</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Life-time Guarantes</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Limited-Time Offer</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
+        @include('front.include.topbar')
         <!-- /Top Bar -->
         <!-- Header -->
         <header id="header" class="header-default header-absolute header-white header-uppercase">
-            <div class="container">
-                <div class="row wrapper-header align-items-center">
-                    <div class="col-md-4 col-3 d-xl-none">
-                        <a href="#mobileMenu" class="mobile-menu" data-bs-toggle="offcanvas" aria-controls="mobileMenu">
-                            <i class="icon icon-categories1"></i>
-                        </a>
-                    </div>
-                    <div class="col-xxl-5 col-xl-6 d-none d-xl-block">
-                        <nav class="box-navigation text-center style-space">
-                            <ul class="box-nav-menu justify-content-start">
-                                <li class="menu-item">
-                                    <a href="#" class="item-link">Home</a>                                   
-                                </li>
-                                <li class="menu-item">
-                                    <a href="about-us.html" class="item-link">About</a>                                   
-                                </li>
-                                <li class="menu-item">
-                                    <a href="" class="item-link">Contact</a>                                   
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-xl-2 col-md-4 col-6 text-xxl-center">
-                        <a href="index.html" class="logo-header">
-                            <img src="images/logo/logo-white.png" alt="logo" class="logo">
-                        </a>
-                    </div>
-                    <div class="col-xxl-5 col-xl-4 col-md-4 col-3">
-                        <ul class="nav-icon d-flex justify-content-end align-items-center">
-                            <li class="nav-account">
-                                <a href="#login" data-bs-toggle="offcanvas" class="nav-icon-item">
-                                    <i class="icon icon-user"></i>
-                                </a>
-                            </li>
-                            <li class="nav-cart pl">
-                                <a href="#shoppingCart" data-bs-toggle="offcanvas" class="nav-icon-item">
-                                    <i class="icon icon-cart"></i>
-                                    <span class="count-box">0</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            @include('front.include.header')
         </header>
         <!-- /Header -->
 
@@ -1908,18 +1755,15 @@
     <!-- /compare  -->
 
     <!-- Javascript -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/swiper-bundle.min.js"></script>
-    <script src="js/carousel.js"></script>
-    <script src="js/bootstrap-select.min.js"></script>
-    <script src="js/lazysize.min.js"></script>
-    <script src="js/count-down.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/multiple-modal.js"></script>
-
-
-    <script src="js/main.js"></script>
+   <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/jquery.min.js')}}"></script>
+    <script src="{{asset('js/swiper-bundle.min.js')}}"></script>
+    <script src="{{asset('js/carousel.js')}}"></script>
+    <script src="{{asset('js/bootstrap-select.min.js')}}"></script>
+    <script src="{{asset('js/lazysize.min.js')}}"></script>
+    <script src="{{asset('js/count-down.js')}}"></script>
+    <script src="{{asset('js/wow.min.js')}}"></script>
+    <script src="{{asset('js/multiple-modal.js')}}"></script>
 </body>
 
 </html>

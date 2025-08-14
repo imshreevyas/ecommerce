@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('front.index');
 });
+
+Route::get('/account-details', function () {
+    return view('front.account-details');
+})->name('account-details');
