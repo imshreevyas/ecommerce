@@ -5,6 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AddressController;
+use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ReviewController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,6 +29,11 @@ use App\Http\Controllers\Api\AddressController;
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::post('/updateAddress', [AddressController::class, 'updateAddress']);
         Route::post('/addAddress', [AddressController::class, 'AddAddress']);
+        Route::post('/addCart', [CartController::class, 'addCart']);
+        Route::post('/orders', [OrderController::class, 'addOrder']); // with coupon functionality
+        Route::post('/orderHistory', [OrderController::class, 'history']);
+        Route::post('/products/{product_id}/review', [ReviewController::class, 'create']);
+        Route::post('/orders/{order_id}/return', [OrderController::class, 'returnOrder']);
         Route::get('/user', function (Request $request) {
             return $request->user();
         });
@@ -31,3 +41,5 @@ use App\Http\Controllers\Api\AddressController;
 
     // product list and category
     Route::get('/categoryList',[CategoryController::class,'show'])->name('categoryList');
+    Route::get('/productList',[ProductController::class,'index'])->name('productList');
+    Route::get('/productDetails',[ProductController::class,'details'])->name('productDetails');
