@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', initAuthState);
+initAuthState();
 function initAuthState() {
   const isLoggedIn = localStorage.getItem('auth_token') !== null;
   

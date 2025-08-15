@@ -651,7 +651,7 @@
                     <div class="footer-top-wrap">
                         <div class="footer-logo">
                             <a href="index.html">
-                                <img src="images/logo/logo-white.png" class="logo" alt="logo">
+                                <img src="{{asset('images/logo/logo-white.png')}}" class="logo" alt="logo">
                             </a>
                         </div>
                         <ul class="tf-social-icon style-large">

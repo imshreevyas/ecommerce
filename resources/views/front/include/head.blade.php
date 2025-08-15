@@ -6,6 +6,7 @@
 <meta name="description"
     content="Fyll description">
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<script src="{{ asset('js/api/init.js') }}"></script>
 <!-- font -->
 <link rel="stylesheet" href="{{ asset('fonts/fonts.css') }}">
 <link rel="stylesheet" href="{{ asset('fonts/font-icons.css') }}">
@@ -18,4 +19,3 @@
 <!-- Favicon and Touch Icons  -->
 <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}">
 <link rel="apple-touch-icon-precomposed" href="{{ asset('images/logo/favicon.png') }}">
-<script src="{{ asset('js/api/init.js') }}"></script>
