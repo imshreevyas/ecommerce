@@ -1,3 +1,4 @@
+const url='http://localhost/ecom';
 initAuthState();
 function initAuthState() {
   const isLoggedIn = localStorage.getItem('auth_token') !== null;

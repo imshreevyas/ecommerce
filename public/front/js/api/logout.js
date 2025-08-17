@@ -6,7 +6,7 @@ $("#logout-button").click(function (event) {
     logoutBtn.innerHTML = 'Logging out...';
 
     $.ajax({
-        url: 'http://localhost/ecom/api/logout',
+        url: `${url}/api/logout`,
         type: 'POST',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('auth_token'),

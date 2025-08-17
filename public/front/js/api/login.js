@@ -17,7 +17,7 @@ $("#request-otp-button").click(function (event) {
 
   // API request to send OTP
   $.ajax({
-    url: 'http://localhost/ecom/api/requestOtp',
+    url: `${url}/api/requestOtp`,
     type: "POST",
     contentType: "application/json",
     data: JSON.stringify({ phone: phone }),
@@ -66,7 +66,7 @@ $("#verify-otp-button").click(function (event) {
 
   // API request to verify OTP
   $.ajax({
-    url: 'http://localhost/ecom/api/loginOtp',
+    url: `${url}/api/loginOtp`,
     type: "POST",
     contentType: "application/json",
     data: JSON.stringify({

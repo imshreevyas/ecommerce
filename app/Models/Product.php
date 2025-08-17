@@ -39,7 +39,11 @@ class Product extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category_uid', 'category_uid');
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+    public function product_images()
+    {
+        return $this->hasMany(ProductImage::class, 'product_id', 'id');
     }
     public function reviews()
     {
