@@ -17,8 +17,11 @@ $("#request-otp-button").click(function (event) {
 
   // API request to send OTP
   $.ajax({
-    url: `${url}/api/requestOtp`,
+    url: `${url}/requestOtp`,
     type: "POST",
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
     contentType: "application/json",
     data: JSON.stringify({ phone: phone }),
     success: function (response) {
@@ -66,8 +69,11 @@ $("#verify-otp-button").click(function (event) {
 
   // API request to verify OTP
   $.ajax({
-    url: `${url}/api/loginOtp`,
+    url: `${url}/loginOtp`,
     type: "POST",
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
     contentType: "application/json",
     data: JSON.stringify({
       phone: phone,
@@ -76,11 +82,6 @@ $("#verify-otp-button").click(function (event) {
     success: function (response) {
       if (response.status == "success") {
         console.log("OTP verified successfully");
-
-        // Store the authentication token
-        localStorage.setItem("auth_token", response.data.access_token);
-        localStorage.setItem("user_data", JSON.stringify(response.data.user));
-
         // Redirect to account details
         window.location.href = "./account-details";
       } else {
@@ -140,30 +141,4 @@ function startOtpTimer() {
 $("#resend-otp-button").click(function () {
   $("#request-otp-button").click();
   $("#resend-otp-button").hide();
-});
-document.addEventListener("DOMContentLoaded", function () {
-  const accountIcon = document.getElementById("account-icon");
-
-  // Check if user is logged in (check for auth token in localStorage)
-  const isLoggedIn = localStorage.getItem("auth_token") !== null;
-
-  if (isLoggedIn) {
-    // User is logged in - redirect to account details
-    accountIcon.href = "./account-details";
-    accountIcon.removeAttribute("data-bs-toggle");
-  } else {
-    // User is not logged in - show login popup
-    accountIcon.href = "#login";
-    accountIcon.setAttribute("data-bs-toggle", "offcanvas");
-  }
-
-  // Optional: Add click handler for additional logic
-  accountIcon.addEventListener("click", function (e) {
-    if (isLoggedIn) {
-      // You could add additional logic here before redirect
-      console.log("User is logged in, redirecting to account details");
-    } else {
-      console.log("Showing login popup");
-    }
-  });
 });

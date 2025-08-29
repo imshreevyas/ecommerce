@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\front\AuthController;
+use App\Http\Controllers\front\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*  
@@ -13,10 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('front.index');
-});
+Route::get('/', [IndexController::class, 'index']);
 
-Route::get('/account-details', function () {
-    return view('front.account-details');
-})->name('account-details');
+// route for login
+Route::post('/requestOtp', [AuthController::class, 'requestOtp']);
+Route::post('/loginOtp', [AuthController::class, 'login']);
+
+
+Route::get('/product-detail/{id}', [IndexController::class, 'productDetail'])->name('product-detail');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/account-details', function () {
+        return view('front.account-details');
+    })->name('account-details');
+});

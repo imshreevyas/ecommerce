@@ -6,37 +6,10 @@
 <!--<![endif]-->
 
 <head>
-    <meta charset="utf-8">
-    <title>Fyll - Shift toward mindful living.</title>
-
-    <meta name="author" content="themesflat.com">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description"
-        content="Fyll description">
-
-    <!-- font -->
-    <link rel="stylesheet" href="fonts/fonts.css">
-    <link rel="stylesheet" href="fonts/font-icons.css">
-    <!-- css -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/drift-basic.min.css">
-    <link rel="stylesheet" href="css/photoswipe.css">
-    <link rel="stylesheet" href="css/swiper-bundle.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-
-    <!-- Favicon and Touch Icons  -->
-    <link rel="shortcut icon" href="images/logo/favicon.png">
-    <link rel="apple-touch-icon-precomposed" href="images/logo/favicon.png">
-
+    @include('front.include.head')
 </head>
 
 <body class="bg-surface-3 primary-3">
-
-    <!-- RTL -->
-    <!-- <a href="javascript:void(0);" id="toggle-rtl" class="tf-btn animate-btn"><span>RTL</span></a> -->
-    <!-- /RTL  -->
-
     <!-- Scroll Top -->
     <button id="goTop" class="pos1">
         <span class="border-progress"></span>
@@ -54,144 +27,11 @@
     <div id="wrapper">
 
         <!-- Top Bar-->
-        <div class="tf-topbar bg-light-blue topbar-bg">
-            <div class="container">
-                <div class="topbar-wraper">
-                    <div class="d-none d-xl-block flex-shrink-0">
-                        <ul class="tf-social-icon topbar-left">
-                            <li><a href="https://www.facebook.com/" class="social-item social-facebook"><i
-                                        class="icon icon-fb"></i></a></li>
-                            <li><a href="https://www.instagram.com/" class="social-item social-instagram"><i
-                                        class="icon icon-instagram"></i></a>
-                            </li>
-                            <li><a href="https://x.com/" class="social-item social-x"><i class="icon icon-x"></i></a>
-                            </li>
-                            <li><a href="https://www.snapchat.com/" class="social-item social-snapchat"><i
-                                        class="icon icon-snapchat"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="overflow-hidden">
-                        <div class="topbar-center marquee-wrapper">
-                            <div class="initial-child-container">
-                                <div class="marquee-child-item">
-                                    <p>Return extended to 60 days</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Life-time Guarantes</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Limited-Time Offer</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <!-- 2 -->
-                                <div class="marquee-child-item">
-                                    <p>Return extended to 60 days</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Life-time Guarantes</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Limited-Time Offer</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <!-- 3 -->
-                                <div class="marquee-child-item">
-                                    <p>Return extended to 60 days</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Life-time Guarantes</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Limited-Time Offer</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <!-- 4 -->
-                                <div class="marquee-child-item">
-                                    <p>Return extended to 60 days</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Life-time Guarantes</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Limited-Time Offer</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <!-- 5 -->
-                                <div class="marquee-child-item">
-                                    <p>Return extended to 60 days</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Life-time Guarantes</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Limited-Time Offer</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
+        @include('front.include.topbar')
         <!-- /Top Bar -->
         <!-- Header -->
-        <header id="header" class="header-default header-white header-uppercase product-details-header-white">
-            <div class="container">
-                <div class="row wrapper-header align-items-center">
-                    <div class="col-md-4 col-3 d-xl-none">
-                        <a href="#mobileMenu" class="mobile-menu" data-bs-toggle="offcanvas" aria-controls="mobileMenu">
-                            <i class="icon icon-categories1"></i>
-                        </a>
-                    </div>
-                    <div class="col-xl-2 col-md-4 col-6">
-                        <a href="index.html" class="logo-header">
-                            <img src="images/logo/logo-white.png" alt="logo" class="logo">
-                        </a>
-                    </div>
-                    <div class="col-xl-8 d-none d-xl-block">
-                        <nav class="box-navigation text-center style-space">
-                            <ul class="box-nav-menu justify-content-start">
-                                <li class="menu-item">
-                                    <a href="#" class="item-link">Home</a>                                   
-                                </li>
-                                <li class="menu-item">
-                                    <a href="about-us.html" class="item-link">About</a>                                   
-                                </li>
-                                <li class="menu-item">
-                                    <a href="" class="item-link">Contact</a>                                   
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-xl-2 col-md-4 col-3">
-                        <ul class="nav-icon d-flex justify-content-end align-items-center">
-                            <li class="nav-account">
-                                <a href="#login" data-bs-toggle="offcanvas" aria-controls="login" class="nav-icon-item">
-                                    <i class="icon icon-user"></i>
-                                </a>
-                            </li>
-                            <li class="nav-cart">
-                                <a href="#shoppingCart" data-bs-toggle="offcanvas" class="nav-icon-item">
-                                    <i class="icon icon-cart"></i>
-                                    <span class="count-box">0</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <header id="header" class="header-default header-absolute header-white header-uppercase">
+            @include('front.include.header')
         </header>
         <!-- /Header -->
 
@@ -227,163 +67,36 @@
                                         data-preview="4" data-direction="vertical">
                                         <div class="swiper-wrapper stagger-wrap">
                                             <!-- black -->
-                                            <div class="swiper-slide stagger-item" data-color="black" data-size="small">
-                                                <div class="item">
-                                                    <img class="lazyload"
-                                                        data-src="images/products/shree/p7.png"
-                                                        src="images/products/shree/p7.png"
-                                                        alt="img-product">
+                                            @foreach ($product->product_images as $image)
+                                                <div class="swiper-slide stagger-item" data-color="black" data-size="small">
+                                                    <div class="item">
+                                                        <img class="lazyload"
+                                                            data-src="{{ $image->image_url }}"
+                                                            src="{{ $image->image_url }}"
+                                                            alt="img-product">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="swiper-slide stagger-item" data-color="black"
-                                                data-size="medium">
-                                                <div class="item">
-                                                    <img class="lazyload"
-                                                        data-src="images/products/shree/p1.png"
-                                                        src="images/products/shree/p1.png"
-                                                        alt="img-product">
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide stagger-item" data-color="black" data-size="large">
-                                                <div class="item">
-                                                    <img class="lazyload"
-                                                        data-src="images/products/shree/p2.png"
-                                                        src="images/products/shree/p2.png"
-                                                        alt="img-product">
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide stagger-item" data-color="black"
-                                                data-size="extra large">
-                                                <div class="item">
-                                                    <img class="lazyload"
-                                                        data-src="images/products/shree/p3.png"
-                                                        src="images/products/shree/p3.png"
-                                                        alt="img-product">
-                                                </div>
-                                            </div>
-                                            <!-- yellow -->
-                                            <div class="swiper-slide stagger-item" data-color="orange"
-                                                data-size="small">
-                                                <div class="item">
-                                                    <img class="lazyload"
-                                                        data-src="images/products/fashion/fs-orange1.jpg"
-                                                        src="images/products/fashion/fs-orange1.jpg" alt="img-product">
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide stagger-item" data-color="orange"
-                                                data-size="medium">
-                                                <div class="item">
-                                                    <img class="lazyload"
-                                                        data-src="images/products/fashion/fs-orange2.jpg"
-                                                        src="images/products/fashion/fs-orange2.jpg" alt="img-product">
-                                                </div>
-                                            </div>
-                                            <!-- grey -->
-                                            <div class="swiper-slide stagger-item" data-color="green" data-size="large">
-                                                <div class="item">
-                                                    <img class="lazyload"
-                                                        data-src="images/products/fashion/fs-green1.jpg"
-                                                        src="images/products/fashion/fs-green1.jpg" alt="img-product">
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide stagger-item" data-color="green"
-                                                data-size="extra large">
-                                                <div class="item">
-                                                    <img class="lazyload"
-                                                        data-src="images/products/fashion/fs-green2.jpg"
-                                                        src="images/products/fashion/fs-green2.jpg" alt="img-product">
-                                                </div>
-                                            </div>
-
+                                            @endforeach
                                         </div>
                                     </div>
                                     <div class="flat-wrap-media-product">
                                         <div dir="ltr" class="swiper tf-product-media-main" id="gallery-swiper-started">
                                             <div class="swiper-wrapper">
                                                 <!-- black -->
-                                                <div class="swiper-slide" data-color="black" data-size="small">
-                                                    <a href="images/products/shree/p7.png" target="_blank"
-                                                        class="item" data-pswp-width="552px" data-pswp-height="827px">
-                                                        <img class="tf-image-zoom lazyload"
-                                                            data-zoom="images/products/shree/p7.png"
-                                                            data-src="images/products/shree/p7.png"
-                                                            src="images/products/shree/p7.png"
-                                                            alt="img-product">
-                                                    </a>
-                                                </div>
-                                                <div class="swiper-slide" data-color="black" data-size="medium">
-                                                    <a href="images/products/shree/p1.png" target="_blank"
-                                                        class="item" data-pswp-width="552px" data-pswp-height="827px">
-                                                        <img class="tf-image-zoom lazyload"
-                                                            data-zoom="images/products/shree/p1.png"
-                                                            data-src="images/products/shree/p1.png"
-                                                            src="images/products/shree/p1.png"
-                                                            alt="img-product">
-                                                    </a>
-                                                </div>
-                                                <div class="swiper-slide" data-color="black" data-size="large">
-                                                    <a href="images/products/shree/p2.png" target="_blank"
-                                                        class="item" data-pswp-width="552px" data-pswp-height="827px">
-                                                        <img class="tf-image-zoom lazyload"
-                                                            data-zoom="images/products/shree/p2.png"
-                                                            data-src="images/products/shree/p2.png"
-                                                            src="images/products/shree/p2.png"
-                                                            alt="img-product">
-                                                    </a>
-                                                </div>
-                                                <div class="swiper-slide" data-color="black" data-size="extra large">
-                                                    <a href="images/products/shree/p3.png" target="_blank"
-                                                        class="item" data-pswp-width="552px" data-pswp-height="827px">
-                                                        <img class="tf-image-zoom lazyload"
-                                                            data-zoom="images/products/shree/p3.png"
-                                                            data-src="images/products/shree/p3.png"
-                                                            src="images/products/shree/p3.png"
-                                                            alt="img-product">
-                                                    </a>
-                                                </div>
+                                                @foreach ($product->product_images as $image)
                                                 
-                                                <!-- yellow -->
-                                                <div class="swiper-slide" data-color="orange" data-size="small">
-                                                    <a href="images/products/fashion/fs-orange1.jpg" target="_blank"
+                                                <div class="swiper-slide" data-color="black" data-size="medium">
+                                                    <a href="{{ $image->image_url }}" target="_blank"
                                                         class="item" data-pswp-width="552px" data-pswp-height="827px">
                                                         <img class="tf-image-zoom lazyload"
-                                                            data-zoom="images/products/fashion/fs-orange1.jpg"
-                                                            data-src="images/products/fashion/fs-orange1.jpg"
-                                                            src="images/products/fashion/fs-orange1.jpg"
+                                                            data-zoom="{{ $image->image_url }}"
+                                                            data-src="{{ $image->image_url }}"
+                                                            src="{{ $image->image_url }}"
                                                             alt="img-product">
                                                     </a>
                                                 </div>
-                                                <div class="swiper-slide" data-color="orange" data-size="medium">
-                                                    <a href="images/products/fashion/fs-orange2.jpg" target="_blank"
-                                                        class="item" data-pswp-width="552px" data-pswp-height="827px">
-                                                        <img class="tf-image-zoom lazyload"
-                                                            data-zoom="images/products/fashion/fs-orange2.jpg"
-                                                            data-src="images/products/fashion/fs-orange2.jpg"
-                                                            src="images/products/fashion/fs-orange2.jpg"
-                                                            alt="img-product">
-                                                    </a>
-                                                </div>
-                                                <!-- grey -->
-                                                <div class="swiper-slide" data-color="green" data-size="large">
-                                                    <a href="images/products/fashion/fs-green1.jpg" target="_blank"
-                                                        class="item" data-pswp-width="552px" data-pswp-height="827px">
-                                                        <img class="tf-image-zoom lazyload"
-                                                            data-zoom="images/products/fashion/fs-green1.jpg"
-                                                            data-src="images/products/fashion/fs-green1.jpg"
-                                                            src="images/products/fashion/fs-green1.jpg"
-                                                            alt="img-product">
-                                                    </a>
-                                                </div>
-                                                <div class="swiper-slide" data-color="green" data-size="extra large">
-                                                    <a href="images/products/fashion/fs-green2.jpg" target="_blank"
-                                                        class="item" data-pswp-width="552px" data-pswp-height="827px">
-                                                        <img class="tf-image-zoom lazyload"
-                                                            data-zoom="images/products/fashion/fs-green2.jpg"
-                                                            data-src="images/products/fashion/fs-green2.jpg"
-                                                            src="images/products/fashion/fs-green2.jpg"
-                                                            alt="img-product">
-                                                    </a>
-                                                </div>
+
+                                                @endforeach
 
                                             </div>
                                         </div>
@@ -400,8 +113,8 @@
                             <div class="tf-product-info-wrap other-image-zoom">
                                 <div class="tf-product-info-list">
                                     <div class="tf-product-heading">
-                                        <span class="brand-product">KOTON</span>
-                                        <h5 class="product-name fw-medium">Linen Blend Pants</h5>
+                                        <span class="brand-product">{{$product->category->name}}</span>
+                                        <h5 class="product-name fw-medium">{{$product->title}}</h5>
                                         <div class="product-rate">
                                             <div class="list-star">
                                                 <i class="icon icon-star"></i>
@@ -413,35 +126,16 @@
                                             <span class="count-review">(5 reviews)</span>
                                         </div>
                                         <div class="product-price">
-                                            <div class="display-sm price-new price-on-sale">₹60.00</div>
-                                            <div class="display-sm price-old">₹80.00</div>
-                                            <span class="badge-sale">20% Off</span>
+                                            <div class="display-sm price-new price-on-sale">₹{{$product->selling_price}}</div>
+                                            <div class="display-sm price-old">₹{{$product->mrp}}</div>
+                                            <span class="badge-sale">₹{{$product->discount}} Off</span>
                                         </div>
                                         <div class="product-stock">
-                                            <span class="stock in-stock">In Stock</span>
-                                            <svg class="icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M15.2759 10.9242C15.2556 10.6149 14.9236 10.4281 14.6488 10.5714C14.4098 10.6961 13.6603 11.0196 13.0698 11.0196C12.6156 11.0196 12.3132 10.8694 12.3132 10.1362C12.3132 8.12636 15.0124 6.52078 12.6056 3.51218C12.3295 3.16719 11.773 3.41746 11.8469 3.85238C11.8484 3.86145 11.9887 4.77182 11.5632 5.27582C11.3635 5.51218 11.061 5.62711 10.6384 5.62711C9.17454 5.62711 9.27646 1.94027 11.1223 0.795793C11.5328 0.541367 11.2702 -0.0948905 10.8012 0.0119845C10.683 0.0387033 7.88684 0.701328 6.39105 3.62798C5.28035 5.80099 5.88191 7.29977 6.32116 8.39418C6.71371 9.3722 6.89283 9.81857 6.01364 10.4273C5.68251 10.6566 5.42618 10.6328 5.42618 10.6328C4.60384 10.6328 3.82489 9.42402 3.59437 8.95879C3.40712 8.57837 2.83721 8.67311 2.78314 9.09372C2.75993 9.27457 2.24057 13.5513 4.51026 16.1312C5.76076 17.5525 7.50054 18.0581 9.40742 17.9948C11.1702 17.9357 12.5768 17.3395 13.5883 16.2228C15.4639 14.152 15.2844 11.0549 15.2759 10.9242Z"
-                                                    fill="#F2721C" />
-                                                <path
-                                                    d="M4.44845 10.1357C4.04521 9.74669 3.72761 9.22817 3.59412 8.95877C3.40688 8.57834 2.83696 8.67309 2.78289 9.0937C2.75969 9.27454 2.24032 13.5513 4.51001 16.1312C5.2812 17.0077 6.27795 17.5784 7.48458 17.8379C4.95987 16.3506 4.24181 13.0162 4.44845 10.1357Z"
-                                                    fill="#EA5513" />
-                                                <path
-                                                    d="M3.73448 4.51577C3.70506 4.49735 3.66772 4.49735 3.6383 4.51577C2.64745 5.13712 2.64446 6.58633 3.6383 7.20955C3.66723 7.22769 3.70471 7.22825 3.73448 7.20955C4.72533 6.58816 4.72821 5.13898 3.73448 4.51577Z"
-                                                    fill="#F2721C" />
-                                                <path
-                                                    d="M4.12025 4.85809C4.01204 4.72502 3.88239 4.60855 3.73448 4.51577C3.70506 4.49735 3.66772 4.49735 3.6383 4.51577C2.64745 5.13712 2.64446 6.58633 3.6383 7.20955C3.66723 7.22769 3.70471 7.22825 3.73448 7.20955C3.88242 7.11677 4.01208 7.00026 4.12029 6.8672C3.64157 6.28237 3.64072 5.44386 4.12025 4.85809Z"
-                                                    fill="#EA5513" />
-                                                <path
-                                                    d="M10.8011 0.0119845C10.6829 0.0387033 7.88676 0.701328 6.39096 3.62798C4.90723 6.53083 6.48163 8.24741 6.63386 9.34639L6.63403 9.34629C6.69 9.74974 6.54569 10.0588 6.01356 10.4272C5.69392 10.6486 5.40494 10.6816 5.10034 10.5723V10.5727C5.10034 10.5727 6.17507 11.6058 7.26087 10.8972C8.33686 10.1951 8.02601 9.11809 7.85986 8.63131L7.86025 8.63103C7.46365 7.57951 7.11673 6.19027 8.09319 4.27988C8.67292 3.14557 9.44797 2.35153 10.1868 1.80263C10.426 1.38835 10.7395 1.0331 11.1223 0.795758C11.5326 0.541367 11.2701 -0.0948905 10.8011 0.0119845Z"
-                                                    fill="#EA5513" />
-                                            </svg>
-                                            <span class="text-dark">30 sold in last 24 hours</span>
+                                            <span class="stock in-stock">{{$product->available_qty>0?' In Stock':'Out of Stock'}}</span>
                                         </div>
                                         <div class="product-progress-sale">
                                             <div class="title-hurry-up"><span class="text-primary fw-medium">HURRY
-                                                    UP!</span> Only <span class="count">4</span> items left!</div>
+                                                    UP!</span> Only <span class="count">{{$product->available_qty}}</span> items left!</div>
                                             <div class="progress-sold">
                                                 <div class="value" style="width: 0%;" data-progress="70"></div>
                                             </div>
@@ -2675,20 +2369,20 @@
 
 
     <!-- Javascript -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/swiper-bundle.min.js"></script>
-    <script src="js/carousel.js"></script>
-    <script src="js/bootstrap-select.min.js"></script>
-    <script src="js/lazysize.min.js"></script>
-    <script src="js/count-down.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/multiple-modal.js"></script>
-    <script src="js/drift.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/photoswipe-lightbox.umd.min.js"></script>
-    <script src="js/photoswipe.umd.min.js"></script>
-    <script src="js/zoom.js"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('js/carousel.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('js/lazysize.min.js') }}"></script>
+    <script src="{{ asset('js/count-down.js') }}"></script>
+    <script src="{{ asset('js/wow.min.js') }}"></script>
+    <script src="{{ asset('js/multiple-modal.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/api/login.js') }}"></script>
+    <script src="{{ asset('js/photoswipe-lightbox.umd.min.js') }}"></script>
+    <script src="{{ asset('js/photoswipe.umd.min.js') }}"></script>
+    <script src="{{ asset('js/zoom.js') }}"></script>
 </body>
 
 </html>

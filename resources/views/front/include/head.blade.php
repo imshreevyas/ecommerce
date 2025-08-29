@@ -19,3 +19,27 @@
 <!-- Favicon and Touch Icons  -->
 <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}">
 <link rel="apple-touch-icon-precomposed" href="{{ asset('images/logo/favicon.png') }}">
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const accountIcon = document.getElementById("account-icon");
+
+        // Check if user is logged in using PHP auth directly in JS
+        const isLoggedIn = {{ auth()->check() ? 'true' : 'false' }};
+
+        if (isLoggedIn) {
+            accountIcon.href = "{{ route('account-details') }}";
+            accountIcon.removeAttribute("data-bs-toggle");
+        } else {
+            accountIcon.href = "#login";
+            accountIcon.setAttribute("data-bs-toggle", "offcanvas");
+        }
+
+        accountIcon.addEventListener("click", function(e) {
+            if (isLoggedIn) {
+                console.log("User is logged in, redirecting to account details");
+            } else {
+                console.log("Showing login popup");
+            }
+        });
+    });
+</script>

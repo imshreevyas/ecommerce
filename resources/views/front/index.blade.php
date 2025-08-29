@@ -50,7 +50,8 @@
             <div class="container">
                 <div class="flat-wrapper-iconbox">
                     <h3 class="title letter-0 font-7 fw-semibold">Why Shop With Us?</h3>
-                    <div dir="ltr" class="swiper tf-swiper wow fadeInUp" data-swiper='{
+                    <div dir="ltr" class="swiper tf-swiper wow fadeInUp"
+                        data-swiper='{
                         "slidesPerView": 1,
                         "spaceBetween": 12,
                         "speed": 800,
@@ -67,7 +68,8 @@
                             <div class="swiper-slide">
                                 <div class="tf-icon-box style-3 justify-content-center justify-content-lg-start">
                                     <div class="box-icon">
-                                        <img src="{{ asset('images/icons/minimal.png') }}" alt="" srcset="">
+                                        <img src="{{ asset('images/icons/minimal.png') }}" alt=""
+                                            srcset="">
                                     </div>
                                     <div class="content">
                                         <div class="title fw-bold font-7">Minimalism</div>
@@ -124,8 +126,8 @@
             <div class="container">
                 <div class="s2-banner-with-text">
                     <div class="banner">
-                        <img src="{{ asset('images/slider/shree/4.png') }}" data-src="{{ asset('images/slider/shree/4.png') }}" alt="banner"
-                            class="lazyload">
+                        <img src="{{ asset('images/slider/shree/4.png') }}"
+                            data-src="{{ asset('images/slider/shree/4.png') }}" alt="banner" class="lazyload">
                     </div>
                     <div class="content-with-text wow fadeInUp">
                         <div class="box-title-content">
@@ -147,7 +149,8 @@
                     <h3 class="title letter-0 text-start font-7">Featured Products</h3>
                 </div>
                 <div class="fl-control-sw2 wrap-pos-nav sw-over-product wow fadeInUp">
-                    <div dir="ltr" class="swiper tf-swiper wrap-sw-over" data-swiper='{
+                    <div dir="ltr" class="swiper tf-swiper wrap-sw-over"
+                        data-swiper='{
                         "slidesPerView": 2,
                         "spaceBetween": 12,
                         "speed": 800,
@@ -165,10 +168,93 @@
                         "1200": { "slidesPerView": 4, "spaceBetween": 24, "slidesPerGroup": 4}
                         }
                     }'>
-                        <div class="product-container">      
+                        <div class="product-container">
                             <!-- Display Product List here -->
                             <div class="swiper-wrapper">
-                            </div>                      
+                                @foreach ($products as $product)
+                                    <div class="swiper-slide">
+                                        <div class="card-product">
+                                            <div class="card-product-wrapper asp-ratio-0">
+                                                <a href="{{ route('product-detail', $product->id) }}"
+                                                    class="product-img">
+                                                    <img class="img-product lazyload"
+                                                        data-src="{{ $product->product_images[0]->image_url }}"
+                                                        src="{{ $product->product_images[0]->image_url }}"
+                                                        alt="{{ $product->title }}">
+                                                    @if (isset($product->product_images[1]))
+                                                        <img class="img-hover lazyload"
+                                                            data-src="{{ $product->product_images[1]->image_url }}"
+                                                            src="{{ $product->product_images[1]->image_url }}"
+                                                            alt="{{ $product->title }}">
+                                                    @endif
+                                                </a>
+                                                <ul class="list-product-btn">
+                                                    <li>
+                                                        <a href="#quickAdd" data-bs-toggle="modal"
+                                                            class="hover-tooltip tooltip-left box-icon"
+                                                            data-product-id="{{ $product->id }}">
+                                                            <span class="icon icon-cart2"></span>
+                                                            <span class="tooltip">Quick Add</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#quickView" data-bs-toggle="modal"
+                                                            class="hover-tooltip tooltip-left box-icon quickview"
+                                                            data-product-id="{{ $product->id }}">
+                                                            <span class="icon icon-view"></span>
+                                                            <span class="tooltip">Quick View</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="compare">
+                                                        <a href="#compare" data-bs-toggle="modal"
+                                                            aria-controls="compare"
+                                                            class="hover-tooltip tooltip-left box-icon"
+                                                            data-product-id="{{ $product->id }}">
+                                                            <span class="icon icon-compare"></span>
+                                                            <span class="tooltip">Add to Compare</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                @if ($product->discount > 0)
+                                                    <div class="on-sale-wrap">
+                                                        <span class="on-sale-item">{{ $product->discount }}%
+                                                            Off</span>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div class="card-product-info">
+                                                <a href="{{ route('product-detail', $product->id) }}"
+                                                    class="name-product link fw-medium text-md">{{ $product->title }}</a>
+                                                <p class="price-wrap fw-medium">
+                                                    <span
+                                                        class="price-new text-xl text-primary">₹{{ number_format($product->selling_price, 2) }}</span>
+                                                    @if ($product->discount > 0)
+                                                        <span
+                                                            class="price-old">₹{{ number_format($product->mrp, 2) }}</span>
+                                                    @endif
+                                                </p>
+                                                @if ($product->variants && count($product->variants) > 0)
+                                                    <ul class="list-color-product style-2">
+                                                        @foreach ($product->variants as $index => $variant)
+                                                            <li
+                                                                class="list-color-item hover-tooltip tooltip-bot color-swatch {{ $index === 0 ? 'active' : '' }}">
+                                                                <span
+                                                                    class="tooltip color-filter">{{ $variant->color }}</span>
+                                                                <span class="swatch-value"
+                                                                    style="background-color: {{ $variant->color_code }}"></span>
+                                                                <img class="lazyload"
+                                                                    data-src="{{ $variant->image }}"
+                                                                    src="{{ $variant->image }}"
+                                                                    alt="{{ $product->title }}">
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                         <div class="d-flex d-xl-none sw-dot-default sw-pagination-product justify-content-center">
                         </div>
@@ -196,13 +282,15 @@
                     <div class="image-banner">
                         <div class="image image-1 hover-img">
                             <div class="shine-item img-style wow fadeInRight" data-wow-delay="0.1s">
-                                <img src="{{ asset('images/banner/banner1.jpeg') }}" data-src="{{ asset('images/slider/shree/1.png') }}" alt=""
+                                <img src="{{ asset('images/banner/banner1.jpeg') }}"
+                                    data-src="{{ asset('images/slider/shree/1.png') }}" alt=""
                                     class="lazyload">
                             </div>
                         </div>
                         <div class="image image-2 hover-shine hover-img">
                             <div class="shine-item img-style wow fadeInRight">
-                                <img src="{{ asset('images/banner/banner1.jpeg') }}" data-src="{{ asset('images/slider/shree/3.png') }}" alt=""
+                                <img src="{{ asset('images/banner/banner1.jpeg') }}"
+                                    data-src="{{ asset('images/slider/shree/3.png') }}" alt=""
                                     class="lazyload">
                             </div>
                         </div>
@@ -215,10 +303,13 @@
         <section class="flat-spacing-3">
             <div class="container-3">
                 <div class="flat-wrapper-testimonial bg-dark-green-4">
-                    <img class="img-item-1 absolute" src="{{ asset('images/slider/shree/5.jpeg') }}" alt="" style="max-width: 120px;">
-                    <img class="img-item-2 absolute" src="{{ asset('images/slider/shree/6.jpeg') }}" alt="" style="max-width: 120px;">
+                    <img class="img-item-1 absolute" src="{{ asset('images/slider/shree/5.jpeg') }}" alt=""
+                        style="max-width: 120px;">
+                    <img class="img-item-2 absolute" src="{{ asset('images/slider/shree/6.jpeg') }}" alt=""
+                        style="max-width: 120px;">
 
-                    <div dir="ltr" class="swiper tf-swiper" data-swiper='{
+                    <div dir="ltr" class="swiper tf-swiper"
+                        data-swiper='{
                         "slidesPerView": 1,
                         "speed": 800,
                         "spaceBetween": 24,
@@ -324,7 +415,7 @@
                     <div class="footer-top-wrap">
                         <div class="footer-logo">
                             <a href="index.html">
-                                <img src="{{asset('images/logo/logo-white.png')}}" class="logo" alt="logo">
+                                <img src="{{ asset('images/logo/logo-white.png') }}" class="logo" alt="logo">
                             </a>
                         </div>
                         <ul class="tf-social-icon style-large">
@@ -363,8 +454,8 @@
                                     <ul class="footer-info">
                                         <li class="item">
                                             <span class="box-icon">
-                                                <svg width="12" height="14" viewBox="0 0 12 14" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
+                                                <svg width="12" height="14" viewBox="0 0 12 14"
+                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
                                                         d="M10.1869 1.73431C9.06854 0.61592 7.58155 0 5.99993 0C4.4183 0 2.93129 0.61592 1.81292 1.73431C0.694534 2.85273 0.0786133 4.33969 0.0786133 5.92129C0.0786133 9.12084 3.10388 11.7821 4.72917 13.2118C4.95504 13.4105 5.15008 13.582 5.30547 13.7272C5.50016 13.9091 5.75006 14 5.9999 14C6.24979 14 6.49964 13.9091 6.69435 13.7272C6.84975 13.582 7.04479 13.4105 7.27065 13.2118C8.89594 11.7821 11.9212 9.12084 11.9212 5.92129C11.9212 4.33969 11.3053 2.85273 10.1869 1.73431ZM6.72897 12.5961C6.49816 12.7991 6.29885 12.9744 6.13451 13.1279C6.05902 13.1984 5.94078 13.1984 5.86526 13.1279C5.70095 12.9744 5.50161 12.7991 5.2708 12.596C3.74283 11.2519 0.898656 8.75001 0.898656 5.92131C0.898656 3.1085 3.18704 0.820124 5.99987 0.820124C8.81268 0.820124 11.1011 3.1085 11.1011 5.92131C11.1011 8.75001 8.25694 11.2519 6.72897 12.5961Z"
                                                         fill="#0D0D0D" />
@@ -380,8 +471,8 @@
                                         </li>
                                         <li class="item">
                                             <span class="box-icon">
-                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
+                                                <svg width="14" height="14" viewBox="0 0 14 14"
+                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
                                                         d="M11.6666 9.4091L10.9841 8.4641C10.7324 8.12417 10.3574 7.89649 9.93972 7.82996C9.522 7.76343 9.09484 7.86335 8.74998 8.10827L8.09081 8.59243C7.13399 7.73698 6.36526 6.69214 5.83331 5.5241L6.49248 5.04577C6.837 4.79478 7.06794 4.41741 7.13464 3.99641C7.20135 3.5754 7.09838 3.14513 6.84831 2.79993L6.18331 1.86077C5.93339 1.51663 5.55703 1.28582 5.13698 1.21909C4.71693 1.15236 4.28757 1.25518 3.94331 1.50493L2.91664 2.23993C2.58681 2.47798 2.33009 2.80349 2.17547 3.17972C2.02086 3.55595 1.9745 3.96792 2.04164 4.3691C2.33803 6.09644 3.02915 7.73206 4.06118 9.14856C5.0932 10.5651 6.43827 11.7242 7.99164 12.5358C8.30603 12.696 8.65376 12.78 9.00664 12.7808C9.46814 12.7804 9.91756 12.6333 10.29 12.3608L11.3108 11.6666C11.4837 11.5428 11.6302 11.3858 11.7419 11.2048C11.8535 11.0238 11.9281 10.8224 11.9612 10.6123C11.9943 10.4023 11.9853 10.1877 11.9347 9.98113C11.8842 9.77457 11.793 9.58012 11.6666 9.4091ZM10.7975 10.9433L9.78248 11.6666C9.58631 11.8098 9.35413 11.8954 9.11199 11.914C8.86984 11.9325 8.62732 11.8832 8.41164 11.7716C6.97557 11.0225 5.73227 9.95129 4.779 8.6418C3.82572 7.33231 3.18832 5.82004 2.91664 4.22327C2.87745 3.98261 2.90577 3.73579 2.99846 3.51026C3.09114 3.28473 3.24455 3.08933 3.44164 2.94577L4.45664 2.21077C4.6131 2.09841 4.80765 2.05252 4.99783 2.08312C5.188 2.11373 5.35834 2.21833 5.47164 2.3741L6.15998 3.3191C6.27119 3.47659 6.31717 3.67098 6.28831 3.8616C6.27352 3.95579 6.24012 4.04608 6.19004 4.12721C6.13996 4.20834 6.07421 4.27867 5.99664 4.3341L5.05164 5.02243C4.97248 5.07857 4.91486 5.16007 4.88834 5.25342C4.86182 5.34678 4.86798 5.44639 4.90581 5.53577C5.52168 7.06896 6.5077 8.42575 7.77581 9.48493C7.85256 9.54453 7.94697 9.57689 8.04414 9.57689C8.14132 9.57689 8.23573 9.54453 8.31248 9.48493L9.25748 8.80243C9.41322 8.68947 9.60729 8.64263 9.79741 8.67214C9.98754 8.70164 10.1583 8.80508 10.2725 8.95993L10.9608 9.9166C11.072 10.0741 11.118 10.2685 11.0891 10.4591C11.0752 10.5552 11.0422 10.6475 10.9921 10.7306C10.942 10.8137 10.8759 10.886 10.7975 10.9433Z"
                                                         fill="#0D0D0D" />
@@ -391,8 +482,8 @@
                                         </li>
                                         <li class="item">
                                             <span class="box-icon">
-                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
+                                                <svg width="14" height="14" viewBox="0 0 14 14"
+                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
                                                         d="M11.8125 2.625H2.1875C1.8394 2.625 1.50556 2.76328 1.25942 3.00942C1.01328 3.25556 0.875 3.5894 0.875 3.9375V10.0625C0.875 10.4106 1.01328 10.7444 1.25942 10.9906C1.50556 11.2367 1.8394 11.375 2.1875 11.375H11.8125C12.1606 11.375 12.4944 11.2367 12.7406 10.9906C12.9867 10.7444 13.125 10.4106 13.125 10.0625V3.9375C13.125 3.5894 12.9867 3.25556 12.7406 3.00942C12.4944 2.76328 12.1606 2.625 11.8125 2.625ZM11.5675 3.5L7.28 7.07438C7.20139 7.13985 7.10231 7.17571 7 7.17571C6.89769 7.17571 6.79861 7.13985 6.72 7.07438L2.4325 3.5H11.5675ZM11.8125 10.5H2.1875C2.07147 10.5 1.96019 10.4539 1.87814 10.3719C1.79609 10.2898 1.75 10.1785 1.75 10.0625V4.06875L6.16 7.74375C6.39584 7.94019 6.69307 8.04776 7 8.04776C7.30693 8.04776 7.60416 7.94019 7.84 7.74375L12.25 4.06875V10.0625C12.25 10.1785 12.2039 10.2898 12.1219 10.3719C12.0398 10.4539 11.9285 10.5 11.8125 10.5Z"
                                                         fill="#0D0D0D" />
@@ -419,14 +510,14 @@
                                         <div id="subscribe-content" class="subscribe-content">
                                             <fieldset class="email">
                                                 <input type="email" name="email-form" id="subscribe-email"
-                                                    class="subscribe-email" placeholder="Email address" tabindex="0"
-                                                    aria-required="true" required>
+                                                    class="subscribe-email" placeholder="Email address"
+                                                    tabindex="0" aria-required="true" required>
                                             </fieldset>
                                             <div class="button-submit">
                                                 <button id="subscribe-button" class="subscribe-button animate-btn"
                                                     type="button">
-                                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
+                                                    <svg width="18" height="18" viewBox="0 0 18 18"
+                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <g clip-path="url(#clip0_5296_3345)">
                                                             <path
                                                                 d="M17.7938 8.50229L17.7931 8.50162L14.1192 4.84537C13.8439 4.57147 13.3988 4.57249 13.1248 4.84776C12.8508 5.123 12.8519 5.56818 13.1271 5.84212L15.5938 8.29687H0.703125C0.314789 8.29687 0 8.61166 0 9C0 9.38833 0.314789 9.70312 0.703125 9.70312H15.5938L13.1272 12.1579C12.8519 12.4318 12.8509 12.877 13.1248 13.1522C13.3988 13.4275 13.844 13.4285 14.1192 13.1546L17.7932 9.49837L17.7938 9.4977C18.0692 9.22285 18.0683 8.77623 17.7938 8.50229Z"
@@ -549,15 +640,15 @@
                         </div>
                         <div class="demo-item">
                             <a href="home-skincare.html" class="demo-image">
-                                <img class="lazyload" data-src="images/demo/comestic.jpg" src="images/demo/comestic.jpg"
-                                    alt="home-comestic">
+                                <img class="lazyload" data-src="images/demo/comestic.jpg"
+                                    src="images/demo/comestic.jpg" alt="home-comestic">
                             </a>
                             <a href="home-skincare.html" class="demo-name link">Skincare</a>
                         </div>
                         <div class="demo-item">
                             <a href="home-bicycle.html" class="demo-image">
-                                <img class="lazyload" data-src="images/demo/bicycle.jpg" src="images/demo/bicycle.jpg"
-                                    alt="home-bicycle">
+                                <img class="lazyload" data-src="images/demo/bicycle.jpg"
+                                    src="images/demo/bicycle.jpg" alt="home-bicycle">
                                 <div class="demo-label"><span>New</span></div>
                             </a>
                             <a href="home-bicycle.html" class="demo-name link">Bicycle</a>
@@ -586,8 +677,8 @@
                         </div>
                         <div class="demo-item">
                             <a href="home-jewelry.html" class="demo-image">
-                                <img class="lazyload" data-src="images/demo/jewelry.jpg" src="images/demo/jewelry.jpg"
-                                    alt="home-jewelry">
+                                <img class="lazyload" data-src="images/demo/jewelry.jpg"
+                                    src="images/demo/jewelry.jpg" alt="home-jewelry">
                             </a>
                             <a href="home-jewelry.html" class="demo-name link">Jewelry</a>
                         </div>
@@ -642,8 +733,8 @@
                         </div>
                         <div class="demo-item">
                             <a href="home-jewelry2.html" class="demo-image">
-                                <img class="lazyload" data-src="images/demo/jewelry2.jpg" src="images/demo/jewelry2.jpg"
-                                    alt="home-jewelry">
+                                <img class="lazyload" data-src="images/demo/jewelry2.jpg"
+                                    src="images/demo/jewelry2.jpg" alt="home-jewelry">
                             </a>
                             <a href="home-jewelry2.html" class="demo-name link">Jewelry 2</a>
                         </div>
@@ -685,16 +776,16 @@
                         </div>
                         <div class="demo-item">
                             <a href="home-footwear.html" class="demo-image">
-                                <img class="lazyload" data-src="images/demo/footwear.jpg" src="images/demo/footwear.jpg"
-                                    alt="home-skincare">
+                                <img class="lazyload" data-src="images/demo/footwear.jpg"
+                                    src="images/demo/footwear.jpg" alt="home-skincare">
                                 <div class="demo-label"><span>New</span></div>
                             </a>
                             <a href="home-footwear.html" class="demo-name link">Footwear</a>
                         </div>
                         <div class="demo-item">
                             <a href="home-glasses.html" class="demo-image">
-                                <img class="lazyload" data-src="images/demo/glasses.jpg" src="images/demo/glasses.jpg"
-                                    alt="home-skincare">
+                                <img class="lazyload" data-src="images/demo/glasses.jpg"
+                                    src="images/demo/glasses.jpg" alt="home-skincare">
                                 <div class="demo-label"><span>New</span></div>
                             </a>
                             <a href="home-glasses.html" class="demo-name link">Glasses</a>
@@ -749,7 +840,8 @@
         <div class="toolbar-item">
             <a href="index.html">
                 <div class="toolbar-icon">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M7.21534 1H3.08153C1.93379 1 1 1.93379 1 3.08153V7.21534C1 8.36309 1.93379 9.29688 3.08153 9.29688H7.21534C8.36309 9.29688 9.29688 8.36309 9.29688 7.21534V3.08153C9.29688 1.93379 8.36309 1 7.21534 1ZM7.89062 7.21534C7.89062 7.58768 7.58768 7.89062 7.21534 7.89062H3.08153C2.70919 7.89062 2.40625 7.58768 2.40625 7.21534V3.08153C2.40625 2.70919 2.70919 2.40625 3.08153 2.40625H7.21534C7.58768 2.40625 7.89062 2.70919 7.89062 3.08153V7.21534Z"
                             fill="black" />
@@ -770,7 +862,8 @@
         <div class="toolbar-item">
             <a href="#login" data-bs-toggle="offcanvas">
                 <div class="toolbar-icon">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M12.6849 6.28659C12.6849 7.00267 12.4004 7.68943 11.8941 8.19578C11.3877 8.70212 10.701 8.98659 9.98488 8.98659C9.2688 8.98659 8.58204 8.70212 8.07569 8.19578C7.56934 7.68943 7.28488 7.00267 7.28488 6.28659C7.28488 5.5705 7.56934 4.88375 8.07569 4.3774C8.58204 3.87105 9.2688 3.58659 9.98488 3.58659C10.701 3.58659 11.3877 3.87105 11.8941 4.3774C12.4004 4.88375 12.6849 5.5705 12.6849 6.28659ZM14.3515 6.28659C14.3515 6.86003 14.2386 7.42785 14.0192 7.95764C13.7997 8.48743 13.4781 8.96881 13.0726 9.37429C12.6671 9.77977 12.1857 10.1014 11.6559 10.3209C11.1261 10.5403 10.5583 10.6533 9.98488 10.6533C9.41144 10.6533 8.84362 10.5403 8.31383 10.3209C7.78404 10.1014 7.30266 9.77977 6.89718 9.37429C6.4917 8.96881 6.17005 8.48743 5.95061 7.95764C5.73116 7.42785 5.61821 6.86003 5.61821 6.28659C5.61821 5.12848 6.07827 4.0178 6.89718 3.19889C7.71609 2.37998 8.82677 1.91992 9.98488 1.91992C11.143 1.91992 12.2537 2.37998 13.0726 3.19889C13.8915 4.0178 14.3515 5.12848 14.3515 6.28659ZM3.83488 17.7049C3.83488 16.2183 4.48488 15.0616 5.55571 14.2524C6.64738 13.4283 8.20571 12.9491 9.98738 12.9491C11.7699 12.9491 13.3282 13.4283 14.419 14.2524C15.4907 15.0608 16.1407 16.2191 16.1407 17.7049C16.1407 17.9259 16.2285 18.1379 16.3848 18.2942C16.5411 18.4505 16.753 18.5383 16.974 18.5383C17.1951 18.5383 17.407 18.4505 17.5633 18.2942C17.7196 18.1379 17.8074 17.9259 17.8074 17.7049C17.8074 15.6633 16.8849 14.0258 15.424 12.9224C13.9824 11.8341 12.0474 11.2824 9.98738 11.2824C7.92738 11.2824 5.99238 11.8341 4.55155 12.9224C3.08988 14.0258 2.16821 15.6641 2.16821 17.7049C2.16821 17.9259 2.25601 18.1379 2.41229 18.2942C2.56857 18.4505 2.78053 18.5383 3.00155 18.5383C3.22256 18.5383 3.43452 18.4505 3.5908 18.2942C3.74708 18.1379 3.83488 17.9259 3.83488 17.7049Z"
                             fill="black" />
@@ -782,7 +875,8 @@
         <div class="toolbar-item">
             <a href="#">
                 <div class="toolbar-icon">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M1.875 8.479C1.875 8.134 2.155 7.854 2.5 7.854C2.845 7.854 3.125 8.134 3.125 8.479V15.5623C3.125 16.5982 3.96417 17.4373 5 17.4373H15C16.0358 17.4373 16.875 16.5982 16.875 15.5623V8.479C16.875 8.134 17.155 7.854 17.5 7.854C17.845 7.854 18.125 8.134 18.125 8.479V15.5623C18.125 17.2882 16.7258 18.6873 15 18.6873H5C3.27417 18.6873 1.875 17.2882 1.875 15.5623V8.479Z"
                             fill="black" />
@@ -806,7 +900,8 @@
         <div class="toolbar-item">
             <a href="#shoppingCart" data-bs-toggle="offcanvas">
                 <div class="toolbar-icon">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M4.70906 7.42985L4.0424 16.699H15.8641L15.1974 7.42985H4.70906ZM16.7491 5.76318H3.15823L2.38073 16.5798C2.36436 16.8082 2.39521 17.0374 2.47134 17.2533C2.54748 17.4692 2.66727 17.6671 2.82325 17.8347C2.97923 18.0022 3.16805 18.1358 3.37795 18.2272C3.58785 18.3186 3.81431 18.3657 4.04323 18.3657H15.8641C16.0931 18.3657 16.3196 18.3185 16.5296 18.2271C16.7395 18.1357 16.9284 18.002 17.0844 17.8344C17.2404 17.6667 17.3601 17.4687 17.4362 17.2527C17.5123 17.0368 17.5431 16.8074 17.5266 16.579L16.7491 5.76318Z"
                             fill="black" />
@@ -831,6 +926,7 @@
             </div>
             <div class="canvas-body popup-inner">
                 <form accept-charset="utf-8" class="form-login" id="login-form">
+                    @csrf
                     <!-- Phone Number Input (Initially Visible) -->
                     <div id="phone-group">
                         <fieldset class="mb_12">
@@ -852,14 +948,14 @@
                     <div class="bot">
                         <div class="button-wrap">
                             <!-- Request OTP Button (Initially Visible) -->
-                            <button class="subscribe-button tf-btn animate-btn bg-dark-2 w-100"
-                                type="button" id="request-otp-button">
+                            <button class="subscribe-button tf-btn animate-btn bg-dark-2 w-100" type="button"
+                                id="request-otp-button">
                                 Request OTP
                             </button>
 
                             <!-- Verify OTP Button (Initially Hidden) -->
-                            <button class="subscribe-button tf-btn animate-btn bg-dark-2 w-100"
-                                type="button" id="verify-otp-button" style="display: none;">
+                            <button class="subscribe-button tf-btn animate-btn bg-dark-2 w-100" type="button"
+                                id="verify-otp-button" style="display: none;">
                                 Verify OTP
                             </button>
 
@@ -920,8 +1016,8 @@
                                 <div class="heading">What are you looking for?</div>
                                 <form class="form-search">
                                     <fieldset class="text">
-                                        <input type="text" placeholder="Search" class="" name="text" tabindex="0"
-                                            value="" aria-required="true" required="">
+                                        <input type="text" placeholder="Search" class="" name="text"
+                                            tabindex="0" value="" aria-required="true" required="">
                                     </fieldset>
                                     <button class="" type="submit">
                                         <i class="icon icon-search"></i>
@@ -941,7 +1037,8 @@
                         <div class="col-lg-12">
                             <div class="featured-product">
                                 <div class="text-xl-2 fw-medium featured-product-heading">Featured product</div>
-                                <div dir="ltr" class="swiper tf-swiper wrap-sw-over" data-swiper='{
+                                <div dir="ltr" class="swiper tf-swiper wrap-sw-over"
+                                    data-swiper='{
                                         "slidesPerView": 2,
                                         "spaceBetween": 12,
                                         "speed": 800,
@@ -1010,7 +1107,8 @@
                                                             <span class="swatch-value bg-white"></span>
                                                             <img class=" lazyload"
                                                                 data-src="images/products/shree/p1.png"
-                                                                src="images/products/shree/p1.png" alt="image-product">
+                                                                src="images/products/shree/p1.png"
+                                                                alt="image-product">
                                                         </li>
                                                         <li
                                                             class="list-color-item color-swatch hover-tooltip tooltip-bot">
@@ -1018,7 +1116,8 @@
                                                             <span class="swatch-value bg-brown-9"></span>
                                                             <img class=" lazyload"
                                                                 data-src="images/products/shree/p2.png"
-                                                                src="images/products/shree/p2.png" alt="image-product">
+                                                                src="images/products/shree/p2.png"
+                                                                alt="image-product">
                                                         </li>
                                                         <li
                                                             class="list-color-item color-swatch hover-tooltip tooltip-bot">
@@ -1026,7 +1125,8 @@
                                                             <span class="swatch-value bg-dark"></span>
                                                             <img class=" lazyload"
                                                                 data-src="images/products/shree/p3.png"
-                                                                src="images/products/shree/p3.png" alt="image-product">
+                                                                src="images/products/shree/p3.png"
+                                                                alt="image-product">
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -1086,7 +1186,8 @@
                                                             <span class="swatch-value bg-light-beige-2"></span>
                                                             <img class=" lazyload"
                                                                 data-src="images/products/shree/p4.png"
-                                                                src="images/products/shree/p4.png" alt="image-product">
+                                                                src="images/products/shree/p4.png"
+                                                                alt="image-product">
                                                         </li>
                                                         <li
                                                             class="list-color-item color-swatch hover-tooltip tooltip-bot">
@@ -1094,7 +1195,8 @@
                                                             <span class="swatch-value bg-dark"></span>
                                                             <img class=" lazyload"
                                                                 data-src="images/products/shree/p5.png"
-                                                                src="images/products/shree/p5.png" alt="image-product">
+                                                                src="images/products/shree/p5.png"
+                                                                alt="image-product">
                                                         </li>
                                                         <li
                                                             class="list-color-item color-swatch hover-tooltip tooltip-bot">
@@ -1102,7 +1204,8 @@
                                                             <span class="swatch-value bg-taupe-brown"></span>
                                                             <img class=" lazyload"
                                                                 data-src="images/products/shree/p6.png"
-                                                                src="images/products/shree/p6.png" alt="image-product">
+                                                                src="images/products/shree/p6.png"
+                                                                alt="image-product">
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -1158,7 +1261,8 @@
                                                             <span class="swatch-value bg-reddish-brown"></span>
                                                             <img class="lazyload"
                                                                 data-src="images/products/shree/p1.png"
-                                                                src="images/products/shree/p1.png" alt="image-product">
+                                                                src="images/products/shree/p1.png"
+                                                                alt="image-product">
                                                         </li>
                                                         <li
                                                             class="list-color-item color-swatch hover-tooltip tooltip-bot">
@@ -1166,7 +1270,8 @@
                                                             <span class="swatch-value bg-blue-2"></span>
                                                             <img class="lazyload"
                                                                 data-src="images/products/shree/p2.png"
-                                                                src="images/products/shree/p2.png" alt="image-product">
+                                                                src="images/products/shree/p2.png"
+                                                                alt="image-product">
                                                         </li>
                                                         <li
                                                             class="list-color-item color-swatch hover-tooltip tooltip-bot">
@@ -1174,7 +1279,8 @@
                                                             <span class="swatch-value bg-terra-cotta"></span>
                                                             <img class="lazyload"
                                                                 data-src="images/products/shree/p3.png"
-                                                                src="images/products/shree/p3.png" alt="image-product">
+                                                                src="images/products/shree/p3.png"
+                                                                alt="image-product">
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -1234,7 +1340,8 @@
                                                             <span class="swatch-value bg-dark-6"></span>
                                                             <img class=" lazyload"
                                                                 data-src="images/products/shree/p4.png"
-                                                                src="images/products/shree/p4.png" alt="image-product">
+                                                                src="images/products/shree/p4.png"
+                                                                alt="image-product">
                                                         </li>
                                                         <li
                                                             class="list-color-item color-swatch hover-tooltip tooltip-bot">
@@ -1242,7 +1349,8 @@
                                                             <span class="swatch-value bg-beige-2"></span>
                                                             <img class=" lazyload"
                                                                 data-src="images/products/shree/p5.png"
-                                                                src="images/products/shree/p5.png" alt="image-product">
+                                                                src="images/products/shree/p5.png"
+                                                                alt="image-product">
                                                         </li>
 
                                                     </ul>
@@ -1287,7 +1395,8 @@
                                     </div>
                                     <div class="tf-mini-cart-info">
                                         <div class="d-flex justify-content-between">
-                                            <a class="title link text-md fw-medium" href="product-detail.html">Bird of
+                                            <a class="title link text-md fw-medium" href="product-detail.html">Bird
+                                                of
                                                 Paradise</a>
                                             <i class="icon icon-close remove fs-12"></i>
                                         </div>
@@ -1298,7 +1407,8 @@
                                         </p>
                                         <div class="wg-quantity small">
                                             <button class="btn-quantity minus-btn">-</button>
-                                            <input class="quantity-product font-4" type="text" name="number" value="1">
+                                            <input class="quantity-product font-4" type="text" name="number"
+                                                value="1">
                                             <button class="btn-quantity plus-btn">+</button>
                                         </div>
                                     </div>
@@ -1321,7 +1431,8 @@
                                         </p>
                                         <div class="wg-quantity small">
                                             <button class="btn-quantity minus-btn">-</button>
-                                            <input class="quantity-product font-4" type="text" name="number" value="1">
+                                            <input class="quantity-product font-4" type="text" name="number"
+                                                value="1">
                                             <button class="btn-quantity plus-btn">+</button>
                                         </div>
                                     </div>
@@ -1341,7 +1452,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div dir="ltr" class="swiper tf-swiper" data-swiper='{
+                                <div dir="ltr" class="swiper tf-swiper"
+                                    data-swiper='{
                                             "slidesPerView": 1,
                                             "spaceBetween": 10,
                                             "speed": 800,
@@ -1359,7 +1471,8 @@
                                             <div class="tf-mini-cart-item line radius-16">
                                                 <div class="tf-mini-cart-image">
                                                     <a href="product-detail.html">
-                                                        <img class="lazyload" data-src="images/products/shree/p1.png"
+                                                        <img class="lazyload"
+                                                            data-src="images/products/shree/p1.png"
                                                             src="images/products/shree/p1.png" alt="img-product">
                                                     </a>
                                                 </div>
@@ -1379,7 +1492,8 @@
                                             <div class="tf-mini-cart-item line radius-16">
                                                 <div class="tf-mini-cart-image">
                                                     <a href="product-detail.html">
-                                                        <img class="lazyload" data-src="images/products/shree/p4.png"
+                                                        <img class="lazyload"
+                                                            data-src="images/products/shree/p4.png"
                                                             src="images/products/shree/p4.png" alt="img-product">
                                                     </a>
                                                 </div>
@@ -1401,7 +1515,8 @@
                                             <div class="tf-mini-cart-item line radius-16">
                                                 <div class="tf-mini-cart-image">
                                                     <a href="product-detail.html">
-                                                        <img class="lazyload" data-src="images/products/shree/p5.png"
+                                                        <img class="lazyload"
+                                                            data-src="images/products/shree/p5.png"
                                                             src="images/products/shree/p5.png" alt="img-product">
                                                     </a>
                                                 </div>
@@ -1440,7 +1555,8 @@
                             </div>
                             <div class="tf-cart-checkbox">
                                 <div class="tf-checkbox-wrapp">
-                                    <input class="" type="checkbox" id="CartDrawer-Form_agree" name="agree_checkbox">
+                                    <input class="" type="checkbox" id="CartDrawer-Form_agree"
+                                        name="agree_checkbox">
                                     <div>
                                         <i class="icon-check"></i>
                                     </div>
@@ -1550,7 +1666,8 @@
                             </div>
                             <div class="field">
                                 <p class="text-sm">Zipcode</p>
-                                <input type="text" data-opend-focus id="zipcode" name="address[zip]" value="">
+                                <input type="text" data-opend-focus id="zipcode" name="address[zip]"
+                                    value="">
                             </div>
                             <div id="zipcode-message" class="error" style="display: none;">
                                 We found one shipping rate available for undefined.
@@ -1614,7 +1731,8 @@
                                 <h6 class="price-new price-on-sale">₹130.00</h6>
                                 <h6 class="price-old">₹150.00</h6>
                             </div>
-                            <p class="text">A lush, vibrant indoor plant with broad, glossy leaves that add a touch of
+                            <p class="text">A lush, vibrant indoor plant with broad, glossy leaves that add a touch
+                                of
                                 nature to any space. Thrives in bright, indirect light and requires minimal maintenance.
                             </p>
                         </div>
@@ -1654,13 +1772,16 @@
                             <div class="group-btn">
                                 <div class="wg-quantity">
                                     <button class="btn-quantity minus-btn">-</button>
-                                    <input class="quantity-product font-4" type="text" name="number" value="1">
+                                    <input class="quantity-product font-4" type="text" name="number"
+                                        value="1">
                                     <button class="btn-quantity plus-btn">+</button>
                                 </div>
-                                <a href="#shoppingCart" data-bs-toggle="offcanvas" class="tf-btn hover-primary">Add to
+                                <a href="#shoppingCart" data-bs-toggle="offcanvas"
+                                    class="tf-btn hover-primary">Add to
                                     cart</a>
                             </div>
-                            <a href="checkout.html" class="tf-btn w-100 animate-btn paypal btn-primary">Buy It Now</a>
+                            <a href="checkout.html" class="tf-btn w-100 animate-btn paypal btn-primary">Buy It
+                                Now</a>
                             <a href="checkout.html" class="more-choose-payment link">More payment options</a>
                         </div>
                         <a href="product-detail.html" class="view-details link">View full details <i
@@ -1731,7 +1852,8 @@
                         <a href="#shoppingCart" data-bs-toggle="offcanvas" class="tf-btn animate-btn atc">Add to
                             cart</a>
                         <a href="wish-list.html" class="box-icon"><i class="icon icon-heart"></i></a>
-                        <a href="javascript:void(0);" class="box-icon btn-compare"><i class="icon icon-compare"></i></a>
+                        <a href="javascript:void(0);" class="box-icon btn-compare"><i
+                                class="icon icon-compare"></i></a>
                         <a href="checkout.html" class="tf-btn btn-primary animate-btn w-100">Buy It Now</a>
                     </div>
                     <a href="checkout.html" class="tf-btn btn-line-dark payment-link">More payment options</a>
@@ -1763,7 +1885,8 @@
                                     </div>
                                     <p class="price-wrap">
                                         <span class="new-price text-primary">₹130.00</span>
-                                        <span class="old-price text-decoration-line-through text-dark-1">₹150.00</span>
+                                        <span
+                                            class="old-price text-decoration-line-through text-dark-1">₹150.00</span>
                                     </p>
                                 </div>
                             </div>
@@ -1775,11 +1898,13 @@
                                 </a>
                                 <div class="content">
                                     <div class="text-title">
-                                        <a class="link text-line-clamp-2" href="product-detail.html">Ficus 'Ruby'</a>
+                                        <a class="link text-line-clamp-2" href="product-detail.html">Ficus
+                                            'Ruby'</a>
                                     </div>
                                     <p class="price-wrap">
                                         <span class="new-price text-primary">₹110.00</span>
-                                        <span class="old-price text-decoration-line-through text-dark-1">₹130.00</span>
+                                        <span
+                                            class="old-price text-decoration-line-through text-dark-1">₹130.00</span>
                                     </p>
                                 </div>
                             </div>
@@ -1791,7 +1916,8 @@
                                 </a>
                                 <div class="content">
                                     <div class="text-title">
-                                        <a class="link text-line-clamp-2" href="product-detail.html">Olive Sipper</a>
+                                        <a class="link text-line-clamp-2" href="product-detail.html">Olive
+                                            Sipper</a>
                                     </div>
                                     <p class="price-wrap">
                                         <span class="new-price">₹150.00</span>
@@ -1812,19 +1938,17 @@
     <!-- /compare  -->
 
     <!-- Javascript -->
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('js/jquery.min.js')}}"></script>
-    <script src="{{asset('js/swiper-bundle.min.js')}}"></script>
-    <script src="{{asset('js/carousel.js')}}"></script>
-    <script src="{{asset('js/bootstrap-select.min.js')}}"></script>
-    <script src="{{asset('js/lazysize.min.js')}}"></script>
-    <script src="{{asset('js/count-down.js')}}"></script>
-    <script src="{{asset('js/wow.min.js')}}"></script>
-    <script src="{{asset('js/multiple-modal.js')}}"></script>
-    <script src="{{asset('js/main.js')}}"></script>
-    <script src="{{asset('js/api/login.js')}}"></script>
-    <script src="{{asset('js/api/product-list.js')}}"></script>
-
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('js/carousel.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('js/lazysize.min.js') }}"></script>
+    <script src="{{ asset('js/count-down.js') }}"></script>
+    <script src="{{ asset('js/wow.min.js') }}"></script>
+    <script src="{{ asset('js/multiple-modal.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/api/login.js') }}"></script>
 </body>
 
 </html>
