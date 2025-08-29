@@ -22,8 +22,8 @@ class ProductController extends Controller
                 'page' => 'sometimes|integer|min:1',
                 'sort_by' => 'sometimes|string|in:price,popularity,newest',
                 'sort_order' => 'sometimes|string|in:asc,desc',
-                'min_price' => 'sometimes|numeric|min:0',
-                'max_price' => 'sometimes|numeric|min:0|gt:min_price'
+                // 'min_price' => 'sometimes|numeric|min:0',
+                // 'max_price' => 'sometimes|numeric|min:0|gt:min_price'
             ], [
                 'category_id.exists' => 'The selected category does not exist.',
                 'max_price.gt' => 'The maximum price must be greater than the minimum price.'
@@ -36,7 +36,7 @@ class ProductController extends Controller
             ], 422);
         }
 
-        $query = Product::with(['images', 'category'])
+        $query = Product::with(['product_images'])
             ->where('category_id', $request->category_id)
             ->where('status', 'active');
 

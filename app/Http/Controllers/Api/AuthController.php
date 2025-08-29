@@ -90,4 +90,21 @@ class AuthController extends Controller
             ]
         ]);
     }
+    
+    public function logout(Request $request)
+    {
+        try {
+            // Revoke current token
+            $request->user()->token()->revoke();            
+            return response()->json([
+                'success' => true,
+                'message' => 'Logged out successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Logout failed'
+            ], 500);
+        }
+    }
 }
