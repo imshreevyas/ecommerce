@@ -8,6 +8,17 @@ function check_isset_or_null($data, $value, $default_value){
     }
 }
 
+function get_cart_items()
+{
+    // get cart model item
+    if (auth()->check()) {
+        $data = App\Models\Cart::with('product')->where('user_id', auth()->id())->get();
+        return $data;
+    }
+    
+    return collect();
+}
+
 if (!function_exists('salonLog')) {
     function salonLog($message, array $context = [])
     {
