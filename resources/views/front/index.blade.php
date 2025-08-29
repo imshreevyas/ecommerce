@@ -168,9 +168,7 @@
                         "1200": { "slidesPerView": 4, "spaceBetween": 24, "slidesPerGroup": 4}
                         }
                     }'>
-                        <div class="product-container">
-                            <!-- Display Product List here -->
-                            <div class="swiper-wrapper">
+                        <div class="swiper-wrapper">
                                 @foreach ($products as $product)
                                     <div class="swiper-slide">
                                         <div class="card-product">
@@ -255,7 +253,6 @@
                                     </div>
                                 @endforeach
                             </div>
-                        </div>
                         <div class="d-flex d-xl-none sw-dot-default sw-pagination-product justify-content-center">
                         </div>
 
