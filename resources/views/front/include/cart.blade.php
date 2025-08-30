@@ -62,9 +62,7 @@
                                 <a href="checkout.html"
                                     class="tf-btn animate-btn d-inline-flex bg-dark-2 w-100 justify-content-center"><span>Check
                                         out</span></a>
-                                <a href="view-cart.html"
-                                    class="tf-btn btn-out-line-dark2 w-100 justify-content-center">View
-                                    cart</a>
+                                
                             </div>
                         </div>
                     </div>

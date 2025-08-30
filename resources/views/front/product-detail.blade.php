@@ -180,8 +180,8 @@
                                         Login
                                     </a>
                                     @elseif($cart_exists)
-                                    <button data-bs-toggle="offcanvas"
-                                        class="tf-btn btn-orange animate-btn d-inline-flex justify-content-center">Checkout</button>
+                                    <a href="#shoppingCart" data-bs-toggle="offcanvas"
+                                        class="tf-btn btn-orange animate-btn d-inline-flex justify-content-center">View Cart</a>
                                     @else
                                     <div class="tf-product-info-quantity">
                                         <div class="wg-quantity">

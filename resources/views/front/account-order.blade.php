@@ -6,30 +6,11 @@
 <!--<![endif]-->
 
 <head>
-    <meta charset="utf-8">
-    <title>Fyll - Shift toward mindful living.</title>
-
-    <meta name="author" content="themesflat.com">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description"
-        content="Fyll description">
-
-    <!-- font -->
-    <link rel="stylesheet" href="fonts/fonts.css">
-    <link rel="stylesheet" href="fonts/font-icons.css">
-    <!-- css -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/swiper-bundle.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-
-    <!-- Favicon and Touch Icons  -->
-    <link rel="shortcut icon" href="images/logo/favicon.png">
-    <link rel="apple-touch-icon-precomposed" href="images/logo/favicon.png">
-
+    @include('front.include.head')
 </head>
 
 <body>
+
     <!-- RTL -->
     <!-- <a href="javascript:void(0);" id="toggle-rtl" class="tf-btn animate-btn"><span>RTL</span></a> -->
     <!-- /RTL  -->
@@ -41,147 +22,15 @@
     </button>
     <!-- /Scroll Top -->
 
+
     <div id="wrapper">
 
         <!-- Top Bar-->
-        <div class="tf-topbar bg-dark-5 topbar-bg">
-            <div class="container">
-                <div class="topbar-wraper">
-                    <div class="d-none d-xl-block flex-shrink-0">
-                        <ul class="tf-social-icon topbar-left">
-                            <li><a href="https://www.facebook.com/" class="social-item social-facebook"><i
-                                        class="icon icon-fb"></i></a></li>
-                            <li><a href="https://www.instagram.com/" class="social-item social-instagram"><i
-                                        class="icon icon-instagram"></i></a>
-                            </li>
-                            <li><a href="https://x.com/" class="social-item social-x"><i class="icon icon-x"></i></a>
-                            </li>
-                            <li><a href="https://www.snapchat.com/" class="social-item social-snapchat"><i
-                                        class="icon icon-snapchat"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="overflow-hidden">
-                        <div class="topbar-center marquee-wrapper">
-                            <div class="initial-child-container">
-                                <div class="marquee-child-item">
-                                    <p>Return extended to 60 days</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Life-time Guarantes</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Limited-Time Offer</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <!-- 2 -->
-                                <div class="marquee-child-item">
-                                    <p>Return extended to 60 days</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Life-time Guarantes</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Limited-Time Offer</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <!-- 3 -->
-                                <div class="marquee-child-item">
-                                    <p>Return extended to 60 days</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Life-time Guarantes</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Limited-Time Offer</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <!-- 4 -->
-                                <div class="marquee-child-item">
-                                    <p>Return extended to 60 days</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Life-time Guarantes</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Limited-Time Offer</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <!-- 5 -->
-                                <div class="marquee-child-item">
-                                    <p>Return extended to 60 days</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Life-time Guarantes</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                                <div class="marquee-child-item">
-                                    <p>Limited-Time Offer</p>
-                                </div>
-                                <div class="marquee-child-item"><span class="dot"></span></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
+        @include('front.include.topbar')
         <!-- /Top Bar -->
         <!-- Header -->
         <header id="header" class="header-default header-absolute header-white header-uppercase">
-            <div class="container">
-                <div class="row wrapper-header align-items-center">
-                    <div class="col-md-4 col-3 d-xl-none">
-                        <a href="#mobileMenu" class="mobile-menu" data-bs-toggle="offcanvas" aria-controls="mobileMenu">
-                            <i class="icon icon-categories1"></i>
-                        </a>
-                    </div>
-                    <div class="col-xxl-5 col-xl-6 d-none d-xl-block">
-                        <nav class="box-navigation text-center style-space">
-                            <ul class="box-nav-menu justify-content-start">
-                                <li class="menu-item">
-                                    <a href="#" class="item-link">Home</a>                                   
-                                </li>
-                                <li class="menu-item">
-                                    <a href="about-us.html" class="item-link">About</a>                                   
-                                </li>
-                                <li class="menu-item">
-                                    <a href="" class="item-link">Contact</a>                                   
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-xl-2 col-md-4 col-6 text-xxl-center">
-                        <a href="index.html" class="logo-header">
-                            <img src="images/logo/logo-white.png" alt="logo" class="logo">
-                        </a>
-                    </div>
-                    <div class="col-xxl-5 col-xl-4 col-md-4 col-3">
-                        <ul class="nav-icon d-flex justify-content-end align-items-center">
-                            <li class="nav-account">
-                                <a href="#login" data-bs-toggle="offcanvas" class="nav-icon-item">
-                                    <i class="icon icon-user"></i>
-                                </a>
-                            </li>
-                            <li class="nav-cart pl">
-                                <a href="#shoppingCart" data-bs-toggle="offcanvas" class="nav-icon-item">
-                                    <i class="icon icon-cart"></i>
-                                    <span class="count-box">0</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            @include('front.include.header')
         </header>
         <!-- /Header -->
 
@@ -189,11 +38,11 @@
         <section class="tf-page-title">
             <div class="container">
                 <div class="box-title text-center">
-                    <h4 class="title">My Orders</h4>
+                    <h4 class="title">My Account</h4>
                     <div class="breadcrumb-list">
-                        <a class="breadcrumb-item" href="index.html">Home</a>
+                        <a class="breadcrumb-item" href="{{route('home')}}">Home</a>
                         <div class="breadcrumb-item dot"><span></span></div>
-                        <div class="breadcrumb-item current">Orders</div>
+                        <div class="breadcrumb-item current">Account</div>
                     </div>
                 </div>
             </div>
@@ -210,34 +59,11 @@
                     </button>
                 </div>
                 <!-- /sidebar-account -->
+
                 <!-- Section-acount -->
                 <div class="main-content-account">
-                    <div class="sidebar-account-wrap sidebar-content-wrap sticky-top d-lg-block d-none">
-                        <ul class="my-account-nav">
-                            <li>
-                                <a href="account-page.html"
-                                    class="text-sm link fw-medium my-account-nav-item">Dashboard</a>
-                            </li>
-                            <li>
-                                <a href="account-orders.html"
-                                    class="text-sm link fw-medium my-account-nav-item active">My Orders</a>
-                            </li>
-                           
-                            <li>
-                                <a href="account-addresses.html"
-                                    class="text-sm link fw-medium my-account-nav-item">Addresses</a>
-                            </li>
-                            <li>
-                                <a href="account-details.html"
-                                    class="text-sm link fw-medium my-account-nav-item">Account Details</a>
-                            </li>
-                            <li>
-                                <a href="index.html" class="text-sm link fw-medium my-account-nav-item">Log
-                                    Out</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="my-acount-content account-orders">
+                    @include('front.include.account-sidebar')
+                   <div class="my-acount-content account-orders">
                         <div class="account-no-orders-wrap">
                             <img class="lazyload" data-src="images/section/account-no-order.png"
                                 src="images/section/account-no-order.png" alt="">
@@ -513,10 +339,10 @@
                 </div>
             </div>
         </footer>
-        <!-- /.Footer -->
+        <!-- /Footer -->
 
         <!-- sidebar account-->
-        <div class="offcanvas offcanvas-start canvas-filter canvas-sidebar canvas-sidebar-account" id="mbAccount">
+        <div class="offcanvas offcanvas-start canvas-sidebar" id="mbAccount">
             <div class="canvas-wrapper">
                 <div class="canvas-header">
                     <span class="title">SIDEBAR ACCOUNT</span>
@@ -529,126 +355,8 @@
         </div>
         <!-- End sidebar account -->
 
-        <!-- order-detail -->
-        <div class="modal fade modalCentered modal-order-detail" id="order_detail">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="header">
-                        <div class="heading">Order Detail</div>
-                        <span class="icon-close icon-close-popup" data-bs-dismiss="modal"></span>
-                    </div>
-                    <ul class="list-infor">
-                        <li>#12345</li>
-                        <li>15 May 2025</li>
-                        <li>6 items</li>
-                        <li class="text-delivered">Delivered</li>
-                    </ul>
-                    <div class="tb-order-detail">
-                        <div class="top">
-                            <div class="title item">Product</div>
-                            <div class="title item d-md-block d-none">Quantity</div>
-                            <div class="title item d-md-block d-none">Price</div>
-                            <div class="title item d-md-block d-none">Total</div>
-                        </div>
-                        <div class="tb-content">
-                            <div class="order-detail-item">
-                                <div class="item">
-                                    <div class="infor-content">
-                                        <div class="image">
-                                            <a href="product-detail.html">
-                                                <img class="lazyload" data-src="images/products/fashion/product-1.jpg"
-                                                    src="images/products/fashion/product-1.jpg" alt="img-product">
-                                            </a>
-                                        </div>
-                                        <div>
-                                            <a class="link" href="product-detail.html">Loose Fit Tee</a>
-                                            <div class="size">White / L</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item" data-title="Quantity">
-                                    2
-                                </div>
-                                <div class="item" data-title="Price">
-                                    ₹130.00
-                                </div>
-                                <div class="item" data-title="Total">
-                                    ₹260.00
-                                </div>
-                            </div>
-                            <div class="order-detail-item">
-                                <div class="item">
-                                    <div class="infor-content">
-                                        <div class="image">
-                                            <a href="product-detail.html">
-                                                <img class="lazyload" data-src="images/products/fashion/product-2.jpg"
-                                                    src="images/products/fashion/product-2.jpg" alt="img-product">
-                                            </a>
-                                        </div>
-                                        <div>
-                                            <a class="link" href="product-detail.html">Loose Fit Tee</a>
-                                            <div class="size">White / L</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item" data-title="Quantity">
-                                    2
-                                </div>
-                                <div class="item" data-title="Price">
-                                    ₹130.00
-                                </div>
-                                <div class="item" data-title="Total">
-                                    ₹260.00
-                                </div>
-                            </div>
-                            <div class="order-detail-item">
-                                <div class="item">
-                                    <div class="infor-content">
-                                        <div class="image">
-                                            <a href="product-detail.html">
-                                                <img class="lazyload" data-src="images/products/fashion/product-3.jpg"
-                                                    src="images/products/fashion/product-3.jpg" alt="img-product">
-                                            </a>
-                                        </div>
-                                        <div>
-                                            <a class="link" href="product-detail.html">Loose Fit Tee</a>
-                                            <div class="size">White / L</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item" data-title="Quantity">
-                                    2
-                                </div>
-                                <div class="item" data-title="Price">
-                                    ₹130.00
-                                </div>
-                                <div class="item" data-title="Total">
-                                    ₹260.00
-                                </div>
-                            </div>
-                            <div class="order-detail-item subtotal">
-                                <div class="item d-md-block d-none"></div>
-                                <div class="item d-md-block d-none"></div>
-                                <div class="item subtotal-text">
-                                    Subtotal:
-                                </div>
-                                <div class="item subtotal-price">
-                                    ₹720.00 USD
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bottom text-center">
-                        Not happy with the order? You can <a href="return-and-refund.html"
-                            class="fw-medium btn-underline">Request a free return</a> in <span class="fw-medium">14
-                            days</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /order-detail -->
-
     </div>
+
 
     <!-- modal demo -->
     <div class="modal fade modalDemo" id="modalDemo">
@@ -1540,360 +1248,7 @@
     <!-- /search -->
 
     <!-- shoppingCart -->
-    <div class="offcanvas offcanvas-end popup-style-1 popup-shopping-cart" id="shoppingCart">
-        <div class="canvas-wrapper">
-            <div class="popup-header">
-                <span class="title">Shopping cart</span>
-                <span class="icon-close icon-close-popup" data-bs-dismiss="offcanvas"></span>
-            </div>
-            <div class="wrap">
-                <div class="tf-mini-cart-threshold">
-                    <div class="text">
-                        Spend <span class="fw-medium">₹100</span> more to get <span class="fw-medium">Free
-                            Shipping</span>
-                    </div>
-                    <div class="tf-progress-bar tf-progress-ship">
-                        <div class="value" style="width: 0%;" data-progress="75">
-                            <i class="icon icon-car"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="tf-mini-cart-wrap">
-                    <div class="tf-mini-cart-main">
-                        <div class="tf-mini-cart-sroll">
-                            <div class="tf-mini-cart-items">
-                                <div class="tf-mini-cart-item file-delete">
-                                    <div class="tf-mini-cart-image">
-                                        <a href="product-detail.html">
-                                            <img class="lazyload" data-src="images/products/fashion/women-1.jpg"
-                                                src="images/products/fashion/women-1.jpg" alt="img-product">
-                                        </a>
-                                    </div>
-                                    <div class="tf-mini-cart-info">
-                                        <div class="d-flex justify-content-between">
-                                            <a class="title link text-md fw-medium" href="product-detail.html">Short
-                                                Sleeve Sweat</a>
-                                            <i class="icon icon-close remove fs-12"></i>
-                                        </div>
-                                        <div class="info-variant">
-                                            <select class="text-xs">
-                                                <option value="White / L">White / L</option>
-                                                <option value="White / M">White / M</option>
-                                                <option value="Black / L">Black / L</option>
-                                            </select>
-                                            <i class="icon-pen edit"></i>
-                                        </div>
-                                        <p class="price-wrap text-sm fw-medium">
-                                            <span class="new-price text-primary">₹130.00</span>
-                                            <span
-                                                class="old-price text-decoration-line-through text-dark-1">₹150.00</span>
-                                        </p>
-                                        <div class="wg-quantity small">
-                                            <button class="btn-quantity minus-btn">-</button>
-                                            <input class="quantity-product font-4" type="text" name="number" value="1">
-                                            <button class="btn-quantity plus-btn">+</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tf-mini-cart-item file-delete">
-                                    <div class="tf-mini-cart-image">
-                                        <a href="product-detail.html">
-                                            <img class="lazyload" data-src="images/products/fashion/women-2.jpg"
-                                                src="images/products/fashion/women-2.jpg" alt="img-product">
-                                        </a>
-                                    </div>
-                                    <div class="tf-mini-cart-info">
-                                        <div class="d-flex justify-content-between">
-                                            <a class="title link text-md fw-medium" href="product-detail.html">Loose
-                                                Fit Tee</a>
-                                            <i class="icon icon-close remove fs-12"></i>
-                                        </div>
-                                        <div class="info-variant">
-                                            <select class="text-xs">
-                                                <option value="White / L">White / L</option>
-                                                <option value="White / M">White / M</option>
-                                                <option value="Black / L">Black / L</option>
-                                            </select>
-                                            <i class="icon-pen edit"></i>
-                                        </div>
-                                        <p class="price-wrap text-sm fw-medium">
-                                            <span class="new-price text-primary">₹130.00</span>
-                                            <span
-                                                class="old-price text-decoration-line-through text-dark-1">₹150.00</span>
-                                        </p>
-                                        <div class="wg-quantity small">
-                                            <button class="btn-quantity minus-btn">-</button>
-                                            <input class="quantity-product font-4" type="text" name="number" value="1">
-                                            <button class="btn-quantity plus-btn">+</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tf-minicart-recommendations">
-                                <div
-                                    class="tf-minicart-recommendations-heading d-flex justify-content-between align-items-end">
-                                    <div class="tf-minicart-recommendations-title text-md fw-medium">You may also
-                                        like</div>
-                                    <div class="d-flex gap-10">
-                                        <div
-                                            class="swiper-button-prev nav-swiper arrow-1 size-30 nav-prev-also-product">
-                                        </div>
-                                        <div
-                                            class="swiper-button-next nav-swiper arrow-1 size-30 nav-next-also-product">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div dir="ltr" class="swiper tf-swiper" data-swiper='{
-                                            "slidesPerView": 1,
-                                            "spaceBetween": 10,
-                                            "speed": 800,
-                                            "observer": true,
-                                            "observeParents": true,
-                                            "slidesPerGroup": 1,
-                                            "navigation": {
-                                                "clickable": true,
-                                                "nextEl": ".nav-next-also-product",
-                                                "prevEl": ".nav-prev-also-product"
-                                            }
-                                        }'>
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <div class="tf-mini-cart-item line radius-16">
-                                                <div class="tf-mini-cart-image">
-                                                    <a href="product-detail.html">
-                                                        <img class="lazyload"
-                                                            data-src="images/products/fashion/product-1.jpg"
-                                                            src="images/products/fashion/product-1.jpg"
-                                                            alt="img-product">
-                                                    </a>
-                                                </div>
-                                                <div class="tf-mini-cart-info justify-content-center">
-                                                    <a class="title link text-md fw-medium"
-                                                        href="product-detail.html">Polo T-Shirt</a>
-                                                    <p class="price-wrap text-sm fw-medium">
-                                                        <span class="new-price text-primary">₹130.00</span>
-                                                        <span
-                                                            class="old-price text-decoration-line-through text-dark-1">₹150.00</span>
-                                                    </p>
-                                                    <a href="#"
-                                                        class="tf-btn animate-btn d-inline-flex bg-dark-2 w-max-content">Add
-                                                        to cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="tf-mini-cart-item line radius-16">
-                                                <div class="tf-mini-cart-image">
-                                                    <a href="product-detail.html">
-                                                        <img class="lazyload"
-                                                            data-src="images/products/fashion/product-2.jpg"
-                                                            src="images/products/fashion/product-2.jpg"
-                                                            alt="img-product">
-                                                    </a>
-                                                </div>
-                                                <div class="tf-mini-cart-info justify-content-center">
-                                                    <a class="title link text-md fw-medium"
-                                                        href="product-detail.html">Short Sleeve Sweat</a>
-                                                    <p class="price-wrap text-sm fw-medium">
-                                                        <span class="new-price text-primary">₹100.00</span>
-                                                        <span
-                                                            class="old-price text-decoration-line-through text-dark-1">₹115.00</span>
-                                                    </p>
-                                                    <a href="#"
-                                                        class="tf-btn animate-btn d-inline-flex bg-dark-2 w-max-content">Add
-                                                        to cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="tf-mini-cart-item line radius-16">
-                                                <div class="tf-mini-cart-image">
-                                                    <a href="product-detail.html">
-                                                        <img class="lazyload"
-                                                            data-src="images/products/fashion/product-3.jpg"
-                                                            src="images/products/fashion/product-3.jpg"
-                                                            alt="img-product">
-                                                    </a>
-                                                </div>
-                                                <div class="tf-mini-cart-info justify-content-center">
-                                                    <a class="title link text-md fw-medium"
-                                                        href="product-detail.html">Crop T-shirt</a>
-                                                    <p class="price-wrap text-sm fw-medium">
-                                                        <span class="new-price text-primary">₹80.00</span>
-                                                        <span
-                                                            class="old-price text-decoration-line-through text-dark-1">₹100.00</span>
-                                                    </p>
-                                                    <a href="#"
-                                                        class="tf-btn animate-btn d-inline-flex bg-dark-2 w-max-content">Add
-                                                        to cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tf-mini-cart-bottom">
-                        <div class="tf-mini-cart-tool">
-                            <div class="tf-mini-cart-tool-btn btn-add-gift">
-                                <i class="icon icon-gift2"></i>
-                                <div class="text-xxs">Add gift wrap</div>
-                            </div>
-                            <div class="tf-mini-cart-tool-btn btn-add-note">
-                                <i class="icon icon-note"></i>
-                                <div class="text-xxs">Order note</div>
-                            </div>
-                            <div class="tf-mini-cart-tool-btn btn-coupon">
-                                <i class="icon icon-coupon"></i>
-                                <div class="text-xxs">Coupon</div>
-                            </div>
-                            <div class="tf-mini-cart-tool-btn btn-estimate-shipping">
-                                <i class="icon icon-car"></i>
-                                <div class="text-xxs">Shipping</div>
-                            </div>
-                        </div>
-                        <div class="tf-mini-cart-bottom-wrap">
-                            <div class="tf-cart-totals-discounts">
-                                <div class="tf-cart-total text-xl fw-medium">Total:</div>
-                                <div class="tf-totals-total-value text-xl fw-medium">₹130.00 USD</div>
-                            </div>
-                            <div class="tf-cart-tax text-sm opacity-8">Taxes and shipping calculated at checkout
-                            </div>
-                            <div class="tf-cart-checkbox">
-                                <div class="tf-checkbox-wrapp">
-                                    <input class="" type="checkbox" id="CartDrawer-Form_agree" name="agree_checkbox">
-                                    <div>
-                                        <i class="icon-check"></i>
-                                    </div>
-                                </div>
-                                <label for="CartDrawer-Form_agree" class="text-sm">
-                                    I agree with the
-                                    <a href="term-and-condition.html" title="Terms of Service" class="fw-medium">terms
-                                        and conditions</a>
-                                </label>
-                            </div>
-                            <div class="tf-mini-cart-view-checkout">
-                                <a href="checkout.html"
-                                    class="tf-btn animate-btn d-inline-flex bg-dark-2 w-100 justify-content-center"><span>Check
-                                        out</span></a>
-                                <a href="view-cart.html"
-                                    class="tf-btn btn-out-line-dark2 w-100 justify-content-center">View cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tf-mini-cart-tool-openable add-gift">
-                        <div class="overplay tf-mini-cart-tool-close"></div>
-                        <form action="#" class="tf-mini-cart-tool-content">
-                            <div class="tf-mini-cart-tool-text text-sm fw-medium">Add gift wrap</div>
-                            <div class="tf-mini-cart-tool-text1">The product will be wrapped carefully.
-                                Fee is only <span class="text fw-medium text-dark">₹10.00</span>. Do you want a
-                                gift wrap?</div>
-                            <div class="tf-cart-tool-btns">
-                                <button class="subscribe-button tf-btn animate-btn d-inline-flex bg-dark-2 w-100"
-                                    type="submit">Add a Gift Wrap</button>
-                                <div class="tf-btn btn-out-line-dark2 w-100 tf-mini-cart-tool-close">Cancel</div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="tf-mini-cart-tool-openable add-note">
-                        <div class="overplay tf-mini-cart-tool-close"></div>
-                        <form action="#" class="tf-mini-cart-tool-content">
-                            <label for="Cart-note" class="tf-mini-cart-tool-text text-sm fw-medium">Order
-                                note</label>
-                            <textarea name="note" id="Cart-note" placeholder="Instruction for seller..."></textarea>
-                            <div class="tf-cart-tool-btns">
-                                <button class="subscribe-button tf-btn animate-btn d-inline-flex bg-dark-2 w-100"
-                                    type="submit">Save</button>
-                                <div class="tf-btn btn-out-line-dark2 w-100 tf-mini-cart-tool-close">Close</div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="tf-mini-cart-tool-openable coupon">
-                        <div class="overplay tf-mini-cart-tool-close"></div>
-                        <form action="#" class="tf-mini-cart-tool-content">
-                            <div class="tf-mini-cart-tool-text text-sm fw-medium">Add coupon</div>
-                            <div class="tf-mini-cart-tool-text1">* Discount will be calculated and
-                                applied at checkout</div>
-                            <input type="text" name="text" placeholder="">
-                            <div class="tf-cart-tool-btns">
-                                <button class="subscribe-button tf-btn animate-btn d-inline-flex bg-dark-2 w-100"
-                                    type="submit">Save</button>
-                                <div class="tf-btn btn-out-line-dark2 w-100 tf-mini-cart-tool-close">Close</div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="tf-mini-cart-tool-openable estimate-shipping">
-                        <div class="overplay tf-mini-cart-tool-close"></div>
-                        <form id="shipping-form" class="tf-mini-cart-tool-content">
-                            <div class="tf-mini-cart-tool-text text-sm fw-medium">Shipping estimates</div>
-                            <div class="field">
-                                <p class="text-sm">Country</p>
-                                <div class="tf-select">
-                                    <select class="w-100" id="shipping-country-form" name="address[country]"
-                                        data-default="">
-                                        <option value="Indore"
-                                            data-provinces='[["Indoren Capital Territory","Indoren Capital Territory"],["New South Wales","New South Wales"],["Northern Territory","Northern Territory"],["Queensland","Queensland"],["South Indore","South Indore"],["Tasmania","Tasmania"],["Victoria","Victoria"],["Western Indore","Western Indore"]]'>
-                                            Indore</option>
-                                        <option value="Austria" data-provinces='[]'>Austria</option>
-                                        <option value="Belgium" data-provinces='[]'>Belgium</option>
-                                        <option value="Canada"
-                                            data-provinces='[["Ontario","Ontario"],["Quebec","Quebec"]]'>Canada
-                                        </option>
-                                        <option value="Czech Republic" data-provinces='[]'>Czechia</option>
-                                        <option value="Denmark" data-provinces='[]'>Denmark</option>
-                                        <option value="Finland" data-provinces='[]'>Finland</option>
-                                        <option value="France" data-provinces='[]'>France</option>
-                                        <option value="Germany" data-provinces='[]'>Germany</option>
-                                        <option selected value="United States"
-                                            data-provinces='[["Alabama","Alabama"],["California","California"],["Florida","Florida"]]'>
-                                            United States</option>
-                                        <option value="United Kingdom"
-                                            data-provinces='[["England","England"],["Scotland","Scotland"],["Wales","Wales"],["Northern Ireland","Northern Ireland"]]'>
-                                            United Kingdom</option>
-                                        <option value="India" data-provinces='[]'>India</option>
-                                        <option value="Japan" data-provinces='[]'>Japan</option>
-                                        <option value="Mexico" data-provinces='[]'>Mexico</option>
-                                        <option value="South Korea" data-provinces='[]'>South Korea</option>
-                                        <option value="Spain" data-provinces='[]'>Spain</option>
-                                        <option value="Italy" data-provinces='[]'>Italy</option>
-                                        <option value="Vietnam"
-                                            data-provinces='[["Ha Noi","Ha Noi"],["Da Nang","Da Nang"],["Ho Chi Minh","Ho Chi Minh"]]'>
-                                            Vietnam</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="field">
-                                <p class="text-sm">State/Province</p>
-                                <div class="tf-select">
-                                    <select id="shipping-province-form" name="address[province]"
-                                        data-default=""></select>
-                                </div>
-                            </div>
-                            <div class="field">
-                                <p class="text-sm">Zipcode</p>
-                                <input type="text" data-opend-focus id="zipcode" name="address[zip]" value="">
-                            </div>
-                            <div id="zipcode-message" class="error" style="display: none;">
-                                We found one shipping rate available for undefined.
-                            </div>
-                            <div id="zipcode-success" class="success" style="display: none;">
-                                <p>We found one shipping rate available for your address:</p>
-                                <p class="standard">Standard at <span>₹0.00</span> USD</p>
-                            </div>
-                            <div class="tf-cart-tool-btns">
-                                <button class="subscribe-button tf-btn animate-btn d-inline-flex bg-dark-2 w-100"
-                                    type="submit">Estimate</button>
-                                <div
-                                    class="tf-mini-cart-tool-primary tf-btn btn-out-line-dark2 w-100 tf-mini-cart-tool-close">
-                                    Close</div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('front.include.cart')
     <!-- /shoppingCart -->
 
     <!-- modal quickView -->
@@ -2066,20 +1421,17 @@
     </div>
     <!-- /compare  -->
 
-
     <!-- Javascript -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/swiper-bundle.min.js"></script>
-    <script src="js/carousel.js"></script>
-    <script src="js/bootstrap-select.min.js"></script>
-    <script src="js/lazysize.min.js"></script>
-    <script src="js/count-down.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/multiple-modal.js"></script>
-
-
-    <script src="js/main.js"></script>
+   <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/jquery.min.js')}}"></script>
+    <script src="{{asset('js/swiper-bundle.min.js')}}"></script>
+    <script src="{{asset('js/carousel.js')}}"></script>
+    <script src="{{asset('js/bootstrap-select.min.js')}}"></script>
+    <script src="{{asset('js/lazysize.min.js')}}"></script>
+    <script src="{{asset('js/count-down.js')}}"></script>
+    <script src="{{asset('js/wow.min.js')}}"></script>
+    <script src="{{asset('js/multiple-modal.js')}}"></script>
+    <script src="{{asset('js/api/logout.js')}}"></script>
 </body>
 
 </html>

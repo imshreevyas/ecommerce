@@ -88,6 +88,25 @@ class AuthController extends Controller
             ]
         ]);
     }
+    public function userAccount()
+    {
+        return view('front.account-details', [
+            'user' => Auth::user()
+        ]);
+    }
+    public function userUpdate(Request $request)
+    {
+        $request->validate([
+            'fullname' => ['required', 'string', 'max:255'],
+            'email' => ['required'],
+        ]);
+
+        $user = Auth::user();
+        $user->fullname = $request->fullname;
+        $user->email = $request->email;
+        $user->save();
+        return redirect()->route('account-details')->with('success', 'Account details updated successfully');
+    }
 
     public function logout(Request $request)
     {
