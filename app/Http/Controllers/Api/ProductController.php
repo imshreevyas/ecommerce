@@ -94,7 +94,7 @@ class ProductController extends Controller
     public function details(Request $request){
        try{
             $request->validate([
-                'id'=>'required|integer|exists:products,id'
+                'id'=>'required|integer|exists:products,product_uid'
             ]);
        }catch(\Exception $e){
             return response()->json([

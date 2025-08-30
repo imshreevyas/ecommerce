@@ -14,7 +14,7 @@ class CartController extends Controller
     public function addCart(Request $request){
         try{
             $validated = $request->validate([
-                'product_id' => 'required|integer|exists:products,id',
+                'product_id' => 'required|integer|exists:products,product_uid',
                 'quantity' => 'required|integer|min:1'
             ]);
         }catch(\Exception $e){

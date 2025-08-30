@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\front\AuthController;
 use App\Http\Controllers\front\IndexController;
+use App\Http\Controllers\front\CartController;
 use Illuminate\Support\Facades\Route;
 
 /*  
@@ -25,6 +26,8 @@ Route::post('/loginOtp', [AuthController::class, 'login']);
 Route::get('/product-detail/{id}', [IndexController::class, 'productDetail'])->name('product-detail');
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::post('/addToCart',[CartController::class,'addCart'])->name('addToCart');
+    Route::post('/removeCart',[CartController::class,'removeCart'])->name('removeCart');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/account-details', function () {
         return view('front.account-details');
