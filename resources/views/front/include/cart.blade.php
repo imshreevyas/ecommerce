@@ -22,8 +22,11 @@
                                     <div class="tf-mini-cart-info">
                                         <div class="d-flex justify-content-between">
                                             <a class="title link text-md fw-medium"
-                                                href="product-detail.html">{{ $item->product->title }}</a>
-                                            <i class="icon icon-close remove fs-12"></i>
+                                                href="{{ route('product-detail', ['id' => $item->product->id]) }}">
+                                                {{ $item->product->title }}
+                                                </a>
+                                                <!-- icon to remove item from cart -->
+                                            <i class="icon icon-close remove fs-12" onclick="removeCart({{$item->product->id}})"></i>
                                         </div>
                                         <p class="price-wrap text-sm fw-medium">
                                             <span
@@ -34,9 +37,10 @@
                                         <div class="wg-quantity small">
                                             <button class="btn-quantity minus-btn">-</button>
                                             <input class="quantity-product font-4" type="text" name="number"
-                                                value="1">
+                                                value="{{ $item->quantity }}">
                                             <button class="btn-quantity plus-btn">+</button>
                                         </div>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -195,4 +199,22 @@
     });
     //append to total_price
     document.querySelector('.total_price').textContent = '₹' + total.toFixed(2);
+
+
+    removeCart = (id) => {
+        $.ajax({
+            url: '{{ route('removeCart') }}',
+            type: 'post',
+             data:{
+                _token:`{{ csrf_token() }}`,
+                product_id:id,
+            },
+            success: function(response) {
+                if (!response.success) {
+                    alert(response.message || 'Something went wrong');
+                    return;
+                }
+            }
+        });
+    }
 </script>

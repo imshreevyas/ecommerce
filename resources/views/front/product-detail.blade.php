@@ -113,7 +113,7 @@
                             <div class="tf-product-info-wrap other-image-zoom">
                                 <div class="tf-product-info-list">
                                     <div class="tf-product-heading">
-                                        <span class="brand-product">{{$product->category->name}}</span>
+                                        <span class="brand-product">{{ $product->category->name ?? '' }}</span>
                                         <h5 class="product-name fw-medium">{{$product->title}}</h5>
                                         <div class="product-rate">
                                             <div class="list-star">
@@ -173,43 +173,30 @@
                                         
                                     </ul>
                                     <div class="tf-product-trust-seal text-center">
-                                        <p class="text-md text-dark-2 text-seal fw-medium">Guarantee Safe Checkout:</p>
-                                        <ul class="list-card">
-                                            <li class="card-item">
-                                                <img src="images/payment/Visa.png" alt="card">
-                                            </li>
-                                            <li class="card-item">
-                                                <img src="images/payment/DinersClub.png" alt="card">
-                                            </li>
-                                            <li class="card-item">
-                                                <img src="images/payment/Mastercard.png" alt="card">
-                                            </li>
-                                            <li class="card-item">
-                                                <img src="images/payment/Stripe.png" alt="card">
-                                            </li>
-                                            <li class="card-item">
-                                                <img src="images/payment/PayPal.png" alt="card">
-                                            </li>
-                                            <li class="card-item">
-                                                <img src="images/payment/GooglePay.png" alt="card">
-                                            </li>
-                                            <li class="card-item">
-                                                <img src="images/payment/ApplePay.png" alt="card">
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="tf-product-delivery-return">
-                                        <div class="product-delivery">
-                                            <div class="icon icon-car2"></div>
-                                            <p class="text-md">Estimated delivery time: <span class="fw-medium">3-5 days
-                                                    international</span></p>
-                                        </div>
-                                        <div class="product-delivery">
-                                            <div class="icon icon-shipping3"></div>
-                                            <p class="text-md">Free shipping on <span class="fw-medium">all orders over
-                                                    ₹150</span></p>
+                                       <form class="">
+                                <div class="tf-sticky-atc-btns">
+                                    @if(!auth()->check())
+                                    <a href="#login" data-bs-toggle="offcanvas" class="tf-btn btn-orange animate-btn d-inline-flex justify-content-center">
+                                        Login
+                                    </a>
+                                    @elseif($cart_exists)
+                                    <button data-bs-toggle="offcanvas"
+                                        class="tf-btn btn-orange animate-btn d-inline-flex justify-content-center">Checkout</button>
+                                    @else
+                                    <div class="tf-product-info-quantity">
+                                        <div class="wg-quantity">
+                                            <button class="btn-quantity minus-btn">-</button>
+                                            <input class="quantity-product font-4" type="text" name="number" value="1">
+                                            <button class="btn-quantity plus-btn">+</button>
                                         </div>
                                     </div>
+                                    <button data-bs-toggle="offcanvas"
+                                        class="tf-btn btn-orange animate-btn d-inline-flex justify-content-center addToCart">Add to cart</button>
+                                    @endif
+                                </div>
+                            </form>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -218,35 +205,7 @@
                     </div>
                 </div>
             </div>
-            {{-- cart section --}}
-            <div class="tf-sticky-btn-atc">
-                <div class="container">
-                    <div class="tf-height-observer w-100 d-flex align-items-center">
-                        <div class="tf-sticky-atc-product d-flex align-items-center">
-                            <div class="tf-sticky-atc-img">
-                                <img class="lazyload" data-src="{{ $image->image_url }}" alt=""
-                                    src="{{ $image->image_url }}">
-                            </div>
-                            <div class="tf-sticky-atc-title fw-5 d-xl-block d-none">{{$product->title}}</div>
-                        </div>
-                        <div class="tf-sticky-atc-infos">
-                            <form class="">
-                                <div class="tf-sticky-atc-btns">
-                                    <div class="tf-product-info-quantity">
-                                        <div class="wg-quantity">
-                                            <button class="btn-quantity minus-btn">-</button>
-                                            <input class="quantity-product font-4" type="text" name="number" value="1">
-                                            <button class="btn-quantity plus-btn">+</button>
-                                        </div>
-                                    </div>
-                                    <a href="#shoppingCart" data-bs-toggle="offcanvas"
-                                        class="tf-btn btn-orange animate-btn d-inline-flex justify-content-center">Add to cart</a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </section>
         <!-- /Product Main -->
         <!-- Product Description -->
@@ -1292,19 +1251,7 @@
                 <button class="icon-close icon-close-popup" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="canvas-body popup-inner">
-                <form action="account-page.html" accept-charset="utf-8" class="form-login">
-                    <div>
-                        <fieldset class="mb_12">
-                            <input type="text" placeholder="phone*" required>
-                        </fieldset>
-                    </div>
-                    <div class="bot">
-                        <div class="button-wrap">
-                            <button class="subscribe-button tf-btn animate-btn d-inline-flex bg-dark-2 w-100"
-                                type="submit">Sign in</button>
-                        </div>
-                    </div>
-                </form>
+                @include('front.include.login')
             </div>
         </div>
     </div>
@@ -1806,105 +1753,6 @@
     @include('front.include.cart')
     <!-- /shoppingCart -->
 
-    <!-- modal quickView -->
-    <div class="modal fade modalCentered modal-quick-view" id="quickView">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <span class="icon-close icon-close-popup" data-bs-dismiss="modal"></span>
-                <div class="tf-product-media-wrap">
-                    <div dir="ltr" class="swiper tf-single-slide">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide" data-color="orange">
-                                <div class="item">
-                                    <img class="lazyload" data-src="images/products/fashion/product-40.jpg"
-                                        src="images/products/fashion/product-40.jpg" alt="">
-                                </div>
-                            </div>
-                            <div class="swiper-slide" data-color="green">
-                                <div class="item">
-                                    <img class="lazyload" data-src="images/products/fashion/product-41.jpg"
-                                        src="images/products/fashion/product-41.jpg" alt="">
-                                </div>
-                            </div>
-                            <div class="swiper-slide" data-color="pink">
-                                <div class="item">
-                                    <img class="lazyload" data-src="images/products/fashion/product-42.jpg"
-                                        src="images/products/fashion/product-42.jpg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-button-prev nav-swiper arrow-1 nav-prev-cls single-slide-prev"></div>
-                        <div class="swiper-button-next nav-swiper arrow-1 nav-next-cls single-slide-next"></div>
-                    </div>
-                </div>
-                <div class="tf-product-info-wrap">
-                    <div class="tf-product-info-inner">
-                        <div class="tf-product-heading">
-                            <h6 class="product-name"><a class="link" href="product-detail.html">Striped T-Shirt</a>
-                            </h6>
-                            <div class="product-price">
-                                <h6 class="price-new price-on-sale">₹100.00</h6>
-                                <h6 class="price-old">₹130.00</h6>
-                                <span class="badge-sale">20% Off</span>
-                            </div>
-                            <p class="text">Pants in an airy weave made from a linen and viscose blend. Featuring a high
-                                waist and a zip fly with button. Shaping at the front and back and wide legs.</p>
-                        </div>
-                        <div class="tf-product-variant">
-                            <div class="variant-picker-item variant-color">
-                                <div class="variant-picker-label">
-                                    Color:<span class="variant-picker-label-value value-currentColor">Orange</span>
-                                </div>
-                                <div class="variant-picker-values">
-                                    <div class="hover-tooltip color-btn active" data-color="orange">
-                                        <span class="check-color bg-light-orange-2"></span>
-                                        <span class="tooltip">Orange</span>
-                                    </div>
-                                    <div class="hover-tooltip color-btn" data-color="green">
-                                        <span class="check-color bg-light-green"></span>
-                                        <span class="tooltip">Green</span>
-                                    </div>
-                                    <div class="hover-tooltip color-btn" data-color="pink">
-                                        <span class="check-color bg-pink"></span>
-                                        <span class="tooltip">Pink</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="variant-picker-item variant-size">
-                                <div class="variant-picker-label">
-                                    <div>Size:<span class="variant-picker-label-value value-currentSize">Small</span>
-                                    </div>
-                                </div>
-                                <div class="variant-picker-values">
-                                    <span class="size-btn active" data-size="small">S</span>
-                                    <span class="size-btn" data-size="medium">M</span>
-                                    <span class="size-btn" data-size="large">L</span>
-                                    <span class="size-btn" data-size="extra large">XL</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tf-product-total-quantity">
-                            <div class="group-btn">
-                                <div class="wg-quantity">
-                                    <button class="btn-quantity minus-btn">-</button>
-                                    <input class="quantity-product font-4" type="text" name="number" value="1">
-                                    <button class="btn-quantity plus-btn">+</button>
-                                </div>
-                                <a href="#shoppingCart" data-bs-toggle="offcanvas" class="tf-btn hover-primary">Add to
-                                    cart</a>
-                            </div>
-                            <a href="checkout.html" class="tf-btn w-100 animate-btn paypal btn-primary">Buy It Now</a>
-                            <a href="checkout.html" class="more-choose-payment link">More payment options</a>
-                        </div>
-                        <a href="product-detail.html" class="view-details link">View full details <i
-                                class="icon icon-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /modal quickView -->
-
     <!-- compare  -->
     <div class="modal modalCentered fade modal-compare" id="compare">
         <div class="modal-dialog modal-dialog-centered">
@@ -2060,6 +1908,32 @@
     <script src="{{ asset('js/photoswipe-lightbox.umd.min.js') }}"></script>
     <script src="{{ asset('js/photoswipe.umd.min.js') }}"></script>
     <script src="{{ asset('js/zoom.js') }}"></script>
+     <script src="{{ asset('js/api/login.js') }}"></script>
+    <script>
+        $('.addToCart').click(function(ev){
+            ev.preventDefault();
+            var qty = $('.quantity-product').val();
+            var product_id=`{{ $product['id'] }}`;
+            $.ajax({
+                url:"{{ route('addToCart') }}",
+                type:"POST",
+                data:{
+                    _token:`{{ csrf_token() }}`,
+                    product_id:product_id,
+                    quantity:qty
+                },
+                success:function(res){
+                    if(res.success){
+                        location.reload(true);
+                    }
+                },
+                error:function(err){
+                    alert(err.responseJSON.message);
+                    console.log(err.responseJSON.message);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

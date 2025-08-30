@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Category;
+use App\Models\ProductImage;
+use App\Models\Review;
 class Product extends Model
 {
     use HasFactory;
@@ -39,14 +41,14 @@ class Product extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
+        return $this->belongsTo(Category::class, 'category_uid', 'category_uid');
     }
     public function product_images()
     {
         return $this->hasMany(ProductImage::class, 'product_id', 'id');
     }
-    public function reviews()
-    {
-        return $this->hasMany(Review::class)->where('status', 'approved');
-    }
+    // public function reviews()
+    // {
+    //     return $this->hasMany(Review::class)->where('status', 'approved');
+    // }
 }
