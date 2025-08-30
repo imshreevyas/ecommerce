@@ -12,16 +12,16 @@
                                     <a href="#" class="item-link">Home</a>
                                 </li>
                                 <li class="menu-item">
-                                    <a href="about-us.html" class="item-link">About</a>
+                                    <a href="#" class="item-link">About</a>
                                 </li>
                                 <li class="menu-item">
-                                    <a href="" class="item-link">Contact</a>
+                                    <a href="#" class="item-link">Contact</a>
                                 </li>
                             </ul>
                         </nav>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 text-xxl-center">
-                        <a href="index.html" class="logo-header">
+                        <a href="{{route('home')}}" class="logo-header">
                             <img src="{{asset('images/logo/logo-white.png')}}" alt="logo" class="logo">
                         </a>
                     </div>
