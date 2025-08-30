@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class ProductImageController extends Controller
 {
@@ -61,5 +63,41 @@ class ProductImageController extends Controller
     public function destroy(ProductImage $productImage)
     {
         //
+    }
+
+    public function upload_temp_gallery(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:jpg,jpeg,png,webp|max:2048',
+            'product_uid' => 'required'
+        ]);
+        
+        $product = ProductImage::createorupdate($insertData);
+
+        $file = $request->file('file');
+        $tempId = Str::uuid()->toString();
+        $tempFolder = 'temp/' . $tempId;
+
+        Storage::disk('public')->makeDirectory($tempFolder);
+
+        $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
+        $path = $file->storeAs($tempFolder, $filename, 'public');
+
+        $gallery_data = $product->gallery ? $product->gallery : [];
+        $insertData = [
+            'product_uid' => $request->get('product_uid'),
+            'gallery' => array_push()
+        ];
+
+
+        
+        ProductImage::create($insertData);
+
+        return response()->json([
+            'success' => true,
+            'temp_id' => $tempId,
+            'file_url' => Storage::url($path),
+            'filename' => $filename
+        ]);
     }
 }

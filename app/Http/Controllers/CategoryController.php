@@ -7,16 +7,17 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\BaseController;
 
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data['categories'] = Category::paginate(10);
-        return view('admin.category.manage', $data);
+        $this->data['categories'] = Category::paginate(10);
+        return view('admin.category.manage', $this->data);
     }
 
     /**

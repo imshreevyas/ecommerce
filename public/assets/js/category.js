@@ -34,7 +34,6 @@ function initializedCategoryDatatable(){
                     orderable: false,
                     searchable: false,
                     render: function (data, type, row) {
-                        var statusClass = row.status == 'active' ? 'form-switch-success' : 'form-switch-danger'; 
                         var statusAttr = row.status == 'active' ? 'checked' : '';
                         // Encode the row object as JSON and escape it
                         const rowData = encodeURIComponent(JSON.stringify(row));

@@ -124,16 +124,3 @@ $(document).on('change', '.maintenance-mode-update-checkbox', function () {
         show_toast('error', err)
     });
 });
-
-
-function generateSlug(e, slug_textfeild_id) {
-    const title = $(e).val();
-    var slug = title
-        .toString()
-        .toLowerCase()
-        .trim()
-        .replace(/[\s\W-]+/g, '-')  // Replace spaces and non-word chars with -
-        .replace(/^-+|-+$/g, '');   // Trim starting/trailing dashes
-
-    $(`#${slug_textfeild_id}`).val(slug);
-}

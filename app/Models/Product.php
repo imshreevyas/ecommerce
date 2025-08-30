@@ -11,7 +11,6 @@ class Product extends Model
     protected $fillable = [
         'product_uid', 
         'category_uid', 
-        'product_name', 
         'title', 
         'slug', 
         'description', 
@@ -22,19 +21,23 @@ class Product extends Model
         'available_qty', 
         'sku',
         'thumbnail', 
-        'is_featured',
-        'dimension', 
+        'gallery', 
         'seo_title', 
         'seo_desc', 
         'seo_keyword',
         'product_schema',
         'tags',
-        'attributes',
         'canonical_url',
         'status',
         'published_at', 
         'created_by', 
-        'updated_by'
+        'updated_by',
+        'deleted_at'
+    ];
+
+    // In Product.php model
+    protected $casts = [
+        'gallery' => 'array',
     ];
 
     public function category()
