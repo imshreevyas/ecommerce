@@ -20,11 +20,13 @@ return new class extends Migration
             $table->decimal('paid_amount', 10, 2);
             $table->string('payment_id')->nullable();
             $table->integer('coupon_id');
-            $table->enum('order_status', ['pending', 'processing', 'shipped', 'delivered', 'cancelled'])->default('pending');
+            $table->enum('order_status', ['pending', 'processing', 'shipped', 'delivered', 'cancelled','return_requested'])->default('pending');
             $table->string('customer_name');
             $table->string('customer_phone');
             $table->text('shipping_address');
             $table->text('billing_address');
+            $table->string('return_reason')->nullable();
+            $table->decimal('refund_amount', 10, 2)->default(0);
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
