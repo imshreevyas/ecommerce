@@ -10,7 +10,7 @@ use App\Http\Controllers\ProductImageController;
 
 /*  
 |--------------------------------------------------------------------------
-| Web Routes
+| Admin Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
@@ -51,7 +51,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::get('/product/manage', [ProductController::class, 'index'])->name('manage-products');
             Route::get('/product/add', [ProductController::class, 'create'])->name('add-product');
             Route::get('/product/edit/{product_uid}', [ProductController::class, 'edit'])->name('edit-product');
-            Route::get('/product/export', [PlansController::class, 'export_data'])->name('export-product');
+            Route::get('/product/export', [ProductController::class, 'export_data'])->name('export-product');
 
             // Category Routes
             Route::get('/category/add', [CategoryController::class, 'create'])->name('add_category');
