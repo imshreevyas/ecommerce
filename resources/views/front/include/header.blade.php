@@ -1,10 +1,5 @@
 <div class="container">
                 <div class="row wrapper-header align-items-center">
-                    <div class="col-md-4 col-3 d-xl-none">
-                        <a href="#mobileMenu" class="mobile-menu" data-bs-toggle="offcanvas" aria-controls="mobileMenu">
-                            <i class="icon icon-categories1"></i>
-                        </a>
-                    </div>
                     <div class="col-xxl-5 col-xl-6 d-none d-xl-block">
                         <nav class="box-navigation text-center style-space">
                             <ul class="box-nav-menu justify-content-start">
