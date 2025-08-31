@@ -28,7 +28,7 @@ Route::get('/product-detail/{id}', [IndexController::class, 'productDetail'])->n
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/addToCart',[CartController::class,'addCart'])->name('addToCart');
     Route::post('/removeCart',[CartController::class,'removeCart'])->name('removeCart');
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/account-details',[AuthController::class,'userAccount'])->name('account-details');
     Route::get('/account-order',function(){
         return view('front.account-order');

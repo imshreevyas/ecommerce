@@ -32,12 +32,14 @@
                                     <i class="icon icon-user"></i>
                                 </a>
                             </li>
+                          @if(@auth()->check())
                             <li class="nav-cart pl">
                                 <a href="#shoppingCart" data-bs-toggle="offcanvas" class="nav-icon-item">
                                     <i class="icon icon-cart"></i>
-                                    <span class="count-box">0</span>
+                                    <!-- <span class="count-box">0</span> -->
                                 </a>
                             </li>
+                          @endif
                         </ul>
                     </div>
                 </div>

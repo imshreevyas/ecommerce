@@ -13,10 +13,15 @@
             <a href="#"
                 class="text-sm link fw-medium my-account-nav-item">Addresses</a>
         </li>
-        
-        <li>
+        <!-- <li>
             <a href="{{ route('logout') }}" id="logout-button" class="text-sm link fw-medium my-account-nav-item">Log
                 Out</a>
+        </li> -->
+        <li>
+            <form method="post" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="text-sm link fw-medium my-account-nav-item">Logout</button>
+            </form>
         </li>
     </ul>
 </div>
