@@ -48,17 +48,16 @@ Route::prefix('admin')->name('admin.')->group(function(){
             
 
             // Products Routes
-            Route::get('/product/add', [ProductController::class, 'create'])->name('add_product');
-            // Route::get('/product/edit', [PlansController::class, 'edit'])->name('plans_edit');
-            Route::get('/product/manage', [ProductController::class, 'index'])->name('manage_products');
-            // Route::get('/product/export', [PlansController::class, 'export_data'])->name('plans_export');
+            Route::get('/product/manage', [ProductController::class, 'index'])->name('manage-products');
+            Route::get('/product/add', [ProductController::class, 'create'])->name('add-product');
+            Route::get('/product/edit/{product_uid}', [ProductController::class, 'edit'])->name('edit-product');
+            Route::get('/product/export', [PlansController::class, 'export_data'])->name('export-product');
 
             // Category Routes
             Route::get('/category/add', [CategoryController::class, 'create'])->name('add_category');
             Route::get('/category/edit', [CategoryController::class, 'edit'])->name('edit_category');
             Route::get('/category/manage', [CategoryController::class, 'index'])->name('manage_category');
             Route::get('/category/get_all_category', [CategoryController::class, 'get_all_categories'])->name('get_all_category');
-
 
         // ================ POST REQUESTS ==============================
 
@@ -69,10 +68,12 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::post('/account/update-brand-social-media',[CompanyProfileController::class,'update_brand_social_media'])->name('update-brand-social-media');
 
             // Product Routes
-            Route::post('/product/create', [ProductController::class, 'store'])->name('create_product');
-            Route::post('/product/update', [ProductController::class, 'update'])->name('update_product');
-            Route::post('/product_images/update', [ProductImageController::class, 'update_image'])->name('update_product_images');
-            Route::post('/product_images/delete', [ProductImageController::class, 'delete_image'])->name('delete_product_images');
+            Route::post('/product/create', [ProductController::class, 'store'])->name('product-create');
+            Route::post('/product/update', [ProductController::class, 'store'])->name('product-update');
+            Route::post('/product/thumbnail/update', [ProductController::class, 'update_image'])->name('update_product_thumbnail');
+            Route::post('/product/draft/init', [ProductController::class, 'product_draft_init'])->name('product-draft-init');
+            Route::post('/product/draft/gallery/add', [ProductController::class, 'update_draft_product_gallery_files'])->name('add-draft-product-gallery-files');
+            Route::post('/product/draft/gallery/delete', [ProductController::class, 'delete_draft_product_gallery_files'])->name('delete-draft-product-gallery-files');
 
             // Category Routes
             Route::post('/category/store', [CategoryController::class, 'store'])->name('categories.store');
