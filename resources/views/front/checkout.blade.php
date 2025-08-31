@@ -55,63 +55,22 @@
                 <div class="row">
                     <div class="col-xl-8">
                         <form class="tf-checkout-cart-main">
-                            <div class="box-ip-checkout">
-                                <div class="title text-lg fw-medium">Checkout</div>
-                                <div class="grid-2 mb_16">
-                                    <div class="tf-field style-2 style-3">
-                                        <input class="tf-field-input tf-input" id="firstname" placeholder=" "
-                                            type="text" name="firstname">
-                                        <label class="tf-field-label" for="firstname">First name</label>
-                                    </div>
-                                    <div class="tf-field style-2 style-3">
-                                        <input class="tf-field-input tf-input" id="lastname" placeholder=" " type="text"
-                                            name="lastname">
-                                        <label class="tf-field-label" for="lastname">Last name</label>
-                                    </div>
+                            <div class="box-ip-select">
+                                <div class="title">
+                                    <div class="text-lg fw-medium">Choose Shipping Address</div>
                                 </div>
-                                <fieldset class="tf-field style-2 style-3 mb_16">
-                                    <input class="tf-field-input tf-input" id="country" type="text" name="country"
-                                        placeholder=" ">
-                                    <label class="tf-field-label" for="country">Country</label>
-                                </fieldset>
-                                <fieldset class="tf-field style-2 style-3 mb_16">
-                                    <input class="tf-field-input tf-input" id="address" type="text" name="address"
-                                        placeholder="">
-                                    <label class="tf-field-label" for="address">Address</label>
-                                </fieldset>
-                                <fieldset class="tf-field style-2 style-3 mb_16">
-                                    <input type="text" class="tf-field-input tf-input" name="apartment" placeholder="">
-                                    <label class="tf-field-label" for="apartment">Apartment, suite, etc
-                                        (optional)</label>
-                                </fieldset>
                                 <div class="grid-3 mb_16">
-                                    <fieldset class="tf-field style-2 style-3">
-                                        <input class="tf-field-input tf-input" id="city" type="text" name="city"
-                                            placeholder="">
-                                        <label class="tf-field-label" for="city">City</label>
-                                    </fieldset>
-                                    <div class="tf-select select-square">
-                                        <select name="State" id="state">
-                                            <option value="">State</option>
-                                            <option value="alabama">Alabama</option>
-                                            <option value="alaska">Alaska</option>
-                                            <option value="california">California</option>
-                                            <option value="hawaii">Hawaii</option>
-                                            <option value="texas">Texas</option>
-                                            <option value="georgia">Georgia</option>
-                                        </select>
-                                    </div>
-                                    <fieldset class="tf-field style-2 style-3">
-                                        <input class="tf-field-input tf-input" id="code" type="text" name="zipcode"
-                                            placeholder="">
-                                        <label class="tf-field-label" for="code">Zipcode/Postal</label>
-                                    </fieldset>
+                                <div class="tf-select select-square">
+                                    <select name="select-address" class="tf-select select-square select-bordered" id="select-address">
+                                        <option value="">Select Address</option>
+                                        <option value="">Address 1</option>
+                                        <option value="new">Add New</option>
+                                    </select>
                                 </div>
-                                <fieldset class="tf-field style-2 style-3 mb_16">
-                                    <input class="tf-field-input tf-input" id="phone" type="text" name="phone"
-                                        placeholder="">
-                                    <label class="tf-field-label" for="phone">Phone</label>
-                                </fieldset>
+                                </div>
+                            </div>
+                            <div class="box-ip-checkout" style="display:none">
+                            @include('front.include.checkout-form')
                             </div>
                             <div class="box-ip-contact">
                                 <div class="title">
@@ -173,7 +132,7 @@
                                 <ul class="list-total">
                                     <li class="total-item text-sm d-flex justify-content-between">
                                         <span>Total MRP:</span>
-                                        <span class="price-sub fw-medium">₹₹{{ $item->product->mrp * $item->quantity }}</span>
+                                        <span class="price-sub fw-medium">₹0.00 INR</span>
                                     </li>
                                     <li class="total-item text-sm d-flex justify-content-between">
                                         <span>Discount:</span>
@@ -267,10 +226,20 @@
                     totalPrice += price * quantity;
                 }
             });
+            const priceSub= totalPrice + discountPrice;
             $('.total-price-order').text('₹' + totalPrice.toFixed(2) + ' INR');
             // update price-discount
             $('.price-discount').text('-₹' + discountPrice.toFixed(2) + ' INR');
+            $('.price-sub').text('₹' + priceSub.toFixed(2) + ' INR');
         }
+        // show/hide checkout form based on address selection
+        $('#select-address').on('change', function() {
+            if (this.value === 'new') {
+                $('.box-ip-checkout').show();
+            } else {
+                $('.box-ip-checkout').hide();
+            }
+        });
     </script>
 </body>
 
