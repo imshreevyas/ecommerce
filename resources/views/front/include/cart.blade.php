@@ -2,7 +2,7 @@
     <div class="canvas-wrapper">
         <div class="popup-header">
             <span class="title">Shopping cart</span>
-            <span class="icon-close icon-close-popup" data-bs-dismiss="offcanvas"></span>
+            <span class="icon-close icon-close-popup" onclick="location.reload()" data-bs-dismiss="offcanvas"></span>
         </div>
         <div class="wrap">
             <div class="tf-mini-cart-threshold">
@@ -35,10 +35,10 @@
                                                 class="old-price text-decoration-line-through text-dark-1">{{ $item->product->mrp }}</span>
                                         </p>
                                         <div class="wg-quantity small">
-                                            <button class="btn-quantity minus-btn">-</button>
+                                            <button class="btn-quantity minus-qty-btn">-</button>
                                             <input class="quantity-product font-4" type="text" name="number"
                                                 value="{{ $item->quantity }}">
-                                            <button class="btn-quantity plus-btn">+</button>
+                                            <button class="btn-quantity plus-qty-btn">+</button>
                                         </div>
                                        
                                     </div>
@@ -190,27 +190,99 @@
 </div>
 
 <script>
-    // sum values of .selling_price
-    let total = 0;
-    document.querySelectorAll('.selling_price').forEach(function(element) {
-        total += parseFloat(element.textContent.replace('₹', '').replace(',', ''));
+    // Function to calculate and update the total price
+    function updateTotal() {
+        let newTotal = 0;
+        let hasItems = false;
+        
+        document.querySelectorAll('.selling_price').forEach(function(element) {
+            const cartItem = element.closest('.tf-mini-cart-item');
+            // Check if cart item still exists in DOM
+            if (!cartItem) return;
+            
+            hasItems = true;
+            const quantityElement = cartItem.querySelector('.quantity-product');
+            const quantity = quantityElement ? parseInt(quantityElement.value) || 1 : 1;
+            const priceText = element.textContent.replace('₹', '').replace(',', '');
+            const price = parseFloat(priceText) || 0;
+            newTotal += price * quantity;
+        });
+        
+        const totalElement = document.querySelector('.total_price');
+        if (totalElement) {
+            totalElement.textContent = '₹' + newTotal.toFixed(2);
+        }
+    
+    }
+
+    // Calculate initial total when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        updateTotal();
+        
+        // Add event listeners to quantity inputs
+        document.querySelectorAll('.quantity-product').forEach(function(input) {
+            input.addEventListener('change', updateTotal);
+        });
+        
+        // Add event listeners to plus/minus buttons
+        document.querySelectorAll('.plus-qty-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const input = this.parentElement.querySelector('.quantity-product');
+                input.value = parseInt(input.value) + 1;
+                updateTotal();
+            });
+        });
+        
+        document.querySelectorAll('.minus-qty-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const input = this.parentElement.querySelector('.quantity-product');
+                if (parseInt(input.value) > 1) {
+                    input.value = parseInt(input.value) - 1;
+                    updateTotal();
+                }
+            });
+        });
     });
-    //append to total_price
-    document.querySelector('.total_price').textContent = '₹' + total.toFixed(2);
 
-
-    removeCart = (id) => {
+    // Remove cart item function
+    function removeCart(id) {
+        // Find the cart item element
+        const itemElement = document.querySelector(`.remove[onclick="removeCart(${id})"]`)?.closest('.tf-mini-cart-item');
+        
+        // Show loading/removing state
+        if (itemElement) {
+            itemElement.style.opacity = '0.5';
+            itemElement.style.pointerEvents = 'none';
+        }
+        
         $.ajax({
-            url: '{{ route('removeCart') }}',
-            type: 'post',
-             data:{
-                _token:`{{ csrf_token() }}`,
-                product_id:id,
+            url: "{{ route('removeCart') }}",
+            type: "POST",
+            data: {
+                product_id: id,
+                _token: "{{ csrf_token() }}"
             },
             success: function(response) {
                 if (!response.success) {
                     alert(response.message || 'Something went wrong');
+                    location.reload();
                     return;
+                }
+                
+                // Remove the item from DOM
+                if (itemElement) {
+                    itemElement.remove();
+                }
+                
+                // Update total price
+                updateTotal();
+            },
+            error: function(xhr, status, error) {
+                alert('Request failed. Please try later.');
+                // Reset item style on error
+                if (itemElement) {
+                    itemElement.style.opacity = '1';
+                    itemElement.style.pointerEvents = 'auto';
                 }
             }
         });

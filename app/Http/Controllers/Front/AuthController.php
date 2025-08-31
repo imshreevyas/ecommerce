@@ -108,16 +108,14 @@ class AuthController extends Controller
         return redirect()->route('account-details')->with('success', 'Account details updated successfully');
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
         try {
             // Log the user out (session-based)
-            Auth::logout();
-
-            // Clear session data
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-
+             Auth::logout();
+            // Invalidate the session and regenerate CSRF token for security
+            request()->session()->invalidate();
+            request()->session()->regenerateToken();
             return redirect('/')->with('success', 'Logged out successfully');
         } catch (\Exception $e) {
             return redirect('/')->with('error', 'Logout failed');
