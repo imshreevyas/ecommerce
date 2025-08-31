@@ -33,5 +33,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/account-order',function(){
         return view('front.account-order');
     })->name('account-order');
+    Route::get('/checkout',function(){
+        return view('front.checkout');
+    })->name('checkout');
     Route::post('/userUpdate',[AuthController::class,'userUpdate'])->name('userUpdate');
 });
