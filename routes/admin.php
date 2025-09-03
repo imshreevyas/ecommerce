@@ -95,3 +95,4 @@ Route::prefix('admin')->name('admin.')->group(function(){
 // Admin Routes
 Route::get('/',[AdminController::class, 'index'])->name('home');
 Route::get('/home',[AdminController::class, 'index'])->name('home');
+Route::get('/product/{slug}', [IndexController::class, 'productDetail'])->name('product.show');

@@ -16,6 +16,9 @@ return new class extends Migration
             $table->integer('admin_id');
             $table->string('currency')->default('INR');
             $table->string('currency_symbol')->default('₹');
+            $table->string('cloudinary_key_name')->nullable();
+            $table->string('cloudinary_api_key')->nullable();
+            $table->string('cloudinary_secret_key')->nullable();
             $table->boolean('maintenance_mode')->default(false);
             $table->text('default_meta_title')->nullable();
             $table->text('default_meta_description')->nullable();

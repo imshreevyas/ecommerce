@@ -10,6 +10,7 @@ class CompanyProfile extends Model
 
     protected $fillable = [
         'admin_id',
+        'cloudinary_public_id',
         'company_name',
         'logo',
         'favicon',
@@ -59,5 +60,10 @@ class CompanyProfile extends Model
         }
 
         return (int) round(($completed / count($fields)) * 100);
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class, 'admin_id', 'id');
     }
 }

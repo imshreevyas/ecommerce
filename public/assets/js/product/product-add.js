@@ -77,6 +77,10 @@ fileInput.addEventListener("change", function () {
     files.forEach((file) => {
         const formData = new FormData();
         var product_uid = $('#product_uid').val();
+        if(product_uid == ''){
+            show_toast('error', 'Enter Title first for the product!')
+            return false;
+        }
         formData.append("file", file);
         formData.append("product_uid", product_uid);
 
@@ -87,13 +91,13 @@ fileInput.addEventListener("change", function () {
         .then(res => {
 
             isFormDirty = true;
-            const { filename, url, uniquefilname } = res.data;
+            const { filename, url, uniquefilname, image_id } = res.data;
 
             const li = document.createElement("li");
             li.className = "mt-2";
             li.innerHTML = templateHTML;
 
-            li.querySelector("img").src = `${ASSET_URL}${url}`;
+            li.querySelector("img").src = url;
             li.querySelector("[data-dz-name]").textContent = filename;
             li.querySelector("[data-dz-size]").textContent = (file.size / 1024).toFixed(1) + " KB";
 
@@ -101,7 +105,7 @@ fileInput.addEventListener("change", function () {
             removeBtn.value = uniquefilname
             removeBtn.addEventListener("click", function (e) {
                 e.preventDefault();
-                axios.post(deleteUrl, { 'product_uid': product_uid, 'filename': uniquefilname, }).then(() => {
+                axios.post(deleteUrl, { 'product_uid': product_uid, 'image_id' : image_id }).then(() => {
                     li.remove();
                 });
             });

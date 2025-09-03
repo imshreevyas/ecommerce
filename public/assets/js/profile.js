@@ -31,8 +31,8 @@ $('#cancel-logo-upload').on('click',function(){
 
 $('#upload-logo').on('click',function(e){
     e.preventDefault();
-    const uploadBannerForm = $('#upload-logo-form')[0]; // Get the native DOM form element
-    const formData = new FormData(uploadBannerForm);
+    const uploadLogoForm = $('#upload-logo-form')[0]; // Get the native DOM form element
+    const formData = new FormData(uploadLogoForm);
     axios.post(`${APP_URL}admin/account/update_logo`,formData, {headers: {
         'Content-Type': 'multipart/form-data', 
     }}).then(function(response) {

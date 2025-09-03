@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Services\SchemaGenerator;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ProductController extends BaseController
 {
@@ -35,7 +37,7 @@ class ProductController extends BaseController
             ->when($tab === 'draft', function ($q) {
                 $q->where('status', 'draft');
             })
-            ->with(['category']) // adjust relations as needed
+            ->with(['category', 'product_images']) // adjust relations as needed
             ->when($tab === 'published',
                 fn ($q) => $q->latest('published_at'),
                 fn ($q) => $q->latest('id')
@@ -141,9 +143,38 @@ class ProductController extends BaseController
         $thumbnail_url = null;
         if ($request->hasFile('thumbnail')) {
             $thumb = $request->file('thumbnail');
-            $filename = Str::random(20) . '-' . time() . '.' . $thumb->getClientOriginalExtension();
-            $path = $thumb->storeAs($directory, $filename, 'public');
-            $validatedData['thumbnail'] = Storage::url($path);
+
+            if(empty($this->data['general_settings']['cloudinary_api_key']) && empty($this->data['general_settings']['cloudinary_secret_key'])){
+
+                if(!empty($product->thumbnail)){
+                    $fullPath = str_replace('/storage/', '', $product->thumbnail);
+
+                    // Delete file from disk if exists
+                    if (Storage::disk('public')->exists($fullPath)) {
+                        Storage::disk('public')->delete($fullPath);
+                    }
+                }
+
+                $filename = Str::random(20) . '-' . time() . '.' . $thumb->getClientOriginalExtension();
+                $path = $thumb->storeAs($directory, $filename, 'public');
+                $validatedData['thumbnail'] = Storage::url($path);
+            }else{
+                if(!empty($product->thumbnail)){
+                    if(!empty($product->cloudinary_public_id)){
+                        Cloudinary::destroy($product->cloudinary_public_id);
+                    }
+                }
+
+                // Uplaod in Cloudinary if keys available in setting or else upload in storage
+                $filename = Str::random(20) . '-' . time();
+                $uploaded_img = Cloudinary::upload($thumb->getRealPath(), [
+                    'folder' => 'products/'.$product->product_uid, // optional
+                    'public_id'  => $filename,  // 👈 set custom name
+                    'overwrite'  => true       // overwrite if file with same name exists
+                ]);
+                $validatedData['thumbnail'] = $uploaded_img->getSecurePath();
+                $validatedData['cloudinary_public_id'] = $uploaded_img->getPublicId();
+            }
         }
 
         if(!empty($validatedData['product_schema'])){
@@ -174,7 +205,8 @@ class ProductController extends BaseController
     public function edit($product_uid)
     {
         $this->data['categories'] = Category::all();
-        $this->data['product'] = Product::where('product_uid', $product_uid)->first();
+        $this->data['product'] = Product::where('product_uid', $product_uid)->with('product_images')->first();
+        $this->data['product_images'] = optional($this->data['product']->product_images)->toArray();
 
         if($this->data['product'] == null){
             return redirect()->route('admin.product.manage')->with('error', 'Invalid Product Request!');
@@ -214,25 +246,45 @@ class ProductController extends BaseController
 
         $file = $request->file('file');
         $product_uid = $request->product_uid;
-        $directory = 'product/' . $product_uid;
-        if (!Storage::disk('public')->exists($directory)) {
-            Storage::disk('public')->makeDirectory($directory);
+        $cloudinary_public_id = '';
+        if(empty($this->data['general_settings']['cloudinary_api_key']) && empty($this->data['general_settings']['cloudinary_secret_key'])){
+            $filename = Str::random(20) . '-' . time() . '.' . $file->getClientOriginalExtension();
+            $directory = 'products/' . $product_uid;
+            if (!Storage::disk('public')->exists($directory)) {
+                Storage::disk('public')->makeDirectory($directory);
+            }
+
+            $path = $file->storeAs($directory, $filename, 'public');
+            $file_url = asset(Storage::url($path));
+
+        }else{
+
+            $filename = Str::random(20) . '-' . time();
+
+            // Uplaod in Cloudinary if keys available in setting or else upload in storage
+            $uploaded_img = Cloudinary::upload($file->getRealPath(), [
+                'folder' => 'products/'.$product_uid, // optional
+                'public_id'  => $filename,  // 👈 set custom name
+                'overwrite'  => true       // overwrite if file with same name exists
+            ]);
+            $file_url = $uploaded_img->getSecurePath();
+            $cloudinary_public_id = $uploaded_img->getPublicId();
         }
 
-        $filename = Str::random(20) . '-' . time() . '.' . $file->getClientOriginalExtension();
-        $path = $file->storeAs($directory, $filename, 'public');
-        $file_url = Storage::url($path);
+        $createData = [
+            'product_uid' => $product_uid,
+            'cloudinary_public_id' => $cloudinary_public_id,
+            'image_url' => $file_url,
+            'status' => 'active',
+        ];
 
-        $product = Product::where('product_uid', $product_uid)->first();
-        $gallery = $product->gallery ?? [];
-        $gallery[] = $file_url;
-        $product->gallery = $gallery;
-        $product->save();
+        $product_image = ProductImage::create($createData);
 
         return response()->json([
             'success' => true,
             'filename' => $file->getClientOriginalName(), // show to user
             'uniquefilname' => $filename,
+            'image_id' => $product_image->id,
             'url' => $file_url
         ]);
     }
@@ -241,32 +293,31 @@ class ProductController extends BaseController
     {
         $request->validate([
             'product_uid' => 'required|string|exists:products,product_uid',
-            'filename' => 'required|string',
+            'image_id' => 'required',
         ]);
 
-        $product = Product::where('product_uid', $request->product_uid)->first();
+        $product_image = ProductImage::where(['product_uid' => $request->product_uid, 'id' => $request->image_id])->first();
 
-        if (!$product || !is_array($product->gallery)) {
-            return response()->json(['success' => false, 'message' => 'Gallery not found.'], 404);
+        if (!$product_image) {
+            return response()->json(['success' => false, 'message' => 'Invalid Request! Image not found.'], 404);
         }
 
-        $filename = $request->filename;
-        $directory = 'product/' . $product->product_uid;
-        $fullPath = $directory . '/' . $filename;
+        if(empty($this->data['general_settings']['cloudinary_api_key']) && empty($this->data['general_settings']['cloudinary_secret_key'])){
+            $fullPath = str_replace('/storage/', '', $product_image->image_url);
 
-        // Delete file from disk if exists
-        if (Storage::disk('public')->exists($fullPath)) {
-            Storage::disk('public')->delete($fullPath);
+            // Delete file from disk if exists
+            if (Storage::disk('public')->exists($fullPath)) {
+                Storage::disk('public')->delete($fullPath);
+            }
+        }else{
+            if(!empty($product_image->cloudinary_public_id)){
+                Cloudinary::destroy($product_image->cloudinary_public_id);
+            }else{
+                return response()->json(['success' => false, 'message' => 'Invalid Request! Image not found.'], 404);
+            }
         }
 
-        // Remove from gallery array
-        $updated_gallery = array_values(array_filter($product->gallery, function ($item) use ($filename) {
-            return basename($item) !== $filename;
-        }));
-
-        $product->gallery = $updated_gallery;
-        $product->save();
-
+        $product_image->delete();
         return response()->json(['success' => true]);
     }
 

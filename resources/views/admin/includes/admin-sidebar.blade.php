@@ -5,19 +5,19 @@
         <!-- Dark Logo-->
         <a href="index.html" class="logo logo-dark">
             <span class="logo-sm">
-                <img src="{{ asset($company_profile->logo) }}" alt="" height="22">
+                <img src="{{ isset($company_profile->logo) ? asset($company_profile->logo) : asset('assets/images/default-logo.png') }}" alt="" height="22">
             </span>
             <span class="logo-lg">
-                <img src="{{ asset($company_profile->logo) }}" alt="" height="100">
+                <img src="{{ isset($company_profile->logo) ? asset($company_profile->logo) : asset('assets/images/default-logo.png') }}" alt="" height="100">
             </span>
         </a>
         <!-- Light Logo-->
         <a href="index.html" class="logo logo-light">
             <span class="logo-sm">
-                <img src="{{ asset($company_profile->logo) }}" alt="" height="22">
+                <img src="{{ isset($company_profile->logo) ? asset($company_profile->logo) : asset('assets/images/default-logo.png') }}" alt="" height="22">
             </span>
             <span class="logo-lg">
-                <img src="{{ asset($company_profile->logo) }}" alt="" height="100">
+                <img src="{{ isset($company_profile->logo) ? asset($company_profile->logo) : asset('assets/images/default-logo.png') }}" alt="" height="100">
             </span>
         </a>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"

@@ -87,6 +87,9 @@ class GeneralSettingController extends Controller
         $validatedData = $request->validate([
             'currency' => 'nullable',
             'currency_symbol' => 'nullable',
+            'cloudinary_key_name' => 'nullable',
+            'cloudinary_api_key' => 'nullable',
+            'cloudinary_secret_key' => 'nullable',
             'default_meta_title' => 'nullable',
             'default_meta_description' => 'nullable',
             'default_schema' => 'nullable',

@@ -29,6 +29,11 @@ class AdminLoginHistory extends Model
             'status'      => $status,
         ]);
     }
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class, 'admin_id', 'id');
+    }
 }
 
 

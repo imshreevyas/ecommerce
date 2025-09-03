@@ -340,7 +340,7 @@
 
     <script src="{{ asset('assets/js/pages/ecommerce-product-create.init.js') }}" defer></script>
 
-    <script>window.existingGallery = @json($product->gallery);</script>
+    <script>window.existingGallery = @json($product_images);</script>
     <script src="{{ asset('assets/js/product/product-edit.js') }}" defer></script>
 
 @stop

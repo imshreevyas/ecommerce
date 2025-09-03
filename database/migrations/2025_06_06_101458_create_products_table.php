@@ -17,6 +17,7 @@ return new class extends Migration
             // Identifiers
             $table->string('product_uid')->unique();
             $table->string('category_uid')->index()->nullable();
+            $table->string('cloudinary_public_id')->nullable();
 
             // Product details
             $table->string('title')->nullable();
@@ -35,7 +36,6 @@ return new class extends Migration
 
             // Media
             $table->string('thumbnail')->nullable();
-            $table->json('gallery')->nullable();
 
             // SEO
             $table->text('tags')->nullable(); // tags as JSON array

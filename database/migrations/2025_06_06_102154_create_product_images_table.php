@@ -13,7 +13,8 @@ return new class extends Migration
     {
        Schema::create('product_images', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id');
+            $table->string('product_uid');
+            $table->string('cloudinary_public_id')->nullable();
             $table->string('image_url');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();

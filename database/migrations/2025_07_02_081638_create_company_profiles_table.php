@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('company_profiles', function (Blueprint $table) {
             $table->id();
             $table->integer('admin_id');
+            $table->string('cloudinary_public_id')->nullable();
             $table->string('company_name')->nullable();
             $table->string('logo')->nullable(); // Path to logo image
             $table->string('favicon')->nullable(); // Path to favicon
-            $table->text('brand_tag_line');
+            $table->text('brand_tag_line')->nullable();
             $table->text('fulladdress')->nullable();
             $table->string('support_phone')->nullable();
             $table->string('support_email')->nullable();

@@ -13,6 +13,7 @@ class Product extends Model
     protected $fillable = [
         'product_uid', 
         'category_uid', 
+        'cloudinary_public_id',
         'title', 
         'slug', 
         'description', 
@@ -22,8 +23,7 @@ class Product extends Model
         'selling_price', 
         'available_qty', 
         'sku',
-        'thumbnail', 
-        'gallery', 
+        'thumbnail',
         'seo_title', 
         'seo_desc', 
         'seo_keyword',
@@ -48,10 +48,7 @@ class Product extends Model
     }
     public function product_images()
     {
-        return $this->hasMany(ProductImage::class, 'product_id', 'id');
+        return $this->hasMany(ProductImage::class, 'product_uid', 'product_uid');
     }
-    // public function reviews()
-    // {
-    //     return $this->hasMany(Review::class)->where('status', 'approved');
-    // }
+
 }

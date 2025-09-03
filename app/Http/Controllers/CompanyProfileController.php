@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
-class CompanyProfileController extends Controller
+class CompanyProfileController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -68,31 +69,45 @@ class CompanyProfileController extends Controller
 
     public function update_logo(Request $request){
         $validatedData = $request->validate([
-            'logo' => 'required|file|mimes:jpeg,png,jpg,webp,PNG,JPG|max:20480|dimensions:max_width=500,max_height=500'
+            'logo' => 'required|file|mimes:jpeg,png,jpg,webp,PNG,JPG|max:20480'
         ]);
 
         $company_profile = CompanyProfile::where('admin_id', Auth::guard('admin')->user()->id)->first();
 
         if ($request->hasFile('logo')) {
-            $asset = $request->file('logo'); // Get the single file
-            $filename = Str::random(20).'-'.time() . '.' . $asset->getClientOriginalExtension();
-            $directory = 'brand';
 
-            // Ensure the directory exists and set permissions
-            if (!Storage::disk('public')->exists($directory)) {
-                Storage::disk('public')->makeDirectory($directory);
-                chmod(storage_path('app/public/' . $directory), 0775);
+            $asset = $request->file('logo'); // Get the single file
+            if(empty($this->data['general_settings']['cloudinary_api_key']) && empty($this->data['general_settings']['cloudinary_secret_key'])){
+                $filename = Str::random(20).'-'.time() . '.' . $asset->getClientOriginalExtension();
+                $directory = 'brand';
+
+                // Ensure the directory exists and set permissions
+                if (!Storage::disk('public')->exists($directory)) {
+                    Storage::disk('public')->makeDirectory($directory);
+                    chmod(storage_path('app/public/' . $directory), 0775);
+                }
+
+                $path = $asset->storeAs($directory, $filename, 'public');
+                $assetPath = Storage::url($path);
+                $logo_url = asset($assetPath);
+            }else{
+                // Uplaod in Cloudinary if keys available in setting or else upload in storage
+                $uploaded_img = Cloudinary::upload($asset->getRealPath(), [
+                    'folder' => 'brand',   // optional
+                ]);
+                $logo_url = $uploaded_img->getSecurePath();
+                $cloudinary_public_id = $uploaded_img->getPublicId();
+                $validatedData['cloudinary_public_id'] = $cloudinary_public_id;
             }
 
-            $path = $asset->storeAs($directory, $filename, 'public');
-            $assetPath = Storage::url($path);
-            $logo_url = $assetPath;
             $validatedData['logo'] = $logo_url;
         }
 
         
-        //delete Previous Image if in folder
-        if($company_profile->logo && !empty($company_profile->logo)) {
+        //delete Previous Image if in folder / Cloudinary
+        if(!empty($company_profile->cloudinary_public_id)){
+            Cloudinary::destroy($company_profile->cloudinary_public_id);
+        }else if(!empty($company_profile->logo)) {
             $oldImagePath = str_replace('/storage/', '', $company_profile->logo);
             if (Storage::disk('public')->exists($oldImagePath)) {
                 Storage::disk('public')->delete($oldImagePath);
@@ -137,7 +152,6 @@ class CompanyProfileController extends Controller
     }
 
     public function update_brand_details(Request $request){
-
         session()->flash('active_tab', 'brandSupportDetails');
         $adminId = Auth::guard('admin')->id(); 
         $validatedData = $request->validate([

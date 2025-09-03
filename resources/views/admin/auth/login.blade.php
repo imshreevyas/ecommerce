@@ -45,12 +45,6 @@
                                     <div class="p-lg-5 p-4 auth-one-bg h-100">
                                         <div class="bg-overlay"></div>
                                         <div class="position-relative h-100 d-flex flex-column">
-                                            <div class="mb-4">
-                                                <a href="{{ route('home') }}" class="d-block">
-                                                    <img src="{{ asset('assets/images/logo-light.png') }}"
-                                                        alt="" height="18">
-                                                </a>
-                                            </div>
                                             <div class="mt-auto">
                                                 <div class="mb-3">
                                                     <i class="ri-double-quotes-l display-4 text-success"></i>
@@ -198,7 +192,8 @@
             }
         }, 1000);
     }
-     function sendOTP(email, csrfToken) {
+
+    function sendOTP(email, csrfToken) {
         $.ajax({
             url: "{{ route('admin.adminLoginPost') }}",
             method: "POST",
@@ -227,6 +222,7 @@
             }
         });
     }
+
     function verifyOTP(email, otp, csrfToken) {
         $.ajax({
             url: "{{ route('admin.verifyOTP') }}",
@@ -276,31 +272,31 @@
     });
 
     $('#otpLoginForm').on('submit', function(e) {
-    e.preventDefault();
-    var currentAction = $(this).attr('action');
-    const csrfToken = $('meta[name="csrf-token"]').attr('content');
-    
-    if (currentAction === "{{ route('admin.adminLoginPost') }}") {
-        // Email submission case
-        var email = $('#email').val().trim();
+        e.preventDefault();
+        var currentAction = $(this).attr('action');
+        const csrfToken = $('meta[name="csrf-token"]').attr('content');
         
-        if (email === '') {
-            alert('Please enter your email.');
-            return;
+        if (currentAction === "{{ route('admin.adminLoginPost') }}") {
+            // Email submission case
+            var email = $('#email').val().trim();
+            
+            if (email === '') {
+                alert('Please enter your email.');
+                return;
+            }
+            sendOTP(email, csrfToken);
+        } else {
+            // OTP verification case
+            var otp = $('#otp').val().trim();
+            var email = $('#email').val().trim();
+            
+            if (otp === '') {
+                alert('Please enter the OTP.');
+                return;
+            }
+            verifyOTP(email, otp, csrfToken);
         }
-        sendOTP(email, csrfToken);
-    } else {
-        // OTP verification case
-        var otp = $('#otp').val().trim();
-        var email = $('#email').val().trim();
-        
-        if (otp === '') {
-            alert('Please enter the OTP.');
-            return;
-        }
-        verifyOTP(email, otp, csrfToken);
-    }
-});
+    });
     </script>
     @include('display_errors')
 </body>

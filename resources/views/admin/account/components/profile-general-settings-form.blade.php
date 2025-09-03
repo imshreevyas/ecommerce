@@ -4,20 +4,40 @@
         <div class="col-lg-4">
             <div class="mb-3 pb-2">
                 <label for="company_name" class="form-label">Currency</label>
-                <input class="form-control" id="currency" name="currency" placeholder="Enter Currency" value="{{ check_isset_or_null($company_profile, 'currency', 'INR') }}">
+                <input class="form-control" id="currency" name="currency" placeholder="Enter Currency" value="{{ check_isset_or_null($general_settings, 'currency', 'INR') }}">
             </div>
         </div>
         
         <div class="col-lg-4">
             <div class="mb-3 pb-2">
                 <label for="exampleFormControlTextarea" class="form-label">Currency Symbol</label>
-                <input class="form-control" id="currency_symbol" name="currency_symbol" placeholder="Enter Support Contact Number" value="{{ check_isset_or_null($company_profile, 'currency_symbol', '₹') }}">
+                <input class="form-control" id="currency_symbol" name="currency_symbol" placeholder="Enter Support Contact Number" value="{{ check_isset_or_null($general_settings, 'currency_symbol', '₹') }}">
             </div>
         </div>
     </div>
 
     <div class="row">
+        <div class="col-lg-4">
+            <div class="mb-3 pb-2">
+                <label for="company_name" class="form-label">Cloudinary Key Name</label>
+                <input class="form-control" id="cloudinary_key_name" name="cloudinary_key_name" placeholder="Enter Cloudinary Key Name" value="{{ check_isset_or_null($general_settings, 'cloudinary_key_name', '') }}">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="mb-3 pb-2">
+                <label for="company_name" class="form-label">Cloudinary Api Key</label>
+                <input class="form-control" id="cloudinary_api_key" name="cloudinary_api_key" placeholder="Enter Cloudinary Api Key" value="{{ check_isset_or_null($general_settings, 'cloudinary_api_key', '') }}">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="mb-3 pb-2">
+                <label for="company_name" class="form-label">Cloudinary Secret Key</label>
+                <input class="form-control" id="cloudinary_secret_key" name="cloudinary_secret_key" placeholder="Enter Cloudinary Secret Key" value="{{ check_isset_or_null($general_settings, 'cloudinary_secret_key', '') }}">
+            </div>
+        </div>
+    </div>
 
+    <div class="row">
         <div class="col-lg-12">
             <div class="mb-3">
                 <label for="skillsInput" class="form-label">Default Seo Title</label>

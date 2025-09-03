@@ -41,7 +41,7 @@ function initializedCategoryDatatable(){
                         return `
                             <div class="d-flex justify-content-around gap-3">
                             <button class="btn btn-sm btn-primary edit-category-btn" data-category_uid="${row.category_uid}" data-name="${row.name}" data-slug="${row.slug}" data-description="${row.description}" data-image_url="${row.image_url}" data-parent_uid="${row.parent_uid}">Edit</button>
-                            <div class="form-check form-switch form-switch-md ${statusClass}"><input class="form-check-input category-status-update-checkbox" type="checkbox" role="switch" id="flexSwitchCheckChecked-${row.category_uid}" ${statusAttr} data-parent-id="${row.parent_uid}" data-category-id="${row.category_uid}"><label class="form-check-label" for="flexSwitchCheckChecked-${row.category_uid}"></label></div>
+                            <div class="form-check form-switch form-switch-md"><input class="form-check-input category-status-update-checkbox" type="checkbox" role="switch" id="flexSwitchCheckChecked-${row.category_uid}" ${statusAttr} data-parent-id="${row.parent_uid}" data-category-id="${row.category_uid}"><label class="form-check-label" for="flexSwitchCheckChecked-${row.category_uid}"></label></div>
                             </div>
                         `;
                     }

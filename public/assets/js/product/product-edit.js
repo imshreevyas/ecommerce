@@ -87,13 +87,13 @@ fileInput.addEventListener("change", function () {
         .then(res => {
 
             isFormDirty = true;
-            const { filename, url, uniquefilname } = res.data;
+            const { filename, url, uniquefilname, image_id } = res.data;
 
             const li = document.createElement("li");
             li.className = "mt-2";
             li.innerHTML = templateHTML;
 
-            li.querySelector("img").src = `${ASSET_URL}${url}`;
+            li.querySelector("img").src = url;
             li.querySelector("[data-dz-name]").textContent = filename;
             li.querySelector("[data-dz-size]").textContent = (file.size / 1024).toFixed(1) + " KB";
 
@@ -101,7 +101,7 @@ fileInput.addEventListener("change", function () {
             removeBtn.value = uniquefilname
             removeBtn.addEventListener("click", function (e) {
                 e.preventDefault();
-                axios.post(deleteUrl, { 'product_uid': product_uid, 'filename': uniquefilname, }).then(() => {
+                axios.post(deleteUrl, { 'product_uid': product_uid, 'image_id' : image_id }).then(() => {
                     li.remove();
                 });
             });
@@ -136,24 +136,27 @@ window.addEventListener("keydown", function (e) {
 if (Array.isArray(window.existingGallery) && window.existingGallery.length > 0) {
     const product_uid = document.getElementById('product_uid').value;
 
-    window.existingGallery.forEach((url) => {
-        const filename = url.split('/').pop();
+    window.existingGallery.forEach((item) => {
+
+        const { id, image_url } = item;
+
+        const filename = image_url.split('/').pop(); // extract filename from URL
 
         const li = document.createElement("li");
         li.className = "mt-2";
         li.innerHTML = templateHTML;
 
-        li.querySelector("img").src = `${ASSET_URL}${url}`;
+        li.querySelector("img").src = image_url;
         li.querySelector("[data-dz-name]").textContent = filename;
         li.querySelector("[data-dz-size]").textContent = "";
 
         const removeBtn = li.querySelector("[data-dz-remove]");
-        removeBtn.value = filename;
+        removeBtn.value = id;
         removeBtn.addEventListener("click", function (e) {
             e.preventDefault();
             axios.post(deleteUrl, { 
-                'product_uid': product_uid, 
-                'filename': filename 
+                'product_uid': product_uid,
+                'image_id': id,
             }).then(() => {
                 li.remove();
             });
