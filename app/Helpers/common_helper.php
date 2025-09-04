@@ -28,5 +28,5 @@ if (!function_exists('Logs')) {
 
 function asset_front($path)
 {
-    return rtrim(config('app.front_asset_url', 'http://localhost/ecom/public/front'), '/') . '/' . ltrim($path, '/');
+    return rtrim(config('app.front_asset_url', asset('/front')), '/') . '/' . ltrim($path, '/');
 }
