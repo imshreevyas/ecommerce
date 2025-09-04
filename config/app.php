@@ -57,8 +57,7 @@ return [
 
     'url' => env('APP_URL', 'http://localhost/ecom'),
 
-    'asset_url' => env('ASSET_URL','http://localhost/ecom/public/front'),
-
+    'asset_url' => env('ASSET_URL','http://localhost/ecom/public/'),
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

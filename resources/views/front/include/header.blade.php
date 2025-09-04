@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 text-xxl-center">
                         <a href="{{route('home')}}" class="logo-header">
-                            <img src="{{asset('images/logo/logo-white.png')}}" alt="logo" class="logo">
+                            <img src="{{asset_front('images/logo/logo-white.png')}}" alt="logo" class="logo">
                         </a>
                     </div>
                     <div class="col-xxl-5 col-xl-4 col-md-4 col-3">

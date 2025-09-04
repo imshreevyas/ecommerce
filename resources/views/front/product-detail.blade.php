@@ -1087,21 +1087,21 @@
 
 
     <!-- Javascript -->
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/swiper-bundle.min.js') }}"></script>
-    <script src="{{ asset('js/carousel.js') }}"></script>
-    <script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('js/lazysize.min.js') }}"></script>
-    <script src="{{ asset('js/count-down.js') }}"></script>
-    <script src="{{ asset('js/wow.min.js') }}"></script>
-    <script src="{{ asset('js/multiple-modal.js') }}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
-    <script src="{{ asset('js/api/login.js') }}"></script>
-    <script src="{{ asset('js/photoswipe-lightbox.umd.min.js') }}"></script>
-    <script src="{{ asset('js/photoswipe.umd.min.js') }}"></script>
-    <script src="{{ asset('js/zoom.js') }}"></script>
-     <script src="{{ asset('js/api/login.js') }}"></script>
+    <script src="{{ asset_front('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset_front('js/jquery.min.js') }}"></script>
+    <script src="{{ asset_front('js/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset_front('js/carousel.js') }}"></script>
+    <script src="{{ asset_front('js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset_front('js/lazysize.min.js') }}"></script>
+    <script src="{{ asset_front('js/count-down.js') }}"></script>
+    <script src="{{ asset_front('js/wow.min.js') }}"></script>
+    <script src="{{ asset_front('js/multiple-modal.js') }}"></script>
+    <script src="{{ asset_front('js/main.js') }}"></script>
+    <script src="{{ asset_front('js/api/login.js') }}"></script>
+    <script src="{{ asset_front('js/photoswipe-lightbox.umd.min.js') }}"></script>
+    <script src="{{ asset_front('js/photoswipe.umd.min.js') }}"></script>
+    <script src="{{ asset_front('js/zoom.js') }}"></script>
+     <script src="{{ asset_front('js/api/login.js') }}"></script>
     <script>
         $('.addToCart').click(function(ev){
             ev.preventDefault();

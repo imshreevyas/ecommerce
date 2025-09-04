@@ -68,7 +68,7 @@
                             <div class="swiper-slide">
                                 <div class="tf-icon-box style-3 justify-content-center justify-content-lg-start">
                                     <div class="box-icon">
-                                        <img src="{{ asset('images/icons/minimal.png') }}" alt=""
+                                        <img src="{{ asset_front('images/icons/minimal.png') }}" alt=""
                                             srcset="">
                                     </div>
                                     <div class="content">
@@ -80,7 +80,7 @@
                             <div class="swiper-slide">
                                 <div class="tf-icon-box style-3 justify-content-center justify-content-lg-start">
                                     <div class="box-icon">
-                                        <img src="{{ asset('images/icons/leaf.png') }}" alt="" srcset="">
+                                        <img src="{{ asset_front('images/icons/leaf.png') }}" alt="" srcset="">
                                     </div>
                                     <div class="content">
                                         <div class="title fw-bold font-7">Sustainability</div>
@@ -91,7 +91,7 @@
                             <div class="swiper-slide">
                                 <div class="tf-icon-box style-3 justify-content-center justify-content-lg-start">
                                     <div class="box-icon">
-                                        <img src="{{ asset('images/icons/luxury.png') }}" alt="" srcset="">
+                                        <img src="{{ asset_front('images/icons/luxury.png') }}" alt="" srcset="">
                                     </div>
                                     <div class="content">
                                         <div class="title fw-bold font-7">Luxury</div>
@@ -102,7 +102,7 @@
                             <div class="swiper-slide">
                                 <div class="tf-icon-box style-3 justify-content-center justify-content-lg-start">
                                     <div class="box-icon">
-                                        <img src="{{ asset('images/icons/luxury.png') }}" alt="" srcset="">
+                                        <img src="{{ asset_front('images/icons/luxury.png') }}" alt="" srcset="">
                                     </div>
                                     <div class="content">
                                         <div class="title fw-bold font-7">Elegant</div>
@@ -126,8 +126,8 @@
             <div class="container">
                 <div class="s2-banner-with-text">
                     <div class="banner">
-                        <img src="{{ asset('images/slider/shree/4.png') }}"
-                            data-src="{{ asset('images/slider/shree/4.png') }}" alt="banner" class="lazyload">
+                        <img src="{{ asset_front('images/slider/shree/4.png') }}"
+                            data-src="{{ asset_front('images/slider/shree/4.png') }}" alt="banner" class="lazyload">
                     </div>
                     <div class="content-with-text wow fadeInUp">
                         <div class="box-title-content">
@@ -252,15 +252,15 @@
                     <div class="image-banner">
                         <div class="image image-1 hover-img">
                             <div class="shine-item img-style wow fadeInRight" data-wow-delay="0.1s">
-                                <img src="{{ asset('images/banner/banner1.jpeg') }}"
-                                    data-src="{{ asset('images/slider/shree/1.png') }}" alt=""
+                                <img src="{{ asset_front('images/banner/banner1.jpeg') }}"
+                                    data-src="{{ asset_front('images/slider/shree/1.png') }}" alt=""
                                     class="lazyload">
                             </div>
                         </div>
                         <div class="image image-2 hover-shine hover-img">
                             <div class="shine-item img-style wow fadeInRight">
-                                <img src="{{ asset('images/banner/banner1.jpeg') }}"
-                                    data-src="{{ asset('images/slider/shree/3.png') }}" alt=""
+                                <img src="{{ asset_front('images/banner/banner1.jpeg') }}"
+                                    data-src="{{ asset_front('images/slider/shree/3.png') }}" alt=""
                                     class="lazyload">
                             </div>
                         </div>
@@ -273,9 +273,9 @@
         <section class="flat-spacing-3">
             <div class="container-3">
                 <div class="flat-wrapper-testimonial bg-dark-green-4">
-                    <img class="img-item-1 absolute" src="{{ asset('images/slider/shree/5.jpeg') }}" alt=""
+                    <img class="img-item-1 absolute" src="{{ asset_front('images/slider/shree/5.jpeg') }}" alt=""
                         style="max-width: 120px;">
-                    <img class="img-item-2 absolute" src="{{ asset('images/slider/shree/6.jpeg') }}" alt=""
+                    <img class="img-item-2 absolute" src="{{ asset_front('images/slider/shree/6.jpeg') }}" alt=""
                         style="max-width: 120px;">
 
                     <div dir="ltr" class="swiper tf-swiper"
@@ -385,7 +385,7 @@
                     <div class="footer-top-wrap">
                         <div class="footer-logo">
                             <a href="index.html">
-                                <img src="{{ asset('images/logo/logo-white.png') }}" class="logo" alt="logo">
+                                <img src="{{ asset_front('images/logo/logo-white.png') }}" class="logo" alt="logo">
                             </a>
                         </div>
                         <ul class="tf-social-icon style-large">
@@ -820,17 +820,17 @@
     <!-- /shoppingCart -->
 
     <!-- Javascript -->
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/swiper-bundle.min.js') }}"></script>
-    <script src="{{ asset('js/carousel.js') }}"></script>
-    <script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('js/lazysize.min.js') }}"></script>
-    <script src="{{ asset('js/count-down.js') }}"></script>
-    <script src="{{ asset('js/wow.min.js') }}"></script>
-    <script src="{{ asset('js/multiple-modal.js') }}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
-    <script src="{{ asset('js/api/login.js') }}"></script>
+    <script src="{{ asset_front('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset_front('js/jquery.min.js') }}"></script>
+    <script src="{{ asset_front('js/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset_front('js/carousel.js') }}"></script>
+    <script src="{{ asset_front('js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset_front('js/lazysize.min.js') }}"></script>
+    <script src="{{ asset_front('js/count-down.js') }}"></script>
+    <script src="{{ asset_front('js/wow.min.js') }}"></script>
+    <script src="{{ asset_front('js/multiple-modal.js') }}"></script>
+    <script src="{{ asset_front('js/main.js') }}"></script>
+    <script src="{{ asset_front('js/api/login.js') }}"></script>
 </body>
 
 </html>

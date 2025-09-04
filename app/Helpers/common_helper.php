@@ -25,3 +25,8 @@ if (!function_exists('Logs')) {
         \Log::channel('daily_log')->debug($message, $context);
     }
 }
+
+function asset_front($path)
+{
+    return rtrim(config('app.front_asset_url', 'http://localhost/ecom/public/front'), '/') . '/' . ltrim($path, '/');
+}

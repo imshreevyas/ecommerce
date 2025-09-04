@@ -5,7 +5,7 @@
                     <div class="swiper-slide">
                         <div class="slider-wrap ">
                             <div class="image">
-                                <img src="{{ asset('images/slider/shree/1.png') }}" data-src="{{ asset('images/slider/shree/1.png') }}" alt="slider"
+                                <img src="{{ asset_front('images/slider/shree/1.png') }}" data-src="{{ asset_front('images/slider/shree/1.png') }}" alt="slider"
                                     class="lazyload">
                             </div>
                             <div class="box-content">
@@ -32,7 +32,7 @@
                     <div class="swiper-slide">
                         <div class="slider-wrap ">
                             <div class="image">
-                                <img src="{{ asset('images/slider/plant/slider-plant-2.jpg') }}" data-src="{{ asset('images/slider/shree/2.png') }}"
+                                <img src="{{ asset_front('images/slider/plant/slider-plant-2.jpg') }}" data-src="{{ asset_front('images/slider/shree/2.png') }}"
                                     alt="slider" class="lazyload">
                             </div>
                             <div class="box-content">
@@ -60,7 +60,7 @@
                     <div class="swiper-slide">
                         <div class="slider-wrap">
                             <div class="image">
-                                <img src="{{ asset('images/slider/plant/slider-plant-3.jpg') }}" data-src="{{ asset('images/slider/shree/7.png') }}"
+                                <img src="{{ asset_front('images/slider/plant/slider-plant-3.jpg') }}" data-src="{{ asset_front('images/slider/shree/7.png') }}"
                                     alt="slider" class="lazyload">
                             </div>
                             <div class="box-content">
