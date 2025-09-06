@@ -20,7 +20,7 @@
         <li>
             <form method="post" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit" class="text-sm link fw-medium my-account-nav-item">Logout</button>
+                <input type="submit" name="Logout" value="Logout" style="border:none;width:100%" class="btn-white fw-medium my-account-nav-item">
             </form>
         </li>
     </ul>
