@@ -59,7 +59,7 @@
                             </div>
 
                             <div class="tf-mini-cart-view-checkout">
-                                <a href="checkout.html"
+                                <a href="{{ route('checkout') }}"
                                     class="tf-btn animate-btn d-inline-flex bg-dark-2 w-100 justify-content-center"><span>Check
                                         out</span></a>
                                 
