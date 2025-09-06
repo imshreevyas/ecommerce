@@ -13,14 +13,14 @@ class IndexController extends Controller
     public function index()
     {
          $products = Product::with(['product_images'])
-        ->where('status', 'active')
+        ->where('status', 'published')
         ->orderBy('created_at', 'desc')
         ->get();
-
-    // Return view with all products
-    return view('front.index', [
-        'products' => $products
-    ]);
+        // dd($products);
+        // Return view with all products
+        return view('front.index', [
+            'products' => $products
+        ]);
     }
     public function productDetail($id)
     {

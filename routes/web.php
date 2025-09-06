@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [IndexController::class, 'index'])->name('home');
+Route::get('/', [IndexController::class, 'index'])->name('index');
 
 // route for login
 Route::post('/requestOtp', [AuthController::class, 'requestOtp']);

@@ -35,7 +35,7 @@
             <div class="container">
                 <div class="breadcrumb-wrap">
                     <div class="breadcrumb-list">
-                        <a class="breadcrumb-item" href="{{route('home')}}">Home</a>
+                        <a class="breadcrumb-item" href="{{route('index')}}">Home</a>
                         <div class="breadcrumb-item dot"><span></span></div>
                         <div class="breadcrumb-item current">{{$product->title}}</div>
                     </div>
@@ -178,7 +178,7 @@
                                     <a href="#shoppingCart" data-bs-toggle="offcanvas"
                                         class="tf-btn btn-orange animate-btn d-inline-flex justify-content-center">View Cart</a>
                                     @else
-                                    <div class="tf-product-info-quantity">
+                                    <div class="d-inline-flex tf-product-info-quantity" style="border: 1px solid;border-radius: 20px;">
                                         <div class="wg-quantity">
                                             <button class="btn-quantity minus-btn">-</button>
                                             <input class="quantity-product font-4" type="text" name="number" value="1">

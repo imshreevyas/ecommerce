@@ -40,7 +40,7 @@
                 <div class="box-title text-center">
                     <h4 class="title">My Account</h4>
                     <div class="breadcrumb-list">
-                        <a class="breadcrumb-item" href="{{route('home')}}">Home</a>
+                        <a class="breadcrumb-item" href="{{route('index')}}">Home</a>
                         <div class="breadcrumb-item dot"><span></span></div>
                         <div class="breadcrumb-item current">Account</div>
                     </div>
