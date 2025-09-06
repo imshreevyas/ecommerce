@@ -379,7 +379,7 @@
         </section>
         <!-- /Testimonial -->
         <!-- Footer -->
-        @include('front.include.footer')
+         @include('front.include.footer')
         <!-- /Footer -->
 
     </div>
