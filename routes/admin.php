@@ -19,15 +19,14 @@ use App\Http\Controllers\ProductImageController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::prefix('admin')->name('admin.')->group(function(){
+    Route::get('/',[AdminController::class, 'index']);
+    Route::get('/home',[AdminController::class, 'index'])->name('home');
+    Route::get('/product/{slug}', [IndexController::class, 'productDetail'])->name('product.show');
 
     // ================ Strting Basic without AUTH REQUESTS ==============================
 
-    Route::get('/',[AdminController::class, 'index'])->name('login');
+    Route::get('/',[AdminController::class, 'index']);
     Route::get('/login',[AdminController::class, 'index'])->name('login');
 
     Route::post('/sendOtp',[AdminController::class, 'sendOtp'])->name('adminLoginPost');
@@ -90,9 +89,3 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::get('/logout',[AdminController::class,'logout'])->name('logout');
     });
 });
-
-
-// Admin Routes
-Route::get('/',[AdminController::class, 'index'])->name('home');
-Route::get('/home',[AdminController::class, 'index'])->name('home');
-Route::get('/product/{slug}', [IndexController::class, 'productDetail'])->name('product.show');
